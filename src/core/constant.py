@@ -8,8 +8,8 @@ MAX_ITEM = 100
 
 # RANDOM GENERATOR
 # constant A_COEF : integer
-A_COEF = 543893972929
+A_COEF = 69248439517783
 # constant MOD_COEF : integer
 MOD_COEF = 2**64-1
 # constant C_COEF : integer
-C_CONST = 11
+C_CONST = 1

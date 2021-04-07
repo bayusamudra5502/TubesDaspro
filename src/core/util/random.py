@@ -24,7 +24,7 @@ def random() -> float:
     global lastValue
 
     if (lastValue == -1):
-        lastValue = int(time.time()) # Seeding
+        lastValue = int(time.time() * 10 ** 4) # Seeding
     
     lastValue = (const.A_COEF * lastValue + const.C_CONST) % const.MOD_COEF
     return (1/(const.MOD_COEF) * lastValue)
