@@ -13,3 +13,7 @@ A_COEF = 69248439517783
 MOD_COEF = 2**64-1
 # constant C_COEF : integer
 C_CONST = 1
+
+# HASH
+# constant HASH_LEN : integer
+HASH_LEN = 32
