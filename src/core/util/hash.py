@@ -39,7 +39,8 @@ from core.constant import HASH_CONST_1, HASH_CONST_2, \
 # Fungsi ini menerima bilangan 64 bit dan fungsi ini
 # akan mengacak bit dari num dan mengeluarkan bilangan 
 # hasil dari pengacakan bit dari num maksimal sepanjang
-# 64 bit jika tiddak akan menghasilkan error
+# 64 bit jika tidak akan menghasilkan error den 
+# mengembalikan nilai -1
 
 def intHash(str: str) -> int:
     """Fungsi ini menerima sebuah variabel string dan
