@@ -6,6 +6,6 @@
 # fungsi random, dan fungsi-fungsi validasi
 # input
 
-from .hash import *
+from .hash import hash, intHash
 from .random import random
 from .validator import *

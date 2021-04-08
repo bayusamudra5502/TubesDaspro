@@ -10,6 +10,12 @@
             "request": "launch",
             "program": "${workspaceFolder}\\src\\kantongajaib.py",
             "console": "integratedTerminal"
+        },{
+            "name": "Tes",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\test\\hash.py",
+            "console": "integratedTerminal"
         }
     ]
 }
