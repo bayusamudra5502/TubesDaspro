@@ -6,3 +6,4 @@
 from .login import *
 from .register import *
 from .role import *
+from .password import *

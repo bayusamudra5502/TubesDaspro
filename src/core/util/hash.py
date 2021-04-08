@@ -1,9 +1,12 @@
-# Module hash
-# Modul ini berisi semua fungsi yang berkaitan dengan
-# proses hashing string 
+# Bayu Samudra (16520420) - 8 April 2021
+
+#  Module hash
+"""Modul ini berisi semua fungsi yang berkaitan dengan
+proses hashing string."""
 
 # PUSTAKA
 from math import log2
+from .manipulation import intToHex
 
 from core.constant import HASH_CONST_1, HASH_CONST_2, \
         HASH_INIT_CONST, HASH_LEN, HASH_ROUND
@@ -68,7 +71,7 @@ def hash(str: str) -> str:
     # hexResult : string
 
     # ALGORITMA
-    hexResult = f"{intHash(str):x}"
+    hexResult = intToHex(intHash(str))
 
     if len(hexResult) < 16:
         return "0" * (16-len(hexResult)) + hexResult

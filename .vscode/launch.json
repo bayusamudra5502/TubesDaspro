@@ -14,7 +14,7 @@
             "name": "Tes",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\test\\hash.py",
+            "program": "${file}",
             "console": "integratedTerminal"
         }
     ]

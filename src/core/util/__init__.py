@@ -9,3 +9,4 @@
 from .hash import hash, intHash
 from .random import random
 from .validator import *
+from .manipulation import *
