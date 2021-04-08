@@ -51,7 +51,10 @@ def padding(num: int):
 
 def bitLength(num : int):
     """Fungsi ini akan menghitung jumlah bit dari num."""
-    return int(log2(num))
+    if(num > 0):
+        int(log2(num)) + 1
+    else:
+        return 0
 
 def strToInt(str:str):
     """Fungsi strToInt akan mengubah str menjadi integer"""
