@@ -5,6 +5,7 @@
 # KAMUS
 # constant MAX_ITEM : integer = 100
 MAX_ARRAY_NUM = 10000
+MAX_COLUMNS = 10
 
 # RANDOM GENERATOR SETTINGS
 # constant A_COEF : integer
