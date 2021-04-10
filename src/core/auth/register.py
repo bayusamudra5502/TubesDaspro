@@ -3,7 +3,10 @@
 # F01 - Resgister pada program ini. Pada
 # Modul inni terdiri dari prosedur dan
 # fungsi yang terlibat dalam proses 
-# registrasi
+# registrasi (F01)
 
-def register():
+dataUser = {}
+
+def register(username):
+    global dataUser
     pass

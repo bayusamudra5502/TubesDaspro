@@ -7,4 +7,4 @@ sys.path.append(CORE_PATH)
 
 from core.auth import *
 
-# Tulis tes disini
+# Tulis tes dibawah ini

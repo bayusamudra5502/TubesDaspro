@@ -1,6 +1,6 @@
 # Module Constant
-# Modul ini beris semua konstanta yang digunakan pada
-# Program ini
+# Modul ini beris semua konstanta dinamis 
+# yang digunakan pada Program ini
 
 # KAMUS
 # constant MAX_ITEM : integer = 100

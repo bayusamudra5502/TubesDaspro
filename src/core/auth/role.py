@@ -2,6 +2,8 @@
 # Modul ini berfungsi beberapa fungsi
 # yang berkaitan dengan role pengguna
 
+dataUser = {}
+
 def isAdminRole(pengguna):
     pass
 
