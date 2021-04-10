@@ -1,11 +1,13 @@
 import sys
 from os import path
 
-CORE_PATH = path.join(path.dirname(path.abspath(__file__)), "..", "src")
+CORE_PATH = path.join(path.dirname(path.abspath(__file__)), ".." , "..", "src")
 sys.path.append(path.join(CORE_PATH, ".."))
 sys.path.append(CORE_PATH)
 
-from core.auth import password
+from core.auth import *
+
+# Tulis tes dibawah ini
 
 passwd = "Pg@M%V38B42u3jCX+PjQ"
 genPass = password.generatePassword("Pg@M%V38B42u3jCX+PjQ")
