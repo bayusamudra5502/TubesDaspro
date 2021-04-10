@@ -8,3 +8,5 @@ sys.path.append(CORE_PATH)
 from core.util import *
 
 # Tulis tes dibawah ini
+
+print(split("ayam;den;lapeh",";"))
