@@ -12,19 +12,23 @@ from core.item.permintaan import mintaConsumable
 from core.util import toLower
 from core.help import help
 
-def exit(saveDir) -> bool:
-    if(isChanged()):
+def exit(saveDir, username) -> bool:
+    if(isChanged() and (username) != ""):
         resp = ""
-        while(toLower(resp) == "y" or 
+        while(not (toLower(resp) == "y" or 
                 toLower(resp) == "n" or
-                toLower(resp) == "c"):
-            input("Apakah anda ingin meyimpan perubahan? [Y/n/c] : ")
+                toLower(resp) == "c")):
+            resp = input("Apakah anda ingin meyimpan perubahan? [Y/n/c] : ")
 
             if(toLower(resp) == "y"):
-                if(save(saveDir)):
-                    print("\nPerubahan Berhasil disimpan...")
-                return True
+                if(isValidUser(username)):
+                    if(save(saveDir)):
+                        print("Perubahan Berhasil disimpan...\n")
+                    return True
+                else:
+                    print("Perubahan tidak berhasil disimpan.\n")
             elif(toLower(resp) == "n"):
+                print("Perubahan tidak disimpan\n")
                 return True
             elif(toLower(resp) == "c"):
                 return False
@@ -35,7 +39,7 @@ def exit(saveDir) -> bool:
 
 def main(saveDir):
     isExit = False
-    username = ""
+    username = "admin"
     errorCnt = 0
 
     print("Selamat datang di kantong ajaib")
@@ -67,32 +71,44 @@ def main(saveDir):
             command = toLower(input(">>> "))
             
             if command == "exit":
-                isExit = exit(saveDir)
+                isExit = exit(saveDir, username)
                 errorCnt = 0
+                command = ""
             elif command == "login":
                 username = login()
                 errorCnt = 0
             elif command == "save":
-                if isValidUser(username):
+                if username == "":
+                    print("Anda belum melakukan login. Silahkan login terlebih dahulu dengan menggunakan perintah 'login'")
+                elif isValidUser(username):
                     if save(saveDir):
                         print("Data berhasil disimpan")
                 
                 errorCnt = 0
             else:
-                isValidComm = False
-                for i in range(len(commandList)):
-                    if commandList[i] == command:
-                        isValidComm = True
-                
-                if(isValidComm):
-                    commandDriver[command](username)
-                    errorCnt = 0
-                elif(command != ""):
-                    print("Perintah tidak valid, Silahkan coba lagi.")
+                if username == "":
+                    print("Anda belum melakukan login. Silahkan login terlebih dahulu dengan menggunakan perintah 'login'")
+                else:
+                    isValidComm = False
+                    for i in range(len(commandList)):
+                        if commandList[i] == command:
+                            isValidComm = True
+                    
+                    if(isValidComm):
+                        commandDriver[command](username)
+                        errorCnt = 0
+                    elif(command != ""):
+                        print("Perintah tidak valid, Silahkan coba lagi.")
 
-                    if errorCnt >= 3:
-                        print("Tips : Gunakan help untuk melihat perintah yang tersedia.")
+                        if errorCnt >= 3:
+                            print("Tips : Gunakan help untuk melihat perintah yang tersedia.\n")
+                        else:
+                            print()
+                        
+                        errorCnt += 1
 
         except KeyboardInterrupt:
             command = "exit"
-            isExit = exit(saveDir)
+            print()
+            isExit = exit(saveDir, username)
+            command = ""

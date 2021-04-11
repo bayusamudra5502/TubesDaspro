@@ -33,16 +33,24 @@ def getTable(name:str) -> dict:
         
         return db["data"][name]
 
-def applyChange(changedTable : dict, tableName:str, isLoad:bool = False):
+def applyChange(changedTable : dict, tableName:str):
     global db, isChange
 
     db["data"][tableName] = changedTable
     db["tableName"][db["numTable"]] = tableName
     db["numTable"] += 1
-    isChange = not isLoad
+
+    isChange = True
 
 def isChanged() -> bool:
     return isChange
 
 def readDatabase():
+    return db
+
+def resetChanged():
+    global isChange
+    isChange = False
+
+def getDB():
     return db

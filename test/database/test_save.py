@@ -40,5 +40,7 @@ def test_ujiCopy():
     table = tableParser(readFile(IRIS_PATH))
 
     applyChange(table, "IrisTable")
+    print(getDB())
+
     save(TEST_ROOT)
     assert hash_file(IRIS_PATH) == hash_file(join(TEST_ROOT, "IrisTable.csv"))

@@ -39,7 +39,8 @@ def loadDatabase(dir:str) -> bool:
             fileData = readFile(join(dir, DB_FILES_NAME[0][i]))
             if fileData != "":
                 parsedTable = tableParser(fileData)
-                applyChange(parsedTable, DB_FILES_NAME[0][i][:-4], isLoad=True)
+                applyChange(parsedTable, DB_FILES_NAME[0][i][:-4])
+                resetChanged()
             else:
                 return False
             

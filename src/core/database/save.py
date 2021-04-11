@@ -2,7 +2,7 @@
 # Modul ini merupakan implementasi dari fitur
 # Penyimpanan pada program ini.
 
-from .database import readDatabase
+from .database import readDatabase, resetChanged
 from os.path import join, abspath, isdir, exists
 from os import W_OK, access
 
@@ -38,7 +38,7 @@ def save(saveDir):
                 file.write(";")
             else:
                 file.write("\n")
-        
+
         for j in range(tableData["row_number"]):
             for k in range(tableData["col_number"]):
                 file.write(tableData["data"][j][tableData["columnName"][k]])
@@ -46,7 +46,6 @@ def save(saveDir):
                     file.write(";")
                 else:
                     file.write("\n")
-        
-        file.close()
-    
+
+    resetChanged()
     return True
