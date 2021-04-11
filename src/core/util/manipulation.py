@@ -91,3 +91,15 @@ def countSubstring(text:str, substr:str) -> int:
         pos += 1
     
     return cnt
+
+def toLower(str:str) -> str:
+    strRes = ""
+    for i in range(len(str)):
+        intChar = ord(str[i])
+
+        if(65<=intChar<=90):
+            intChar += 32
+        
+        strRes += chr(intChar)
+    
+    return str

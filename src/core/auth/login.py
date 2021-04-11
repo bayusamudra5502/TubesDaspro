@@ -3,7 +3,9 @@
 # pada program ini. Pada modul ini terdiri dari
 # Fungsi-fungsi yang berkaitan dengan login
 
-dataUser = {}
+from core.database import getTable
+from .password import isValidPassword
 
-def login():
+def login() -> str:
+    dataUser = getTable("user")
     pass

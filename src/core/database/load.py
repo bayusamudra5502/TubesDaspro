@@ -2,8 +2,9 @@
 # Modul ini berisi fungsi yang berkaitan
 # dengan pemuatan data dari file csv
 
-from os import read, walk
-from os.path import isdir, isfile, join
+from os import R_OK,  walk
+from os import access
+from os.path import isdir, isfile, join, exists
 
 from core.util import split
 from core.constant import DB_FILES_NAME, MAX_ARRAY_NUM
@@ -11,15 +12,19 @@ from .database import *
 
 def readFile(path:str) -> str:
     """Fungsi ini mengeluarkan isi dari file pada path"""
-
-    if(isfile(path)):
-        fileReader = open(path, "r")
-        hasil = fileReader.read()
-        fileReader.close()
-        
-        return hasil
+    
+    if(access(path, R_OK)):
+        if(isfile(path)):
+            fileReader = open(path, "r")
+            hasil = fileReader.read()
+            fileReader.close()
+            
+            return hasil
+        else:
+            print("ERROR : Input harus merupakan lokasi file")
+            return ""
     else:
-        print("ERROR : Input harus merupakan lokasi file")
+        print("ERROR : File '{path}' tidak bisa diakses.")
         return ""
 
 def loadDatabase(dir:str) -> bool:
@@ -79,25 +84,34 @@ def isValidDir(dir:str) -> bool:
     dibutuhkan dan berada dalam root tertinggi dari dir."""
 
     if(isdir(dir)):
-        fileCheck = {}
-        for i in range(DB_FILES_NAME[1]):
-            fileCheck[DB_FILES_NAME[0][i]] = False
+        if(exists(dir)):
+            if(access(dir, R_OK)):
+                fileCheck = {}
+                for i in range(DB_FILES_NAME[1]):
+                    fileCheck[DB_FILES_NAME[0][i]] = False
 
-        for (root, dirs, files) in walk(dir, topdown=True):
-            if root == dir:
-                for i in files:
-                    fileCheck[i] = True
-        
-        isRequiredExist = True
-        for i in range(DB_FILES_NAME[1]):
-            isRequiredExist = \
-                isRequiredExist and fileCheck[DB_FILES_NAME[0][i]]
-        
-        if (isRequiredExist):
-            return True
+                for (root, dirs, files) in walk(dir, topdown=True):
+                    if root == dir:
+                        for i in files:
+                            fileCheck[i] = True
+                
+                isRequiredExist = True
+                
+                for i in range(DB_FILES_NAME[1]):
+                    isRequiredExist = \
+                        isRequiredExist and fileCheck[DB_FILES_NAME[0][i]]
+                
+                if (isRequiredExist):
+                    return True
+                else:
+                    print("ERROR : File yang dibutuhkan tidak ditemukan atau tidak berada pada level teratas.")
+                    return False
+            else:
+                print(f"ERROR : TIdak dapat membaca folder '{dir}'.")
+                return False
         else:
-            print("ERROR : File yang dibutuhkan tidak ditemukan atau tidak berada pada level teratas.")
+            print(f"ERROR : Lokasi '{dir}' tidak ditemukan.")
             return False
     else:
-        print("ERROR : Path bukan merupakan folder")
+        print(f"Lokasi '{dir}' bukan merupakan folder yang sah")
         return False

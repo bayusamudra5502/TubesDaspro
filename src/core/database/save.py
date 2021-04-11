@@ -3,9 +3,26 @@
 # Penyimpanan pada program ini.
 
 from .database import readDatabase
-from os.path import join, abspath
+from os.path import join, abspath, isdir, exists
+from os import W_OK, access
 
-def save(saveDir):
+def save(username, saveDir):
+    """Fungsi ini akan menyimpan semua data pada database di
+    folder saveDir dalam format csv. Jika proses berhasil,
+    fungsi mengembalikan True"""
+
+    if not exists(saveDir):
+        print(f"Lokasi '{saveDir}' tidak ditemukan.")
+        return False
+
+    if not isdir(saveDir):
+        print(f"Lokasi '{saveDir}' bukan merupakan folder.")
+        return False
+    
+    if not access(saveDir, W_OK):
+        print(f"Lokasi '{saveDir}' tidak bisa ditulis. Pastikan anda memiliki akses.")
+        return False
+
     database = readDatabase()
 
     for i in range(database["numTable"]):
@@ -31,3 +48,5 @@ def save(saveDir):
                     file.write("\n")
         
         file.close()
+    
+    return True

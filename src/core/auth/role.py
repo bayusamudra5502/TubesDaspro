@@ -2,10 +2,12 @@
 # Modul ini berfungsi beberapa fungsi
 # yang berkaitan dengan role pengguna
 
-dataUser = {}
+from core.database import getTable
 
 def isAdminRole(pengguna):
+    dataUser = getTable("user")
     pass
 
-def isUserRole(pengguna):
+def isValidUser(pengguna):
+    dataUser = getTable("user")
     pass

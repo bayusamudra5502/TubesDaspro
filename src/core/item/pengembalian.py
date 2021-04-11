@@ -2,8 +2,8 @@
 # Modul ini berisi implementasi dari fitur
 # pengembalian gadget (F09 dan FB02)
 
-dataGadget = {}
+from core.database import applyChange, getTable
 
 def pengembalianGadget(username):
-    global dataGadget
+    dataGadget = getTable("gadget")
     pass

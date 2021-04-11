@@ -9,6 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/src/kantongajaib.py",
+            "args": ["${workspaceFolder}/db"],
             "console": "integratedTerminal"
         },{
             "name": "Tes",
