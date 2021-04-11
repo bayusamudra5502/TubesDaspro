@@ -12,18 +12,20 @@ def save(saveDir):
     fungsi mengembalikan True"""
 
     if not exists(saveDir):
-        print(f"Lokasi '{saveDir}' tidak ditemukan.")
+        print(f"ERROR: Lokasi '{saveDir}' tidak ditemukan.")
         return False
 
     if not isdir(saveDir):
-        print(f"Lokasi '{saveDir}' bukan merupakan folder.")
+        print(f"ERROR: Lokasi '{saveDir}' bukan merupakan folder.")
         return False
     
     if not access(saveDir, W_OK):
-        print(f"Lokasi '{saveDir}' tidak bisa ditulis. Pastikan anda memiliki akses.")
+        print(f"ERROR: Lokasi '{saveDir}' tidak bisa ditulis. Pastikan anda memiliki akses.")
         return False
 
     database = readDatabase()
+    isChangeApply = True
+    isChangePartial = False
 
     for i in range(database["numTable"]):
         tableName = database["tableName"][i]
@@ -31,21 +33,33 @@ def save(saveDir):
         filePath = abspath(join(saveDir, fileName))
         tableData = database["data"][tableName]
 
-        file = open(filePath, "w")
-        for j in range(tableData["col_number"]):
-            file.write(tableData["columnName"][j])
-            if j != (tableData["col_number"] - 1):
-                file.write(";")
-            else:
-                file.write("\n")
-
-        for j in range(tableData["row_number"]):
-            for k in range(tableData["col_number"]):
-                file.write(tableData["data"][j][tableData["columnName"][k]])
-                if k != (tableData["col_number"] - 1):
+        if access(filePath, W_OK):
+            file = open(filePath, "w")
+            for j in range(tableData["col_number"]):
+                file.write(tableData["columnName"][j])
+                if j != (tableData["col_number"] - 1):
                     file.write(";")
                 else:
                     file.write("\n")
 
-    resetChanged()
-    return True
+            for j in range(tableData["row_number"]):
+                for k in range(tableData["col_number"]):
+                    file.write(tableData["data"][j][tableData["columnName"][k]])
+                    if k != (tableData["col_number"] - 1):
+                        file.write(";")
+                    else:
+                        file.write("\n")
+            
+            isChangePartial = True
+        else:
+            isChangeApply = False
+            print(f"ERROR: File '{filePath}' tidak bisa ditulis. Pastikan anda memiliki akses.")
+
+    if isChangeApply:
+        resetChanged()
+    elif isChangePartial:
+        print("Sebagian file telah berhasil tersimpan.\n")
+    else:
+        print("Gagal menyimpan seluruh file.\n")
+
+    return isChangeApply

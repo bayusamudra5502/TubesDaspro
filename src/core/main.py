@@ -23,17 +23,17 @@ def exit(saveDir, username) -> bool:
             if(toLower(resp) == "y"):
                 if(isValidUser(username)):
                     if(save(saveDir)):
-                        print("Perubahan Berhasil disimpan...\n")
+                        print("Perubahan Berhasil disimpan...")
                     return True
                 else:
-                    print("Perubahan tidak berhasil disimpan.\n")
+                    print("Perubahan tidak berhasil disimpan.")
             elif(toLower(resp) == "n"):
-                print("Perubahan tidak disimpan\n")
+                print("Perubahan tidak disimpan")
                 return True
             elif(toLower(resp) == "c"):
                 return False
             else:
-                print("Input tidak valid. Silahkan coba lagi.\n")
+                print("Input tidak valid. Silahkan coba lagi.")
     else:
         return True
 
@@ -85,6 +85,10 @@ def main(saveDir):
                         print("Data berhasil disimpan")
                 
                 errorCnt = 0
+            elif command == "":
+                pass
+            elif command == "help":
+                commandDriver["help"](username)
             else:
                 if username == "":
                     print("Anda belum melakukan login. Silahkan login terlebih dahulu dengan menggunakan perintah 'login'")
@@ -97,13 +101,11 @@ def main(saveDir):
                     if(isValidComm):
                         commandDriver[command](username)
                         errorCnt = 0
-                    elif(command != ""):
+                    else:
                         print("Perintah tidak valid, Silahkan coba lagi.")
 
                         if errorCnt >= 3:
-                            print("Tips : Gunakan help untuk melihat perintah yang tersedia.\n")
-                        else:
-                            print()
+                            print("Tips : Gunakan help untuk melihat perintah yang tersedia.")
                         
                         errorCnt += 1
 

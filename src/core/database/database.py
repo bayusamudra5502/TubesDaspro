@@ -37,8 +37,13 @@ def applyChange(changedTable : dict, tableName:str):
     global db, isChange
 
     db["data"][tableName] = changedTable
-    db["tableName"][db["numTable"]] = tableName
-    db["numTable"] += 1
+    isEditing = False
+    for i in range(db["numTable"]):
+        isEditing = isEditing or (db["tableName"][i] == tableName)
+
+    if not isEditing:
+        db["tableName"][db["numTable"]] = tableName
+        db["numTable"] += 1
 
     isChange = True
 
