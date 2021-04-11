@@ -4,7 +4,7 @@
 
 from os import R_OK,  walk
 from os import access
-from os.path import isdir, isfile, join, exists
+from os.path import abspath, isabs, isdir, isfile, join, exists
 
 from core.util import split
 from core.constant import DB_FILES_NAME, MAX_ARRAY_NUM
@@ -24,7 +24,7 @@ def readFile(path:str) -> str:
             print("ERROR : Input harus merupakan lokasi file")
             return ""
     else:
-        print("ERROR : File '{path}' tidak bisa diakses.")
+        print(f"ERROR : File '{path}' tidak bisa diakses.")
         return ""
 
 def loadDatabase(dir:str) -> bool:
@@ -37,10 +37,12 @@ def loadDatabase(dir:str) -> bool:
         for i in range(DB_FILES_NAME[1]):
             # Membaca data dari file
             fileData = readFile(join(dir, DB_FILES_NAME[0][i]))
-            parsedTable = tableParser(fileData)
+            if fileData != "":
+                parsedTable = tableParser(fileData)
+                applyChange(parsedTable, DB_FILES_NAME[0][i][:-4], isLoad=True)
+            else:
+                return False
             
-            applyChange(parsedTable, DB_FILES_NAME[0][i][:-4], isLoad=True)
-        
         return True
     else:
         return False
@@ -83,6 +85,10 @@ def isValidDir(dir:str) -> bool:
     database yang valid. Folder yang valid terdiri dari file yang
     dibutuhkan dan berada dalam root tertinggi dari dir."""
 
+    if(not isabs(dir)):
+        # Membuat path menjadi absolute
+        dir = abspath(dir)
+
     if(isdir(dir)):
         if(exists(dir)):
             if(access(dir, R_OK)):
@@ -96,7 +102,7 @@ def isValidDir(dir:str) -> bool:
                             fileCheck[i] = True
                 
                 isRequiredExist = True
-                
+
                 for i in range(DB_FILES_NAME[1]):
                     isRequiredExist = \
                         isRequiredExist and fileCheck[DB_FILES_NAME[0][i]]

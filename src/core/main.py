@@ -41,7 +41,6 @@ def main(saveDir):
     print("Selamat datang di kantong ajaib")
     print()
     print("Untuk melihat perintah yang tersedia, gunakan perintah 'help'")
-    print()
 
     commandDriver = {
         "carirarity" : searchByRarity,
@@ -97,6 +96,3 @@ def main(saveDir):
         except KeyboardInterrupt:
             command = "exit"
             isExit = exit(saveDir)
-        
-        if(command != ""):
-            print()

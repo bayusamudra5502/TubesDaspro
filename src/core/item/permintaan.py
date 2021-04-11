@@ -3,6 +3,7 @@
 # permintaan consumable (F10)
 
 from core.database import applyChange, getTable
+from core.auth import isValidUser
 
 def mintaConsumable(username):
     dataConsumable = getTable("consumable")

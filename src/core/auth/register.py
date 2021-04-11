@@ -7,6 +7,7 @@
 
 from core.database import getTable, applyChange
 from .password import generatePassword
+from .user import isAdminRole, isUnameAvailable
 
 def register(username):
     dataUser = getTable("user")

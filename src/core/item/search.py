@@ -4,6 +4,7 @@
 # ditemukannya (F03 dan F04)
 
 from core.database import applyChange, getTable
+from core.auth import isValidUser
 
 def searchByRarity(username):
     # Fitur F03

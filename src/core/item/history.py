@@ -4,6 +4,7 @@
 # pengambilan consumable
 
 from core.database import applyChange, getTable
+from core.auth import isAdminRole
 
 def histPinjamGadget(username):
     # Fitur F11

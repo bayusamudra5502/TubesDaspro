@@ -5,5 +5,5 @@
 
 from .login import login
 from .register import *
-from .role import *
+from .user import *
 from .password import isValidPassword, generatePassword

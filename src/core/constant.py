@@ -5,9 +5,6 @@
 from os.path import join, abspath, dirname
 
 # KAMUS
-# ROOT LOCATION
-ROOT_PATH = abspath(join(dirname(__file__), ".."))
-
 # constant MAX_ITEM : integer = 100
 MAX_ARRAY_NUM = 10000
 

@@ -6,7 +6,7 @@ from .database import readDatabase
 from os.path import join, abspath, isdir, exists
 from os import W_OK, access
 
-def save(username, saveDir):
+def save(saveDir):
     """Fungsi ini akan menyimpan semua data pada database di
     folder saveDir dalam format csv. Jika proses berhasil,
     fungsi mengembalikan True"""
