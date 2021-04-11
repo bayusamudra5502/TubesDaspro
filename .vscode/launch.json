@@ -8,7 +8,7 @@
             "name": "Jalankan Program",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\src\\kantongajaib.py",
+            "program": "${workspaceFolder}/src/kantongajaib.py",
             "console": "integratedTerminal"
         },{
             "name": "Tes",
