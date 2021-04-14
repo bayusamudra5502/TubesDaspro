@@ -120,6 +120,26 @@ def toLower(str:str) -> str:
     
     return strRes
 
+def toUpper(str: str) -> str:
+    """Fungsi ini akan mengubah semua karakter abjad di str
+        menjadi uppercase."""
+
+    # KAMUS LOKAL
+    #   strRes : string
+    #   intChar : integer
+
+    # ALGORITMA
+    strRes = ""
+    for i in range(len(str)):
+        intChar = ord(str[i])
+
+        if (97 <= intChar <= 122):
+            intChar -= 32
+
+        strRes += chr(intChar)
+
+    return strRes
+
 def generateNextID(lastID:str)->str:
     """Fungsi ini akan memberikan id selanjutnya berdasarkan 
     nilai lastID. Pastikan lastID hanya memuat prefix."""
