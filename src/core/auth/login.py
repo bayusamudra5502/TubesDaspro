@@ -23,9 +23,11 @@ def login() -> str:
 
             elif (username == dataUser['data'][i]['username']) and (not isValidPassword(password, dataUser['data'][i]['password'])):
                 print('Halo', username + '!', 'Password yang kamu input salah.')
+                print()
                 break
 
             else:
                 print('Username tidak ditemukan.')
+                print()
                 break
     pass
