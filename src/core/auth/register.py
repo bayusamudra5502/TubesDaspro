@@ -5,8 +5,10 @@
 # fungsi yang terlibat dalam proses 
 # registrasi (F01)
 
-dataUser = {}
+from core.database import getTable, applyChange
+from .password import generatePassword
+from .user import isAdminRole, isUnameAvailable
 
 def register(username):
-    global dataUser
+    dataUser = getTable("user")
     pass

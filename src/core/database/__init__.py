@@ -5,6 +5,4 @@
 
 from .load import *
 from .save import *
-
-# KAMUS GLOBAL
-db = {}
+from .database import *

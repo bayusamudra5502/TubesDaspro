@@ -25,6 +25,14 @@ from core.constant import MAX_ARRAY_NUM
 # Fungsi ini akan menghitung jumlah kemunculan 
 # sting substr pada string text.
 
+# function toLower(str:string) -> string
+# Fungsi ini akan mengubah semua karakter abjad di str
+# menjadi lowercase.
+
+# function generateNextID(lastID:string, prefix:string) -> string
+# Fungsi ini akan memberikan id selanjutnya berdasarkan pola
+# yang ada pada pada lastID
+
 # ALGORITMA
 
 def intToHex(num:int)->str:
@@ -91,3 +99,65 @@ def countSubstring(text:str, substr:str) -> int:
         pos += 1
     
     return cnt
+
+def toLower(str:str) -> str:
+    """Fungsi ini akan mengubah semua karakter abjad di str
+        menjadi lowercase."""
+    
+    # KAMUS LOKAL
+    #   strRes : string
+    #   intChar : integer
+
+    # ALGORITMA
+    strRes = ""
+    for i in range(len(str)):
+        intChar = ord(str[i])
+
+        if(65<=intChar<=90):
+            intChar += 32
+        
+        strRes += chr(intChar)
+    
+    return strRes
+
+def generateNextID(lastID:str)->str:
+    """Fungsi ini akan memberikan id selanjutnya berdasarkan 
+    nilai lastID. Pastikan lastID hanya memuat prefix."""
+
+    # KAMUS LOKAL
+
+    # ALGORITMA
+    # Mencari Prefix
+    if lastID == "":
+        return lastID
+    else:
+        prefix = ""
+        isTrailingZero = False
+
+        for i in range(len(lastID)):
+            if(48<=ord(lastID[i])<=57):
+                if(lastID[i] == "0"):
+                    isTrailingZero = True
+
+                break
+            else:
+                prefix += lastID[i]
+        
+        isOnlyPrefix = True
+        for i in range(len(prefix), len(lastID)):
+            isOnlyPrefix = isOnlyPrefix and ((48<=ord(lastID[i])<=57))
+
+        if isOnlyPrefix:
+            intID = int(lastID[len(prefix):])
+            intID += 1
+
+            if not isTrailingZero:
+                return prefix + str(intID)
+            else:
+                deltaLen = len(lastID) - len(prefix)
+
+                return prefix + "0" * (deltaLen - len(str(intID))) + str(intID)
+
+        else:
+            print("ID memuat infix atau suffix.")
+            return ""

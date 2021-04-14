@@ -2,7 +2,9 @@
 # Modul ini berisi implementasi dari
 # fitur peminjaman gadget (F08)
 
-dataGadget = {}
+from core.database import applyChange, getTable
+from core.auth import isValidUser
 
 def peminjamanGadget(username):
-    global dataGadget
+    dataGadget = getTable("gadget")
+    pass

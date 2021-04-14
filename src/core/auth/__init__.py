@@ -3,7 +3,7 @@
 # dengan fitur autekansi seperti login, register
 # dan pengecekan role.
 
-from .login import *
+from .login import login
 from .register import *
-from .role import *
+from .user import *
 from .password import isValidPassword, generatePassword

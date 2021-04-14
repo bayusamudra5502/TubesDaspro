@@ -2,8 +2,9 @@
 # Modul ini berisi implementasi dari fitur
 # pengembalian gadget (F09 dan FB02)
 
-dataGadget = {}
+from core.database import applyChange, getTable
+from core.auth import isValidUser
 
 def pengembalianGadget(username):
-    global dataGadget
+    dataGadget = getTable("gadget")
     pass

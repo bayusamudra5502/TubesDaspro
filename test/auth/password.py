@@ -15,3 +15,7 @@ genPass = password.generatePassword("Pg@M%V38B42u3jCX+PjQ")
 print(genPass)
 print(password.isValidPassword(passwd, genPass)) # True
 print(password.isValidPassword("Ayam Goreng Enak", genPass)) # False
+
+passwd = "admin"
+genPass = password.generatePassword("admin")
+print(genPass)
