@@ -6,6 +6,7 @@ from .add import *
 from .delete import *
 from .edit import *
 from .history import *
+from .permintaan import *
 from .peminjaman import *
 from .pengembalian import *
 from .search import *
