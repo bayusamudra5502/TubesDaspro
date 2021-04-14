@@ -9,6 +9,7 @@ from core.auth import isAdminRole
 def histPinjamGadget(username):
     # Fitur F11
     dataBorrowHist = getTable("gadget_borrow_history")
+    
     pass
 
 def histKembaliGadget(username):
