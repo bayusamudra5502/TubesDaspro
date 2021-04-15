@@ -11,6 +11,7 @@ db = {
     "tableName" : ["" for i in range(MAX_ARRAY_NUM)],
     "numTable" : 0
 }
+
 isChange = False
 
 def getTable(name:str) -> dict:
@@ -41,6 +42,16 @@ def getTable(name:str) -> dict:
         return db["data"][name]
 
 def applyChange(changedTable : dict, tableName:str):
+    """
+    applyChange akan menyimpan perubahan pada database. Parameter 
+    changeTable merupakan struktur data `table` yang diambil dengan 
+    menggunakan fungsi `getTable()` yang telah diubah. tableName 
+    merupakan nama tabel  yang dimaksud. Nama tabel harus sama 
+    dengan nama file tanpa ekstensi seperti pada `getTable()`.
+
+    FUugsi ini harus dijalankan setelah melakukan perubahan pada 
+    table agar tersimpan pada struktur data database.
+    """
     global db, isChange
 
     db["data"][tableName] = changedTable
@@ -55,11 +66,23 @@ def applyChange(changedTable : dict, tableName:str):
     isChange = True
 
 def isChanged() -> bool:
+    """
+    Fungsi ini akan memeriksa apakah sudah ada perubahan yang
+    dilakukan pada database. Jika sudah, akan mengembalikan
+    True.
+    """
     return isChange
 
 def readDatabase():
+    """
+    Fungsi ini akan mengeluarkan objek database saat fungsi ini
+    dijalankan.
+    """
     return db
 
 def resetChanged():
+    """
+    Prosedur ini akan mengubah status perubahan menjadi False.
+    """
     global isChange
     isChange = False

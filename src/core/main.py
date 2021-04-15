@@ -4,7 +4,9 @@
 # bagian ini, user akan memasukan perintahnya
 # untuk mengakses kantong ajaib.
 
-from os import error
+from os import system
+from os.path import abspath
+import sys
 from core.auth import *
 from core.item import *
 from core.database import isChanged, save
@@ -12,7 +14,7 @@ from core.item.permintaan import mintaConsumable
 from core.util import toLower
 from core.help import help
 
-def exit(saveDir, username) -> bool:
+def exit(username) -> bool:
     if(isChanged() and (username) != ""):
         resp = ""
         while(not (toLower(resp) == "y" or 
@@ -21,12 +23,14 @@ def exit(saveDir, username) -> bool:
             resp = input("Apakah anda ingin meyimpan perubahan? [Y/n/c] : ")
 
             if(toLower(resp) == "y"):
-                if(isValidUser(username)):
-                    if(save(saveDir)):
-                        print("Perubahan Berhasil disimpan...")
+                if(doSave(username)):
                     return True
                 else:
-                    print("Perubahan tidak berhasil disimpan.")
+                    errResp = toLower(input("Apakah anda ingin tetap keluar tanpa menyimpan? [Y/n] : ")) 
+                    if(errResp == "y"):
+                        return True
+                    else:
+                        return False
             elif(toLower(resp) == "n"):
                 print("Perubahan tidak disimpan")
                 return True
@@ -37,13 +41,60 @@ def exit(saveDir, username) -> bool:
     else:
         return True
 
+def doSave(username):
+    if(isValidUser(username)):
+        isOKLocation = False
+        saveDir = ""
+        while not isOKLocation:
+            print("Silahkan masukkan lokasi penyimpanan database.")
+            print()
+
+            saveDir = input("Lokasi Penyimpanan")
+            print()
+
+            print("Lokasi penyimpanan yang dipilih: ")
+            print(abspath(saveDir))
+            print()
+
+            isValidResp = False
+            while not isValidResp:
+                resp = input("Apakah lokasi penyimpanan sudah benar? [Y/n] : ")
+                if(toLower(resp) == "y"):
+                    isOKLocation = True
+                    isValidResp = True
+                elif(toLower(resp) == "n"):
+                    isValidResp = True
+                else:
+                    print("Input tidak valid. Silahkan coba lagi.")
+
+        if(save(saveDir)):
+            print("Perubahan Berhasil disimpan...")
+        else:
+            print("Perubahan gagal disimpan.")
+    else:
+        print("Anda tidak memiliki akses untuk menyimpan data.")
+
 def main(saveDir):
     isExit = False
-    username = "admin"
+    username = ""
     errorCnt = 0
 
+    system("cls || clear")
+
+    # Diambil dari : https://patorjk.com/software/taag/#p=display&f=Big&t=Kantong%20Ajaib
+    print("""
+  _  __           _                               _       _ _     
+ | |/ /          | |                        /\   (_)     (_) |    
+ | ' / __ _ _ __ | |_ ___  _ __   __ _     /  \   _  __ _ _| |__  
+ |  < / _` | '_ \| __/ _ \| '_ \ / _` |   / /\ \ | |/ _` | | '_ \ 
+ | . \ (_| | | | | || (_) | | | | (_| |  / ____ \| | (_| | | |_) |
+ |_|\_\__,_|_| |_|\__\___/|_| |_|\__, | /_/    \_\ |\__,_|_|_.__/ 
+                                  __/ |         _/ |              
+                                 |___/         |__/   v1.0
+""")
     print("Selamat datang di kantong ajaib")
     print()
+    print("Silahkan lakukan login dengan menggunakan perintah 'login'")
     print("Untuk melihat perintah yang tersedia, gunakan perintah 'help'")
 
     commandDriver = {
@@ -71,7 +122,7 @@ def main(saveDir):
             command = toLower(input(">>> "))
             
             if command == "exit":
-                isExit = exit(saveDir, username)
+                isExit = exit(username)
                 errorCnt = 0
                 command = ""
             elif command == "login":
@@ -81,8 +132,7 @@ def main(saveDir):
                 if username == "":
                     print("Anda belum melakukan login. Silahkan login terlebih dahulu dengan menggunakan perintah 'login'")
                 elif isValidUser(username):
-                    if save(saveDir):
-                        print("Data berhasil disimpan")
+                    doSave(username)
                 
                 errorCnt = 0
             elif command == "":
@@ -114,3 +164,6 @@ def main(saveDir):
             print()
             isExit = exit(saveDir, username)
             command = ""
+        finally:
+            if(command != ""):
+                print()
