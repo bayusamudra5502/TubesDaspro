@@ -27,7 +27,7 @@ def getUserID(username):
 def isAdminRole(username):
     if isValidUser(username):
         objUser = getObjectUser(username)
-        return objUser["role"] == "Admin"
+        return objUser["role"] == "admin"
     else:
         return False
 
