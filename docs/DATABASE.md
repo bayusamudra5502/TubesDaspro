@@ -109,7 +109,7 @@ dataUser = {
     "columnName" : [
         "id","username","nama","alamat",
         "password","role"],
-    "row_number" : 1,
+    "row_number" : 2,
     "col_number" : 6
 }
 ```
@@ -184,4 +184,77 @@ dataGadget["data"][1]["jumlah"] = str(nilaiSebelumnya)
 Setelah melakukan hal diatas, lakukan applyChange
 ```python
 applyChange(dataGadget,"gadget")
+```
+
+## Contoh 3
+Misalkan data di `user.csv` sebagai berikut
+```csv
+id;username;nama;alamat;password;role
+P1;admin;administrator;Bandung;07a7b9.34a67df2bc69277c;admin
+P2;user;pengguna;Bandung;07a7b9.34a67df2bc69277c;user
+```
+
+Akan ditambahkan data user baru. Pertama, import dulu tablenya
+```python
+dataUser = getTable("user")
+
+# Bila dilihat, user akan berisi sebagai berikut:
+dataUser = {
+    "data" : [{
+        "id" : "P1",
+        "username" : "admin",
+        "nama" : "administrator",
+        "alamat" : "Bandung",
+        "password" : "07a7b9.34a67df2bc69277c",
+        "role" : "admin"
+    },
+    {
+        "id" : "P2",
+        "username" : "user",
+        "nama" : "pengguna",
+        "alamat" : "Bandung",
+        "password" : "07a7b9.34a67df2bc69277c",
+        "role" : "user"
+    }],
+    "columnName" : [
+        "id","username","nama","alamat",
+        "password","role"],
+    "row_number" : 2,
+    "col_number" : 6
+}
+```
+
+Misalkan user yang ditambahkan memiliki id="P3", username="nobita", nama="Nobi Nobita", alamat="Tokyo", password="07a7b9.34a67df2bc69277c", role="user". Maka,
+```python
+userBaru = {
+    id:"P3"
+    username:"nobita"
+    nama:"Nobi Nobita"
+    alamat:"Tokyo"
+    password:"07a7b9.34a67df2bc69277c"
+    role:"user"
+}
+
+dataUser["data"][dataUser["row_number"]] = userBaru
+```
+Bisa juga gini:
+```python
+id="P3"
+username="nobita"
+nama="Nobi Nobita"
+alamat="Tokyo"
+password="07a7b9.34a67df2bc69277c"
+role="user"
+
+dataUser["data"][dataUser["row_number"]]["id"] = id
+dataUser["data"][dataUser["row_number"]]["username"] = username
+dataUser["data"][dataUser["row_number"]]["nama"] = nama
+dataUser["data"][dataUser["row_number"]]["alamat"] = alamat
+dataUser["data"][dataUser["row_number"]]["password"] = password
+dataUser["data"][dataUser["row_number"]]["role"] = role
+```
+
+Klo udah ngelakuin hal diatas, jangan lupa
+```python
+applyChange(dataUser, "user")
 ```
