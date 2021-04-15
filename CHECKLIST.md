@@ -3,11 +3,11 @@ Berikut ini adalah kolom checklist dari proses pembuatan program kantong ajaib i
 
 | No  | Fitur                               | Desain  | Implementasi  | Check       | 
 |:---:| ----------------------------------- |:-------:|:-------------:|:-----------:|
-| 1   | F01-REGISTER                        | ❌      | ❌            | ❌         |
-| 2   | F02-LOGIN                           | ❌      | ❌            | ❌         |
-| 3   | F03-Pencarian by Rarity             | ❌      | ❌            | ❌         |
-| 4   | F04-Pencarian by tahu               | ❌      | ❌            | ❌         |
-| 5   | F05-Menambah Item                   | ❌      | ❌            | ❌         |
+| 1   | F01-REGISTER                        | ⌛      | ✔️            | ⌛         |
+| 2   | F02-LOGIN                           | ⌛      | ✔️            | ⌛         |
+| 3   | F03-Pencarian by Rarity             | ⌛      | ✔️            | ⌛         |
+| 4   | F04-Pencarian by tahu               | ⌛      | ✔️            | ⌛         |
+| 5   | F05-Menambah Item                   | ⌛      | ✔️            | ⌛         |
 | 6   | F06-Menghapus Item                  | ❌      | ❌            | ❌         |
 | 7   | F07-Mengubah jumlah item            | ❌      | ❌            | ❌         |
 | 8   | F08-Meminjam Gadget                 | ❌      | ❌            | ❌         |
