@@ -10,5 +10,5 @@ Pembagian Tugas :
 
 ## Keterangan
 Ini username dan password default untuk program ini:
-USERNAME : admin
-PASSWORD : admin
+* USERNAME : admin
+* PASSWORD : admin
