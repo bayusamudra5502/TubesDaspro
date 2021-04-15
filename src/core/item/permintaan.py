@@ -10,9 +10,9 @@ def mintaConsumable(username):
     id_item = input("Masukan ID item   : ")
     jumlah_permintaan = int(input("Jumlah            : "))
     tanggal_permintaan = input("Tanggal permintaan: ")
-
     for i in range(int(consumabledata['row_number'])):
         if (consumabledata['data'][i]['id'] == id_item):
+
             if (int(consumabledata['data'][i]['jumlah']))> jumlah_permintaan:
                 newConsumable =  (int(consumabledata['data'][i]['jumlah']))-(jumlah_permintaan)
                 (consumabledata['data'][i]['jumlah']) = newConsumable
@@ -23,3 +23,5 @@ def mintaConsumable(username):
                 (consumabledata['data'][i]['jumlah']) = newConsumable1  
                 print()
                 print("Item " + str(consumabledata['data'][i]['nama']) + " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
+    pass
+
