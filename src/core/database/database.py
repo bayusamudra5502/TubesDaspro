@@ -14,6 +14,13 @@ db = {
 isChange = False
 
 def getTable(name:str) -> dict:
+    """
+    getTable menerima sebuah name yang merupakan nama dari tabel
+    pada database. Nama tabel adalah nama file tanpa ekstensi. 
+    
+    Fungsi ini akan mengembalikan sebuah dict yang merupakan 
+    struktur data tabel. LIhat dokumentasi.
+    """
     global db
 
     if db == {}:
@@ -56,6 +63,3 @@ def readDatabase():
 def resetChanged():
     global isChange
     isChange = False
-
-def getDB():
-    return db
