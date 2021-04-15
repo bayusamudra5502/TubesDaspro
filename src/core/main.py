@@ -49,7 +49,7 @@ def doSave(username):
             print("Silahkan masukkan lokasi penyimpanan database.")
             print()
 
-            saveDir = input("Lokasi Penyimpanan")
+            saveDir = input("Lokasi Penyimpanan : ")
             print()
 
             print("Lokasi penyimpanan yang dipilih: ")

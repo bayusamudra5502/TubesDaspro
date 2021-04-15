@@ -9,22 +9,27 @@ from .password import isValidPassword
 
 def login() -> str:
     dataUser = getTable("user")
+    errcode = 0
 
     username = input('Masukan username: ')
     password = input('Masukan password: ')
 
-    for i in range(len(dataUser)):
+    for i in range(dataUser['row_number']):
         if (username == dataUser['data'][i]['username']) and isValidPassword(password, dataUser['data'][i]['password']):
             print('Halo', username + '!', 'Selamat datang di Kantong Ajaib.')
-            loggedin = True
             return username
 
         elif (username == dataUser['data'][i]['username']) and (
         not isValidPassword(password, dataUser['data'][i]['password'])):
+            errcode = 0
             print('Halo', username + '!', 'Password yang kamu input salah.')
             break
 
         else:
-            print('Username tidak ditemukan.')
-            break
+            errcode = 1
+            continue
+
+    if (errcode == 1):
+        print('Username tidak ditemukan.')
+
     pass
