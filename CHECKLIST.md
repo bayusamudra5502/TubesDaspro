@@ -18,7 +18,7 @@ Berikut ini adalah kolom checklist dari proses pembuatan program kantong ajaib i
 | 13  | F13-Riwayat pengambilan consumable  | ❌      | ❌            | ❌         |
 | 14  | F14-Load Data                       | ✔️      | ✔️            | ✔️         |
 | 15  | F15-Save Data                       | ✔️      | ⚠️            | ⚠️         |
-| 16  | F16-Help                            | ❌      | ❌            | ❌         |
+| 16  | F16-Help                            | ✔️      | ✔️            | ✔️         |
 | 17  | F17-Exit                            | ✔️      | ✔️            | ✔️         |
 | 18  | FB1-Hashing                         | ✔️      | ✔️            | ✔️         |
 | 19  | FB2-Pengembalian Parsial            | ❌      | ❌            | ❌         |
