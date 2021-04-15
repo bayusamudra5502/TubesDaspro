@@ -64,6 +64,7 @@ applyChange akan menyimpan perubahan pada database. Parameter changeTable merupa
 FUngsi ini harus dijalankan setelah melakukan perubahan pada table agar tersimpan pada struktur data database.
 
 ## Contoh
+### Contoh 1
 Berikut ini adalah contoh dari implementasi struktur data diatas.
 Sebagai contoh berikut ini merupakan file `user.csv`:
 ```csv
@@ -121,4 +122,66 @@ Misalkan ingin diambil password user dengan id P2. karena user terrsebut berada 
 Bila sudah melakukan perubahan pada tabel user diatas, jalankan:
 ```python
     applyChange(dataUser, "user")
+```
+
+### Contoh 2
+Akan diubah data di `gadget.csv`:
+```csv
+id;nama;deskripsi;jumlah;rarity;tahun_ditemukan
+G1;Time Machine;Mesin waktu doremonangis;123;A;2099
+G2;Bamboo Propeller;Baling-baling bambu (buat terbang);12;A;2080
+C1;Tahu Bulat;Digoreng dadakan;20;S;2121
+```
+
+Akan dijalankan perintah getTable
+```python
+dataGadget = getTable("gadget")
+dataGadget = {
+    "data" : [{
+        "id" : "G1",
+        "nama" : "Time Machine",
+        "deskripsi" : "Mesin waktu doremonangis",
+        "jumlah" : "123",
+        "rarity" : "A",
+        "tahun_ditemukan" : "2080"
+    },
+    {
+        "id" : "G2",
+        "nama" : "Bamboo Propeller",
+        "deskripsi" : "Baling-baling bambu (buat terbang)",
+        "jumlah" : "12",
+        "rarity" : "A",
+        "tahun_ditemukan" : "2080"
+    },
+    {
+        "id" : "C1",
+        "nama" : "Tahu Bulat",
+        "deskripsi" : "Digoreng dadakan",
+        "jumlah" : "20",
+        "rarity" : "S",
+        "tahun_ditemukan" : "2121"
+    }],
+    "columnName" : [
+        "id","nama","deskripsi","jumlah",
+        "rarity","tahun_ditemukan"],
+    "row_number" : 3,
+    "col_number" : 6
+}
+```
+
+Misalkan, akan diubah Tahu bulat jumlahnya menjadi 29 dan Bamboo Propeller ditambah jumlahnya sebanyak 10.
+```python
+# Mengubah tahu bulat
+jumlahBaru = 29
+dataGadget["data"][2]["jumlah"] = str(jumlahBaru)
+
+# Mengubah bamboo propeller
+nilaiSebelumnya = int(dataGadget["data"][1]["jumlah"])
+nilaiSebeumnya += 10
+dataGadget["data"][1]["jumlah"] = str(nilaiSebelumnya)
+```
+
+Setelah melakukan hal diatas, lakukan applyChange
+```python
+applyChange(dataGadget,"gadget")
 ```
