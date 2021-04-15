@@ -6,22 +6,30 @@ from core.database import applyChange, getTable
 from core.auth import isValidUser
 
 def mintaConsumable(username):
-    consumabledata = getTable("consumable")
-    id_item = input("Masukan ID item   : ")
-    jumlah_permintaan = int(input("Jumlah            : "))
-    tanggal_permintaan = input("Tanggal permintaan: ")
-    for i in range(int(consumabledata['row_number'])):
-        if (consumabledata['data'][i]['id'] == id_item):
+    dataConsumable = getTable("consumable")
+    if isValidUser:
+        id_item = (input('Masukan ID item {:>4s}'.format(': ')))
+        notFound=True
 
-            if (int(consumabledata['data'][i]['jumlah']))> jumlah_permintaan:
-                newConsumable =  (int(consumabledata['data'][i]['jumlah']))-(jumlah_permintaan)
-                (consumabledata['data'][i]['jumlah']) = newConsumable
-                print()
-                print("Item " + str(consumabledata['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
-            elif  (int(consumabledata['data'][i]['jumlah'])) == jumlah_permintaan:
-                newConsumable1 =  (consumabledata['data'][i]['jumlah'])
-                (consumabledata['data'][i]['jumlah']) = newConsumable1  
-                print()
-                print("Item " + str(consumabledata['data'][i]['nama']) + " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
+        for i in range(int(dataConsumable['row_number'])):
+            if (id_item == dataConsumable['data'][i]['id']):
+                jumlah_permintaan = int(input("Jumlah            : "))
+                tanggal_permintaan = input("Tanggal permintaan: ")
+                if (int(dataConsumable['data'][i]['jumlah'])) > jumlah_permintaan:
+                    newConsumable =  (int(dataConsumable['data'][i]['jumlah']))-(jumlah_permintaan)
+                    dataConsumable['data'][i]['jumlah'] = str(newConsumable)
+                    print()
+                    print("Item " + str(dataConsumable['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
+                
+                elif (int(dataConsumable['data'][i]['jumlah'])) == jumlah_permintaan:
+                    newConsumable1 =  (int(dataConsumable['data'][i]['jumlah']))
+                    dataConsumable['data'][i]['jumlah'] = str(newConsumable1)
+                    print()
+                    print("Item " + str(dataConsumable['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
+    else:
+        print("silakan lakukan login terlebih dahulu untuk menjalankan perintah lain")
+    applyChange(dataConsumable, "consumable")
     pass
+
+
 
