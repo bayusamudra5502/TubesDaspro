@@ -23,4 +23,3 @@ def mintaConsumable(username):
                 (consumabledata['data'][i]['jumlah']) = newConsumable1  
                 print()
                 print("Item " + str(consumabledata['data'][i]['nama']) + " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
-    pass
