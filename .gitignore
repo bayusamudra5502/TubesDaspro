@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=vscode,python
 
 ### Projcet
-docs/
+docs/*.docx
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
