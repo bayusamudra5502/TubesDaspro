@@ -17,10 +17,10 @@ def mintaConsumable(username):
                 newConsumable =  (int(consumabledata['data'][i]['jumlah']))-(jumlah_permintaan)
                 (consumabledata['data'][i]['jumlah']) = newConsumable
                 print()
-                print("Item " + str(consumabledata['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah diambil!!!")
+                print("Item " + str(consumabledata['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
             elif  (int(consumabledata['data'][i]['jumlah'])) == jumlah_permintaan:
                 newConsumable1 =  (consumabledata['data'][i]['jumlah'])
                 (consumabledata['data'][i]['jumlah']) = newConsumable1  
                 print()
-                print("Item " + str(consumabledata['data'][i]['nama']) + " (x" + str(jumlah_permintaan) +") telah diambil!!!")
+                print("Item " + str(consumabledata['data'][i]['nama']) + " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
     pass
