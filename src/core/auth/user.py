@@ -13,7 +13,6 @@ def getObjectUser(username):
         if(objUser["username"] == username):
             return objUser
     
-    print(f"User {username} tidak ditemukan.")
     return {}
 
 def getUserID(username):
@@ -33,7 +32,12 @@ def isAdminRole(username):
 
 def isValidUser(username):
     objUser = getObjectUser(username)
-    return (objUser != {})
+
+    if(objUser == {}):
+        print(f"User {username} tidak ditemukan.")
+        return False
+    else:
+        return True
 
 def isUnameAvailable(username):
     return (not isValidUser(username))

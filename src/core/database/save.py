@@ -39,7 +39,7 @@ def save(saveDir):
         tableData = database["data"][tableName]
 
         if (access(filePath, W_OK) or not exists(filePath)):
-            file = open(filePath, "w+")
+            file = open(filePath, "w")
             for j in range(tableData["col_number"]):
                 file.write(tableData["columnName"][j])
                 if j != (tableData["col_number"] - 1):
