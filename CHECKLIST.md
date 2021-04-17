@@ -13,9 +13,9 @@ Berikut ini adalah kolom checklist dari proses pembuatan program kantong ajaib i
 | 8   | F08-Meminjam Gadget                 | ❌      | ❌            | ❌         |
 | 9   | F09-Mengembalikan Gadget            | ❌      | ❌            | ❌         |
 | 10  | F10-Meminta consumable              | ✔️      | ❌            | ❌       |
-| 11  | F11-Riwayat peminjaman gadget       | ❌      | ❌            | ❌         |
-| 12  | F12-Riwayat pengambalian gadget     | ❌      | ❌            | ❌         |
-| 13  | F13-Riwayat pengambilan consumable  | ❌      | ❌            | ❌         |
+| 11  | F11-Riwayat peminjaman gadget       | ✔️      | ✔️            | ✔️         |
+| 12  | F12-Riwayat pengambalian gadget     | ✔️      | ✔️            | ✔️         |
+| 13  | F13-Riwayat pengambilan consumable  | ✔️      | ✔️            | ✔️         |
 | 14  | F14-Load Data                       | ✔️      | ✔️            | ✔️         |
 | 15  | F15-Save Data                       | ✔️      | ⚠️            | ⚠️         |
 | 16  | F16-Help                            | ✔️      | ✔️            | ✔️         |
