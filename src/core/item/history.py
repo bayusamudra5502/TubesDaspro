@@ -51,7 +51,7 @@ def histPinjamGadget(username):
     pass
 
 def histKembaliGadget(username):
-    if isAdminRole:
+    if isAdminRole(username):
         dataReturnHist = getTable("gadget_return_history")
         listuser = getTable("user")
         itemList = getTable("gadget")
@@ -95,7 +95,7 @@ def histKembaliGadget(username):
     pass
 
 def histAmbilConsumable(username):
-    if isAdminRole:
+    if isAdminRole(username):
         dataConsumableHist = getTable("consumable_history")
         listuser = getTable("user")
         itemList = getTable("consumable")
@@ -135,5 +135,7 @@ def histAmbilConsumable(username):
                     break
     else:
         print("Hanya admin yang dapat melakukan fitur riwayat ini")
+    return isAdminRole
     applyChange(dataConsumableHist, "consumable_history")
     pass
+    

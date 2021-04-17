@@ -3,13 +3,14 @@
 # permintaan consumable (F10)
 
 from core.database import applyChange, getTable
-from core.auth import isValidUser
+from core.auth import isUserRole
 
 def mintaConsumable(username):
-    dataConsumable = getTable("consumable")
-    dataConsumableHist = getTable("consumable_history")
-    dataUser = getTable("user")
-    if isValidUser:
+    
+    if isUserRole(username):
+        dataConsumable = getTable("consumable")
+        dataConsumableHist = getTable("consumable_history")
+        dataUser = getTable("user")
         id_item = (input('Masukan ID item {:>4s}'.format(': ')))
         notFound=True #Asumsi item tidak ditemukan
 
@@ -37,7 +38,8 @@ def mintaConsumable(username):
         if notFound: #item tidak ditemukan
             print("Tidak ada item dengan ID tersebut!")
     else:
-        print("silakan lakukan login terlebih dahulu untuk menjalankan perintah lain")
+        print("silakan lakukan login sebagai user untuk menjalankan perintah ini")
+    return isUserRole
     applyChange(dataConsumable, "consumable")
     applyChange(dataConsumableHist, "consumable_history")
     pass
