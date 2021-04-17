@@ -120,10 +120,9 @@ def searchByYear(username):
 
             elif (kategoriPencarian == '<'):
                 print('Tidak ditemukan barang yang ditemukan sebelum tahun {}.'.format(tahunPencarian))
-
+        applyChange(dataGadget,"gadget")
     else:
         print('Silahkan login terlebih dahulu sebelum menjalankan program lain.')
     return isValidUser
-    applyChange(dataGadget,"gadget")
     pass
     

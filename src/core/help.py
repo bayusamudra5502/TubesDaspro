@@ -25,7 +25,7 @@ def help(username):
     print("riwayatambil  = untuk melihat riwayat permintaan consumable(admin)")
     print("save          = untuk melakukan penyimpanan data yang telah diubah")
     print("help          = untuk meminta petunjuk penggunaan sistem")
-    print("exit          = untuk keluar dari dalam sistem")
+    print("exit          = untuk keluar dari dalam sistem catt: Y = ya, n = no, c = cancel/batal")
     print()
     print("silahkan pilih salah satu menu di atas")
     print("lakukan login terlebih dahulu")
