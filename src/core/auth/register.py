@@ -11,7 +11,6 @@ from core.database import getTable, applyChange
 from .password import generatePassword
 from .user import isAdminRole, isUnameAvailable
 
-
 # KAMUS
 # module register(username)
 # Modul ini hanya dapat dijalankan oleh admin, maka
@@ -40,7 +39,7 @@ def register(username):
             nextIndex = dataUser['row_number']
             dataUser['data'][nextIndex] = \
                 {
-                    'id': 'P' + str(nextIndex),
+                    'id': 'P' + str(nextIndex + 1),
                     'username': user,
                     'nama': nama,
                     'alamat': alamat,

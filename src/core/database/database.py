@@ -5,7 +5,6 @@
 
 from core.constant import MAX_ARRAY_NUM
 
-
 db = {
     "data" : {},
     "tableName" : ["" for i in range(MAX_ARRAY_NUM)],
@@ -54,10 +53,29 @@ def applyChange(changedTable : dict, tableName:str):
     """
     global db, isChange
 
-    db["data"][tableName] = changedTable
+    # Pengaturan jumlah Row
+    formattedTable = {
+        "data" : [{} for i in range(MAX_ARRAY_NUM)],
+        "columnName" : [],
+        "row_number": 0,
+        "col_number": 0
+    }
+
+    numRows = 0
+    for i in range(MAX_ARRAY_NUM):
+        if changedTable["data"][i] != {}:
+            formattedTable["data"][numRows] = changedTable["data"][i]
+            numRows += 1
+
+    formattedTable["row_number"] = numRows
+    formattedTable["columnName"] = changedTable["columnName"]
+    formattedTable["col_number"] = changedTable["col_number"]
+
     isEditing = False
     for i in range(db["numTable"]):
         isEditing = isEditing or (db["tableName"][i] == tableName)
+
+    db["data"][tableName] = formattedTable
 
     if not isEditing:
         db["tableName"][db["numTable"]] = tableName

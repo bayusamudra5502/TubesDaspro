@@ -69,10 +69,13 @@ def doSave(username):
 
         if(save(saveDir)):
             print("Perubahan Berhasil disimpan...")
+            return True
         else:
             print("Perubahan gagal disimpan.")
+            return False
     else:
         print("Anda tidak memiliki akses untuk menyimpan data.")
+        return False
 
 def main(saveDir):
     isExit = False
@@ -162,7 +165,7 @@ def main(saveDir):
         except KeyboardInterrupt:
             command = "exit"
             print()
-            isExit = exit(saveDir, username)
+            isExit = exit(username)
             command = ""
         finally:
             if(command != ""):

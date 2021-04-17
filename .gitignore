@@ -4,6 +4,7 @@
 
 ### Projcet
 docs/*.docx
+tmp/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
