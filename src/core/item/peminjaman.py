@@ -3,12 +3,12 @@
 # fitur peminjaman gadget (F08)
 
 from core.database import applyChange, getTable
-from core.auth import isValidUser
+from core.auth import getUserID
 from core.auth import isUserRole
 from core.util import generateNextID
 
 def peminjamanGadget(username):
-    if isValidUser(username):
+    if getUserID(username):
         if isUserRole(username):
             dataGadget = getTable("gadget")
             dataPinjamGadget = getTable("gadget_borrow_history")
@@ -34,4 +34,4 @@ def peminjamanGadget(username):
             applyChange(dataGadget, "gadget")
             applyChange(dataPinjamGadget, "gadget_borrow_history")
         return isUserRole
-    return isValidUser
+    return getUserID

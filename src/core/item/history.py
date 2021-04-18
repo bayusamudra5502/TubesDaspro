@@ -7,7 +7,7 @@ from core.database import applyChange, getTable
 from core.auth import isAdminRole
 
 def histPinjamGadget(username):
-    if isAdminRole:
+    if isAdminRole(username):
         dataBorrowHist = getTable("gadget_borrow_history")
         listuser = getTable("user")
         itemList = getTable("gadget")
@@ -114,7 +114,7 @@ def histAmbilConsumable(username):
         sortedtanggal.sort(reverse=True) #list telah disort descending berdasarkan tanggal
         banyakdata=len(sortedtanggal)
         print(f"Menampilkan 5 riwayat {phrase1} terbaru\n")
-
+        
         for i in range (banyakdata):
             for j in range (int(dataConsumableHist['row_number'])):
                 if (dataConsumableHist['data'][j]['id'])==str(sortedtanggal[i][1]): #mencocokkan id peminjaman
@@ -140,4 +140,3 @@ def histAmbilConsumable(username):
         print("Hanya admin yang dapat melakukan fitur riwayat ini")
     return isAdminRole
 
-    

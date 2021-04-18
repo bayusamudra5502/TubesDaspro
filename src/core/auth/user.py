@@ -48,3 +48,4 @@ def isValidUser(username):
 
 def isUnameAvailable(username):
     return (getObjectUser(username) == {})
+

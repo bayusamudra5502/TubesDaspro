@@ -12,7 +12,7 @@ def searchByRarity(username):
     # Fitur F03
     dataGadget = getTable("gadget")
 
-    if isValidUser:
+    if isValidUser(username):
         rarityPencarian = toUpper(input('Masukan rarity {:>3s}'.format(': ')))
         found = 0
 
@@ -31,10 +31,10 @@ def searchByRarity(username):
 
         if found == 0:
             print('Tidak ada barang dengan rarity {}.'.format(rarityPencarian))
-
+        applyChange(dataGadget, "gadget")
     else:
         print('Silahkan login terlebih dahulu sebelum menjalankan program lain.')
-
+    return isValidUser
     pass
 
 
@@ -124,5 +124,5 @@ def searchByYear(username):
     else:
         print('Silahkan login terlebih dahulu sebelum menjalankan program lain.')
     return isValidUser
-    pass
+
     
