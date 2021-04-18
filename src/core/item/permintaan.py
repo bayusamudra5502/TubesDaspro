@@ -32,30 +32,47 @@ def mintaConsumable(username):
                             nextIndex = dataConsumableHist['row_number']
                             lastIndext = dataConsumableHist['row_number']-1
                             lastId = dataConsumableHist['data'][lastIndext]['id']
-                            id = (generateNextID(lastId))
+                            id1 = (generateNextID(lastId))
                             if generateNextID(lastId):
                                 dataConsumableHist['data'][nextIndex] = \
                                 {
-                                    'id': id,
-                                    'id_pengambil': getUserID,
+                                    'id': id1,
+                                    'id_pengambil': str(getUserID(username)),
                                     'id_consumable': id_item,
                                     'tanggal_pengambilan': tanggal_permintaan,
-                                    'jumlah': jumlah_permintaan,
+                                    'jumlah': str(jumlah_permintaan),
                                 }
-                        applyChange(dataConsumableHist, 'consumable_history')
-                   
+                            applyChange(dataConsumableHist, 'consumable_history')
+                        return getUserID
+        
                     elif (int(dataConsumable['data'][i]['jumlah'])) == jumlah_permintaan:
                         newConsumable1 =  (int(dataConsumable['data'][i]['jumlah']))
                         dataConsumable['data'][i]['jumlah'] = str(newConsumable1)
                         print()
                         print("Item " + str(dataConsumable['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
+                       
+                        if getUserID(username):
+                            nextIndex = dataConsumableHist['row_number']
+                            lastIndext = dataConsumableHist['row_number']-1
+                            lastId = dataConsumableHist['data'][lastIndext]['id']
+                            id1 = (generateNextID(lastId))
+                            if generateNextID(lastId):
+                                dataConsumableHist['data'][nextIndex] = \
+                                {
+                                    'id': id1,
+                                    'id_pengambil': username,
+                                    'id_consumable': id_item,
+                                    'tanggal_pengambilan': tanggal_permintaan,
+                                    'jumlah': str(jumlah_permintaan),
+                                }
+                            applyChange(dataConsumableHist, 'consumable_history')
+                        return getUserID
+                    else:
+                        print()
+                        print("Jumlah pengambilan melebihi jumlah item yang ada, silakan kurangi jumlah")
                         
-    
-            if notFound: #item tidak ditemukan
-                print("Tidak ada item dengan ID tersebut!")
-            
-            applyChange(dataConsumable, "consumable")
-            applyChange(dataConsumableHist, "consumable_history")
+            if notFound:
+                print('id item yang dimasukkan tidak valid silakan coba lagi')
         else:
             print("silakan lakukan login sebagai user untuk menjalankan perintah ini")
         return isUserRole

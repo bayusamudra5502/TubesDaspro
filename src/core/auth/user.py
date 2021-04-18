@@ -15,9 +15,9 @@ def getObjectUser(username):
     
     return {}
 
+
 def getUserID(username):
     objUser = getObjectUser(username)
-    
     if objUser != {}:
         return objUser["id"]
     else:
