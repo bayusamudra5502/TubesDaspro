@@ -30,6 +30,13 @@ def isAdminRole(username):
     else:
         return False
 
+def isUserRole(username):
+    if isValidUser(username):
+        objUser = getObjectUser(username)
+        return objUser["role"] == "user"
+    else:
+        return False
+
 def isValidUser(username):
     objUser = getObjectUser(username)
 
@@ -40,4 +47,4 @@ def isValidUser(username):
         return True
 
 def isUnameAvailable(username):
-    return (not isValidUser(username))
+    return (getObjectUser(username) == {})

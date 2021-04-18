@@ -42,8 +42,8 @@ def edit(username):
                             print(str(jumlah_edit) + " " + str(dataConsumable["data"][i]["nama"]) + " berhasil ditambahkan. Stok sekarang: " + str(newConsumable))
                         elif jumlah_edit == 0:
                             print("Jumlah " + str(dataConsumable["data"][i]["nama"] + " tidak berubah. Stok sekarang: " + str(dataConsumable["data"][i]["jumlah"]))
-                        else:   #jumlah_edit < 0
-                            newConsumable = int(dataGadget["data"][i]["jumlah"]) + (jumlah_edit)
+                        else:
+                            newConsumable = int(dataConsumable["data"][i]["jumlah"]) + (jumlah_edit)
                             dataConsumable["data"][i]["jumlah"] = str(newConsumable)
                             print(str(jumlah_edit) + " " + str(dataConsumable["data"][i]["nama"]) + " berhasil dibuang. Stok sekarang: " + str(newConsumable))
                     else:   #(int(dataConsumable["data"][dataConsumable[i]]["jumlah"]) < jumlah_edit)
@@ -58,4 +58,3 @@ def edit(username):
     else:
         print("Silakan lakukan login sebagai admin untuk menjalankan perintah ini")
     return isAdminRole
-pass

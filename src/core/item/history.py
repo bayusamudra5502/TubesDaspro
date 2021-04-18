@@ -45,13 +45,14 @@ def histPinjamGadget(username):
                     continue
                 else:
                     break
+        applyChange(dataBorrowHist, "gadget_borrow_history")
     else:
         print("Hanya admin yang dapat melakukan fitur riwayat ini")
-    applyChange(dataBorrowHist, "gadget_borrow_history")
-    pass
+    return isAdminRole
+
 
 def histKembaliGadget(username):
-    if isAdminRole:
+    if isAdminRole(username):
         dataReturnHist = getTable("gadget_return_history")
         listuser = getTable("user")
         itemList = getTable("gadget")
@@ -89,13 +90,14 @@ def histKembaliGadget(username):
                     continue
                 else:
                     break
+        applyChange(dataReturnHist, "gadget_return_history")
     else:
         print("Hanya admin yang dapat melakukan fitur riwayat ini")
-    applyChange(dataReturnHist, "gadget_return_history")
-    pass
+    return isAdminRole
+
 
 def histAmbilConsumable(username):
-    if isAdminRole:
+    if isAdminRole(username):
         dataConsumableHist = getTable("consumable_history")
         listuser = getTable("user")
         itemList = getTable("consumable")
@@ -133,7 +135,9 @@ def histAmbilConsumable(username):
                     continue
                 else:
                     break
+        applyChange(dataConsumableHist, "consumable_history")
     else:
         print("Hanya admin yang dapat melakukan fitur riwayat ini")
-    applyChange(dataConsumableHist, "consumable_history")
-    pass
+    return isAdminRole
+
+    

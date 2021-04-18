@@ -42,7 +42,7 @@ def searchByYear(username):
     # Fitur F04
     dataGadget = getTable("gadget")
 
-    if isValidUser:
+    if isValidUser(username):
         tahunPencarian = int(input('Masukan tahun {:>5s}'.format(': ')))
         kategoriPencarian = input('Masukan kategori {:>1s}'.format(': '))
         found = 0
@@ -120,8 +120,9 @@ def searchByYear(username):
 
             elif (kategoriPencarian == '<'):
                 print('Tidak ditemukan barang yang ditemukan sebelum tahun {}.'.format(tahunPencarian))
-
+        applyChange(dataGadget,"gadget")
     else:
         print('Silahkan login terlebih dahulu sebelum menjalankan program lain.')
-
+    return isValidUser
     pass
+    

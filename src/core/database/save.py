@@ -13,7 +13,7 @@ def save(saveDir):
     fungsi mengembalikan True"""
     
     if not exists(saveDir):
-        print(f"ERROR: Lokasi '{saveDir}' tidak ditemukan. Akan dibuat folder baru.")
+        print(f"WARN: Lokasi '{saveDir}' tidak ditemukan. Akan dibuat folder baru.")
         try:
             mkdir(saveDir)
         except Exception:
