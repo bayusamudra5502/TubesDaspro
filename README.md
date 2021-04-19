@@ -17,3 +17,13 @@ Akun Admin
 Akun User
 * USERNAME : user
 * PASSWORD : user
+
+Akun memiliki password yang sama dengan usernamenya
+contoh:
+* USERNAME : lisa
+* PASSWORD : lisa
+
+* USERNAME : yols
+* PASSWORD : yols
+
+
