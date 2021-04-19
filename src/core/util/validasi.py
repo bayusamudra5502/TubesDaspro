@@ -22,7 +22,7 @@ def isValidTanggal(date:str) -> bool:
             if(bulan == 2):
                 if((tahun % 4 == 0 and tahun % 100 != 0)
                     or tahun % 400 == 0):
-                    # Tahun kabisar
+                    # Tahun kabisat
                     return 1 <= hari <= 29
                 else:
                     # BUkan tahun kabisat

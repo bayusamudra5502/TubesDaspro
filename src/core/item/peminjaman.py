@@ -6,6 +6,7 @@ from core.database import applyChange, getTable
 from core.auth import getUserID
 from core.auth import isUserRole
 from core.util import generateNextID
+from core.util import isValidTanggal
 
 def peminjamanGadget(username):
     if getUserID(username):
