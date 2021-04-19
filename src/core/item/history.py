@@ -28,15 +28,15 @@ def histPinjamGadget(username):
         for i in range (banyakdata):
             for j in range (int(dataBorrowHist['row_number'])):
                 if (dataBorrowHist['data'][j]['id'])==str(sortedtanggal[i][1]): #mencocokkan id peminjaman
-                    print(f"ID {phrase1}: {dataBorrowHist['data'][j]['id']}")
+                    print(f"ID {phrase1}     : {dataBorrowHist['data'][j]['id']}")
                     for k in range (int(listuser['row_number'])): #mencocokkan nama peminjam
                         if (listuser['data'][k]['id'])==(dataBorrowHist['data'][j]['id_peminjam']):
-                            print(f"Nama {phrase2}: {listuser['data'][k]['nama']}")
+                            print(f"Nama {phrase2}     : {listuser['data'][k]['nama']}")
                     for l in range (int(itemList['row_number'])):
                         if (itemList['data'][l]['id'])== (dataBorrowHist['data'][j]['id_gadget']): #mencocokkan nama gadget
-                            print(f"Nama {phrase3}: {itemList['data'][l]['nama']}")
+                            print(f"Nama {phrase3}       : {itemList['data'][l]['nama']}")
                     print(f"Tanggal {phrase1}: {dataBorrowHist['data'][j]['tanggal_peminjaman']}")
-                    print(f"Jumlah: {dataBorrowHist['data'][j]['jumlah']}")
+                    print(f"Jumlah            : {dataBorrowHist['data'][j]['jumlah']}")
             print()
             if (i%5==4):
                 lanjut=input("Ingin menampilkan entry selanjutnya? (Y/N): ")
@@ -54,6 +54,7 @@ def histPinjamGadget(username):
 def histKembaliGadget(username):
     if isAdminRole(username):
         dataReturnHist = getTable("gadget_return_history")
+        dataBorrowHist = getTable("gadget_borrow_history")
         listuser = getTable("user")
         itemList = getTable("gadget")
 
@@ -74,14 +75,16 @@ def histKembaliGadget(username):
             for j in range (int(dataReturnHist['row_number'])):
                 if (dataReturnHist['data'][j]['id'])==str(sortedtanggal[i][1]): #mencocokkan id peminjaman
                     print(f"ID {phrase1}     : {dataReturnHist['data'][j]['id']}")
-                    for k in range (int(listuser['row_number'])): #mencocokkan nama peminjam
-                        if (listuser['data'][k]['id'])==(dataReturnHist['data'][j]['id_pengembali']):
-                            print(f"Nama {phrase2}     : {listuser['data'][k]['nama']}")
-                    for l in range (int(itemList['row_number'])):
-                        if (itemList['data'][l]['id'])== (dataReturnHist['data'][j]['id_gadget']): #mencocokkan nama gadget
-                            print(f"Nama {phrase3}    : {itemList['data'][l]['nama']}")
-                    print(f"Tanggal {phrase1}: {dataReturnHist['data'][j]['tanggal_pengembalian']}")
-                    print(f"Jumlah             : {dataReturnHist['data'][j]['jumlah']}")
+                    for k in range(int(dataBorrowHist['row_number'])):
+                        if (dataBorrowHist['data'][k]['id']) == (dataReturnHist['data'][j]['id_peminjaman']):
+                            for l in range (int(listuser['row_number'])): #mencocokkan nama peminjam
+                                if (listuser['data'][l]['id'])==(dataBorrowHist['data'][k]['id_peminjam']):
+                                    print(f"Nama {phrase2}     : {listuser['data'][l]['nama']}")
+                            for m in range (int(itemList['row_number'])):
+                                if (itemList['data'][m]['id'])== (dataBorrowHist['data'][k]['id_gadget']): #mencocokkan nama gadget
+                                    print(f"Nama {phrase3}         : {itemList['data'][m]['nama']}")
+                            print(f"Tanggal {phrase1}: {dataReturnHist['data'][j]['tanggal_pengembalian']}")
+                            print(f"Jumlah              : {dataReturnHist['data'][j]['jumlah']}")
             print()
             if (i%5==4):
                 lanjut=input("Ingin menampilkan entry selanjutnya? (Y/N): ")

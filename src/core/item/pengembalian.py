@@ -6,6 +6,7 @@ from core.database import applyChange, getTable
 from core.auth import isValidUser
 from core.auth import isUserRole
 from core.util import generateNextID
+from core.util import isValidTanggal
 
 def pengembalianGadget(username):
     if isValidUser(username):
