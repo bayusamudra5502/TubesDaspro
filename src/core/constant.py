@@ -37,3 +37,35 @@ DB_FILES_NAME = (["consumable_history.csv",
                  "gadget_return_history.csv",
                  "gadget.csv",
                  "user.csv"], 6)
+
+# LABORATORIUM
+
+ENGINE_CHART = {
+        "STONE" : {
+            "energi" : 10,
+            "maxFaktor" : 50,
+            "waktu" : 30
+        },
+        "IRON" : {
+            "energi" : 50,
+            "maxFaktor" : 100,
+            "waktu" : 20
+        },
+        "GOLD" : {
+            "energi" : 100,
+            "maxFaktor" : 110,
+            "waktu" : 5
+        },
+        "DIAMOND" : {
+            "energi" : 110,
+            "maxFaktor" : 150,
+            "waktu" : 10
+        },
+    }
+    
+RARITY_CHART = {
+        "C" : 5,
+        "B" : 10,
+        "A" : 25,
+        "S" : 100
+    }

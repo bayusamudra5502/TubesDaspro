@@ -22,7 +22,7 @@ Berikut ini adalah kolom checklist dari proses pembuatan program kantong ajaib i
 | 17  | F17-Exit                            | ✔️      | ✔️            | ✔️         |
 | 18  | FB1-Hashing                         | ✔️      | ✔️            | ✔️         |
 | 19  | FB2-Pengembalian Parsial            | ⌛       | ⌛            | ❌         |
-| 20  | FB3-Meningkatkan rarity consumables | ❌      | ❌            | ❌         |
+| 20  | FB3-Meningkatkan rarity consumables | ⌛      | ⌛            | ❌         |
 
 Keterangan :
 * ✔️ : Sudah dilaksanakan
