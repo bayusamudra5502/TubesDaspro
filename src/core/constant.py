@@ -68,4 +68,6 @@ RARITY_CHART = {
         "B" : 10,
         "A" : 25,
         "S" : 100
-    }
+}
+
+LAB_LOWER_DIV = 37.5

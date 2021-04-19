@@ -2,20 +2,25 @@
 # Modul ini merupakan realisasi dari fitur
 # FB03, yaitu meningkatkan rarity Consumable
 
-from core.constant import MAX_ARRAY_NUM
+from core.constant import LAB_LOWER_DIV, MAX_ARRAY_NUM
 from core.database import getTable
-from core.auth import isValidUser, user
+from core.auth import isValidUser, getUserID, user
 from core.database import applyChange
 from core.util import random
 from core.util import toLower
+from datetime import datetime
 from os import system
 from time import sleep
 from core.constant import ENGINE_CHART, RARITY_CHART
+from core.util.manipulation import generateNextID
 
 MAX_SHOW_NUM = 5
 
+dataConsumableHist = []
 consumables = [{} for i in range(MAX_ARRAY_NUM)]
+usageConsumable = [{} for i in range(MAX_ARRAY_NUM)]
 engine = {}
+username = ""
 nItem = 0
 dataConsumable = []
 
@@ -42,23 +47,27 @@ def selectIndex(len):
     return index
 
 def getCount(num):
-    try:
         count = -1
         isOKCount = False
         while not isOKCount:
-            count = int(input("Jumlah Item : "))
-            if count > num:
-                print("Jumlah yang diinputkan tidak mencukupi dengan stok!")
+            try:
+                count = int(input("Jumlah Item : "))
+                if count > num:
+                    print("Jumlah yang diinputkan tidak mencukupi dengan stok!")
+                    print()
+                elif(count <= 0):
+                    print("Masukkan jumlah consumable yang benar! Pastikan anda memasukan nilai > 0.")
+                    print()
+                elif(count == None):
+                    print("Masukkan jumlah item yang diinginkan!")
+                    print()
+                else:
+                    isOKCount = True
+            except Exception:
+                print("Error! Pastikan anda hanya memasukan bilangan bulat saja.")
                 print()
-            elif(count <= 0):
-                print("Masukkan jumlah consumable yang benar! Pastikan anda memasukan nilai > 0.")
-                print()
-            else:
-                isOKCount = True
 
         return count
-    except Exception:
-        print("Error! Pastikan anda hanya memasukan bilangan bulat saja.")
 
 def showData(data, title):
     system("cls || clear")
@@ -68,29 +77,33 @@ def showData(data, title):
 
     showStartNum = 0
     showEndNum = data["row_number"]
-    cmd = "n"
+    cmd = "y"
 
     if(showEndNum >= MAX_SHOW_NUM):
         showEndNum = MAX_SHOW_NUM
 
-    while toLower(cmd) == "n":
+    while toLower(cmd) != "n":
         for i in range(showStartNum, showEndNum):
-            print("%d. %s (Rarity %s) (%d)" 
-                % (i+1,data["data"][i]["nama"]))
+            print("%d. %s (Rarity %s) (Jumlah : %s buah)" 
+                % (i+1,data["data"][i]["nama"], data["data"][i]["rarity"], data["data"][i]["jumlah"]))
 
         print()
 
-        cmd = "n"
         if((data["row_number"] > (showStartNum + MAX_SHOW_NUM))):
             print("...")
             print()
-            cmd = input("Tampilkan data selanjutnya [Y/n] :")
+            cmd = input("Tampilkan data selanjutnya [Y/n] : ")
+            print()
             if(toLower(cmd) == "y"):
                 showStartNum += MAX_SHOW_NUM
                 if(data["row_number"] - (showEndNum + MAX_SHOW_NUM) > 0):
                     showEndNum += MAX_SHOW_NUM
                 else:
                     showEndNum = data["row_number"]
+        else:
+            input("Tekan ENTER jika anda ingin keluar.")
+            cmd = "n"
+
 
 def addItem():
     global consumables, nItem, dataConsumable
@@ -107,10 +120,11 @@ def addItem():
     
         if isInCart:
             print("Nama barang sudah ada di keranjang. Jika anda ingin melakukan perubahan silahkan lakukan edit barang.")
-            isOK = not ((toLower(input("Apakah anda ingin kembali ke halaman laboratorium? [Y/n] : ")) == "y"))
+            sleep(1)
+            isOK = True
             print()
         else:
-            count = getCount(dataConsumable["data"][index]["jumlah"])
+            count = getCount(int(dataConsumable["data"][index]["jumlah"]))
 
             selectedObject = {
                 "nama" : dataConsumable["data"][index]["nama"],
@@ -130,12 +144,13 @@ def addItem():
                     
             if(isOK):
                 consumables[nItem] = selectedObject
-                dataConsumable["data"][index]["jumlah"] -= count
+                dataConsumable["data"][index]["jumlah"] = str(int(dataConsumable["data"][index]["jumlah"]) - count)
                 nItem += 1
 
 def deleteItem():
-    try:
+        global nItem, dataConsumable
         isLocked = True
+
         while isLocked:
             print("Silahkan isi nomor urut consumable pada keranjang yang akan dihapus.")
 
@@ -154,6 +169,10 @@ def deleteItem():
             while not isValidCMD:
                 cmd = toLower(input("Apakah data diatas sudah benar? [Y/n/c] : ")) 
                 if(cmd == "y"):
+                    jumlah = consumables[index]['jumlah']
+                    dbIndex = consumables[index]["dbIndex"]
+                    dataConsumable["data"][dbIndex]["jumlah"] = str(int(dataConsumable["data"][dbIndex]["jumlah"]) + jumlah)
+
                     for i in range(index, nItem):
                         consumables[i] = consumables[i+1]
                     
@@ -171,19 +190,19 @@ def deleteItem():
                 else:
                     print("Masukan tidak dikenali, ulangi.")
 
-    except Exception:
-        print("Input hanya menerima bilangan bulat!")
 
 def editItem():
     global consumables, nItem, dataConsumable
     isLocked = True
+    nItem = 0
+
     while isLocked:
         print("Silahkan pilih nomor consumable yang akan diubah:")
         index = selectIndex(nItem)
 
         print("Silahkan masukkan jumlah baru yang diinginkan")
         dbIndex = consumables[index]["dbIndex"]
-        total = dataConsumable["data"][dbIndex]["jumlah"] + consumables[index]["jumlah"]
+        total = int(dataConsumable["data"][dbIndex]["jumlah"]) + int(consumables[index]["jumlah"])
 
         newCnt = getCount(total)
 
@@ -197,7 +216,7 @@ def editItem():
         while not isValidCMD:
             cmd = toLower(input("Apakah data diatas sudah benar? [Y/n/c] : ")) 
             if(cmd == "y"):
-                dataConsumable["data"][dbIndex]["jumlah"] = total - newCnt
+                dataConsumable["data"][dbIndex]["jumlah"] = str(total - newCnt)
                 consumables[index]['jumlah'] = newCnt
 
                 print("Data keranjang berhasil diubah.")
@@ -317,11 +336,25 @@ def setEngine():
                 if(toLower(cmd) == "lihat"):
                     showData(dataConsumable, "DATA CONSUMABLE")
                 elif(toLower(cmd) == "tambah"):
-                    index = selectIndex(dataConsumable["row_number"])
-                    cnt = getCount(dataConsumable["data"][index]["jumlah"])
+                    index = selectIndex(dataConsumable["rowjumlah_permintaan_number"])
+                    cnt = getCount(int(dataConsumable["data"][index]["jumlah"]))
 
                     totalEnergy += RARITY_CHART[dataConsumable["data"][index]["rarity"]] * cnt
-                    dataConsumable["data"][index]["jumlah"] -= cnt
+                    dataConsumable["data"][index]["jumlah"] = str(int(dataConsumable["data"][index]["jumlah"]) - cnt)
+
+                    # Melakukan pencatatan pengambilan
+                    nextIndex = dataConsumableHist["row_number"]
+                    dataConsumableHist['data'][nextIndex] = \
+                    {
+                        'id': generateNextID(dataConsumableHist["data"][nextIndex - 1]),
+                        'id_pengambil': str(getUserID(username)),
+                        'id_consumable': dataConsumable["data"][index]["id"],
+                        'tanggal_pengambilan': datetime.now().strftime("%d/%m/%Y"),
+                        'jumlah': str(cnt),
+                    }
+                    
+                    dataConsumableHist["row_number"] += 1
+
                 elif(toLower(cmd) == "batal"):
                     isLocked = False
                 else:
@@ -333,26 +366,130 @@ def setEngine():
             print("Mengisikan energi pada mesin...")
             sleep(1.5)
 
-            factor = random() * ENGINE_CHART[userInput]["maxFaktor"]
+            # Menghitung Faktor
+            factor = (random() * ENGINE_CHART[userInput]["maxFaktor"]) / LAB_LOWER_DIV
 
             engine = {
                 "nama" : userInput,
-                "faktorPengali" : factor
+                "faktorPengali" : factor,
+                "waktu": ENGINE_CHART[userInput]["waktu"]
             }
 
             print("Done!")
             sleep(1)
-            
-            
 
 def mix():
-    pass
+    global dataConsumable, dataConsumableHist
+    
+    if(engine == {}):
+        isValidAns = False
 
-def eksperimen(username):
-    global dataConsumable
+        while not isValidAns:
+            print("PERINGATAN !")
+            cmd = toLower(input("Apakah anda yakin untuk langsung melakukan proses pencampuran tanpa menggunakan mesin? [Y/n] :"))
+
+            if(cmd == "y"):
+                isValidAns = True
+            elif(cmd == "n"):
+                isValidAns = False
+                return False
+            else:
+                print("Input tidak dikenal, coba lagi.")
+    
+    print("Memulai proses persiapan...")
+
+    for i in range(3):
+        print(f"Memulai Tahap Persiapan ke-{i}...")
+        sleep(1)
+        print(f"Tahap ke-{i} selesai dilaksanakan.")
+        print()
+    
+    print("Tahap persiapan selsai.")
+    print("Memulai memasukkan semua bahan.")
+
+    sumPoint = 0
+    for i in range(nItem):
+        print(f"1. Memasukkan {consumables[i]['nama']} sebanyak {consumables[i]['jumlah']} buah")
+        sumPoint += RARITY_CHART[consumables[i]["rarity"]] * (random() ** 1.25)
+
+        # Melakukan pencatatan pengambilan
+        nextIndex = dataConsumableHist["row_number"]
+        dataConsumableHist['data'][nextIndex] = \
+        {
+            'id': generateNextID(dataConsumableHist["data"][nextIndex - 1]),
+            'id_pengambil': str(getUserID(username)),
+            'id_consumable': dataConsumable["data"][consumables[i]['dbIndex']]["id"],
+            'tanggal_pengambilan': datetime.now().strftime("%d/%m/%Y"),
+            'jumlah': str(consumables[i]['jumlah']),
+        }
+                    
+        dataConsumableHist["row_number"] += 1
+
+        sleep(1)
+
+    print("Memulai proses pencampuran semua bahan.")
+
+    finalScore = sumPoint
+
+    if (engine != {}):
+        print("Mesin yang digunakan :", engine["nama"])
+        print(f"Proses memakan waktu : {engine['waktu']} detik")
+        sleep(engine['waktu'])
+
+        finalScore *= random() * engine["faktorPengali"]
+    else:
+        print("Proses memakan waktu : 1 menit")
+        finalScore *= random()
+        sleep(60)
+
+    print("Proses pencampuran selesai.")
+
+    rarityCode = ""
+    if(finalScore < RARITY_CHART["B"]):
+        print(f"Anda mendapatkan consumable dengan rarity C (Point : {finalScore:.2f})")
+        rarityCode = "C"
+    elif(finalScore < RARITY_CHART["A"]):
+        print(f"Anda mendapatkan consumable dengan rarity B (Point : {finalScore:.2f})")
+        rarityCode = "B"
+    elif(finalScore < RARITY_CHART["S"]):
+        print(f"Anda mendapatkan consumable dengan rarity A (Point : {finalScore:.2f})")
+        rarityCode = "A"
+    else:
+        print(f"Anda mendapatkan consumable dengan rarity S (Point : {finalScore:.2f})")
+        rarityCode = "S"
+    
+    jumlahConsumable = ((random() ** 2) * 4) + 1
+    print(f"Jumlah consumable yang didapat : {jumlahConsumable}")
+
+    print()
+    print("Silahkan masukan nama consumable baru anda!")
+
+    nama = input("Nama Consumable : ")
+
+    consumableNextID = dataConsumable["row_number"]
+    dataConsumable['data'][consumableNextID] = \
+    {
+        'id': id,
+        'nama': nama,
+        'deskripsi': "Barang hasil pencampuran Laboratorium Doraemonangis.",
+        'jumlah': jumlahConsumable,
+        'rarity': rarityCode,
+    }
+
+    for i in range(dataConsumable["row_number"]):
+        if(dataConsumable["data"][i]["jumlah"] == "0"):
+            dataConsumable["data"][i] = {}
+    
+    applyChange(dataConsumable, "consumable")
+    applyChange(dataConsumableHist, "consumable_history")
+    return True
+
+def eksperimen(uname):
+    global dataConsumable, username
     dataConsumable = getTable("consumable")
     
-    if isValidUser(username):
+    if isValidUser(uname):
+        username = uname
         option = ""
         while (option != "mix"):
             system("cls || clear")
@@ -383,7 +520,7 @@ def eksperimen(username):
                 for i in range(nItem):
                     print(f"{i+1}. {consumables[i]['nama']}", end="")
                     print(f" - Rarity {consumables[i]['rarity']}", end="")
-                    print(f" ({consumables[i]['jumlah']}x)")
+                    print(f" (x {consumables[i]['jumlah']})")
             else:
                 print("BELUM ADA CONSUMABLE YANG DIPILIH")
             
@@ -401,14 +538,32 @@ def eksperimen(username):
 
             isValid = False
             while not isValid:
-                option = toLower(input("Perintah yang dipilih :"))
-                print()
+                option = toLower(input("Perintah yang dipilih : "))
 
+                isValid = True
                 if option == "show":
                     showData(dataConsumable, "DAFTAR CONSUMABLE")
                 elif option == "add":
                     addItem()
                 elif option == "delete":
                     deleteItem()
-                    
+                elif option == "edit":
+                    editItem()
+                elif option == "engine":
+                    setEngine()
+                elif option == "mix":
+                    if nItem > 0:
+                        if mix():
+                            option = "mix"
+                        else:
+                            option = ""
+                    else:
+                        print("Masukkan terlebih dahulu barang yang akan dicampurkan.")
+                        option = ""
+                else:
+                    print("Perintah tidak dikenal. Silahkan coba lagi.")
+                    print()
+                    isValid = False
+
+            print()          
                     
