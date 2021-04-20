@@ -14,8 +14,10 @@ def delete(username):
         id_array = list(id)
         # Validasi dan modifikasi data
         if (id_array[0]=="G"):
+            notFound1 = True
             for i in range(dataGadget["row_number"]):
                 if(dataGadget["data"][i]["id"] == id):
+                    notFound1 = False
                     print("Apakah anda yakin ingin menghapus " + str(dataGadget["data"][i]["nama"]) + " (Y/N)?", end="")
                     validation = input()
                     while (validation != "Y") and (validation != "y") and (validation != "N") and (validation != "n"):
@@ -25,14 +27,18 @@ def delete(username):
                         validation = input()
                     if (validation == 'Y') or (validation == 'y'):
                         dataGadget["data"][i] ={}
+                        print()
                         print("Item telah berhasil dihapus dari database")
                     else:   #(validation == "N") or (validation == "n")
                         break
-                else:    #(dataGadget["data"][i]["id"] != id)
-                    print("Tidak ada item dengan ID tersebut")
+            if notFound1:    #(dataGadget["data"][i]["id"] != id)
+                print()
+                print("Tidak ada item dengan ID tersebut")
         elif (id_array[0]=="C"):
+            notFound = True
             for i in range(dataConsumable["row_number"]):
                 if(dataConsumable["data"][i]["id"] == id):
+                    notFound = False
                     print("Apakah anda yakin ingin menghapus " + str(dataConsumable["data"][i]["nama"]) + " (Y/N)", end="")
                     validation = input()
                     while(validation != "Y") and (validation != "y") and (validation != "N") and (validation != "n"):
@@ -46,10 +52,12 @@ def delete(username):
                         applyChange(dataConsumable, "consumable")
                     else:   #(validation == "N") or (validation == "n")
                         break
-                else:   #(dataConsumable["data"][i]["id"] != id)
-                    print("Tidak ada item dengan ID tersebut")
+            if notFound:   #(dataConsumable["data"][i]["id"] != id)
+                print("Tidak ada item dengan ID tersebut")
         else:   #(id_array[0] != "G") and (id_array[0] != "C")
+            print()
             print("Tidak ada item dengan ID tersebut")
     else:
+        print()
         print("Silakan lakukan login sebagai admin untuk menjalankan perintah ini")
     return isAdminRole
