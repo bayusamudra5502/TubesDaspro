@@ -52,9 +52,9 @@ def pengembalianGadget(username):
                                 print()
                                 print("Item "+ dataGadget['data'][i]['nama'] + " (x"+str(jumlah_kembali) + ") " + " telah dikembalikan!")
                                 if getUserID(username):
-                                    nextIndex = dataPinjamGadget["row_number"]
-                                    lastIndext = dataPinjamGadget["row_number"]-1
-                                    lastID = dataPinjamGadget["data"][lastIndext]["id"]
+                                    nextIndex = dataKembaliGadget["row_number"]
+                                    lastIndext = dataKembaliGadget["row_number"]-1
+                                    lastID = dataKembaliGadget["data"][lastIndext]["id"]
                                     id1 = (generateNextID(lastID))
                                     if generateNextID(lastID):
                                         dataKembaliGadget["data"][nextIndex] = \
@@ -70,13 +70,16 @@ def pengembalianGadget(username):
                         if notFound1:   # dataGadget["data"][i]["id"] != id_item
                             print("Item tersebut sudah tidak ada dalam database gadget")
                     else:   # validation_jumlah = False
+                        print()
                         print("Jumlah yang ingin dikembalikan melebihi jumlah peminjaman")
                 else:
+                    print()
                     print("Masukan tanggal tidak valid, silakan masukan format tanggal yang valid")
                 return isValidTanggal
             else:   # jumlah_kembali <= 0
                 print("Jumlah pengembalian harus lebih besar dari nol")
         else:
+            print()
             print("Silakan lakukan login sebagai user untuk menjalankan perintah ini")
         return isUserRole
     return isValidUser

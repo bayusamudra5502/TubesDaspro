@@ -44,7 +44,7 @@ def peminjamanGadget(username):
                                     newGadget = int(dataGadget["data"][i]["jumlah"]) - (jumlah_pinjam)
                                     dataGadget["data"][i]["jumlah"] = str(newGadget)
                                     print()
-                                    print("Item " + str(dataGadget["data"][i]["nama"]) + " (x" + str(dataGadget["data"][i]["jumlah"]) + ") " "berhasil dipinjam!")
+                                    print("Item " + str(dataGadget["data"][i]["nama"]) + " (x" + str(jumlah_pinjam) + ") " "berhasil dipinjam!")
                                     applyChange(dataGadget, "gadget")
                                     if getUserID(username):
                                         nextIndex = dataPinjamGadget["row_number"]
