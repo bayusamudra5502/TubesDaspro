@@ -76,8 +76,7 @@ def mintaConsumable(username):
                         print()
                         print("Masukan tanggal tidak valid, silakan masukkan tanggal yang valid")
                     return isValidTanggal
-        
-                    
+                      
             if notFound:
                 print('id item yang dimasukkan tidak valid silakan coba lagi')
         else:
