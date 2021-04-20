@@ -17,7 +17,9 @@ def pengembalianGadget(username):
             dataKembaliGadget = getTable("gadget_return_history")
             # Print daftar gadget yang dipinjam
             for i in range(dataPinjamGadget["row_number"]):
-                print(dataPinjamGadget["data"][i]["id"] + ". " + dataPinjamGadget["data"][i]["id"])
+                for j in range(dataGadget["row_number"]):
+                    if (dataPinjamGadget['data'][i]['id_gadget'])==(dataGadget['data'][j]['id']):
+                        print(dataPinjamGadget["data"][i]["id"] + ". " + dataGadget["data"][j]["nama"])
             # Meminta input
             nomor_pinjam = input("Masukan nomor peminjaman: ")
             jumlah_kembali = int(input("Masukan jumlah item yang dikembalikan: "))
@@ -57,7 +59,7 @@ def pengembalianGadget(username):
                                         "id": id1,
                                         "id_peminjaman": nomor_pinjam,
                                         "id_gadget": id_item,
-                                        "tanggal_peminjaman": tanggal_kembali,
+                                        "tanggal_pengembalian": tanggal_kembali,
                                         "jumlah_kembali": jumlah_kembali 
                                         }
                                     applyChange(dataKembaliGadget, "gadget_return_history")
