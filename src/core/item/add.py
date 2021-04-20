@@ -116,4 +116,6 @@ def addItem(username):
                         }
                     print('Item telah berhasil ditambahkan ke database.')
                     applyChange(dataConsumable, 'consumable')
-    pass
+    else:
+        print("Hanya admin yang dapat melakukan fitur tambah item ini")
+    return isAdminRole

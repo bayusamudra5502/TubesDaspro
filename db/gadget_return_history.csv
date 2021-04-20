@@ -1,1 +1,4 @@
-id;id_pengembalian;id_gadget;tanggal_pengembalian;jumlah
+id;id_peminjaman;tanggal_pengembalian;is_returned;jumlah
+1;1;22/10/2020;true;3
+2;2;12/02/2019;true;4
+3;3;14/04/2002;true;1

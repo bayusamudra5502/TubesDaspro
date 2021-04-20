@@ -3,14 +3,14 @@
 # fitur peminjaman gadget (F08)
 
 from core.database import applyChange, getTable
-from core.auth import isValidUser
+from core.auth import getUserID
 from core.auth import isUserRole
 from core.util import generateNextID
 from core.auth import getUserID
 from core.util import isValidTanggal
 
 def peminjamanGadget(username):
-    if isValidUser(username):
+    if getUserID(username):
         if isUserRole(username):
             dataGadget = getTable("gadget")
             dataPinjamGadget = getTable("gadget_borrow_history")
@@ -74,4 +74,4 @@ def peminjamanGadget(username):
         else:
             print("Silakan lakukan login sebagai user untuk menjalankan perintah ini")
         return isUserRole
-    return isValidUser
+    return getUserID

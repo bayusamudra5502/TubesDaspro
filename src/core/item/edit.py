@@ -40,11 +40,11 @@ def edit(username):
                 if(dataConsumable["data"][i]["id"] == id):
                     if(int(dataConsumable["data"][i]["jumlah"]) >= jumlah_edit):
                         if jumlah_edit > 0:
-                            newGadget = int(dataGadget["data"][i]["jumlah"]) + (jumlah_edit)
-                            dataGadget["data"][i]["jumlah"] = str(newGadget)
-                            print(str(jumlah_edit) + " " + str(dataGadget["data"][i]["nama"]) + " berhasil ditambahkan. Stok sekarang: " + str(newGadget))
+                            newConsumable = int(dataConsumable["data"][i]["jumlah"]) + (jumlah_edit)
+                            dataConsumable["data"][i]["jumlah"] = str(newConsumable)
+                            print(str(jumlah_edit) + " " + str(dataConsumable["data"][i]["nama"]) + " berhasil ditambahkan. Stok sekarang: " + str(newConsumable))
                         elif jumlah_edit == 0:
-                            print("Jumlah " + str(dataGadget["data"][i]["nama"] + " tidak berubah. Stok sekarang: " + str(dataGadget["data"][i]["jumlah"])))
+                            print("Jumlah " + str(dataConsumable["data"][i]["nama"] + " tidak berubah. Stok sekarang: " + str(dataConsumable["data"][i]["jumlah"])))
                         else:   # jumlah_edit < 0
                             newConsumable = int(dataConsumable["data"][i]["jumlah"]) + (jumlah_edit)
                             dataConsumable["data"][i]["jumlah"] = str(newConsumable)

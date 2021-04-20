@@ -5,7 +5,6 @@
 from core import main
 from core.database import isValidDir
 from sys import argv
-
 from core.database.load import loadDatabase
 
 # KAMUS
