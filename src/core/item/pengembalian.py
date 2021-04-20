@@ -63,7 +63,7 @@ def pengembalianGadget(username):
                                         "id": id1,
                                         "id_peminjaman": nomor_pinjam,
                                         "tanggal_pengembalian": tanggal_kembali,
-                                        "jumlah_kembali": str(jumlah_kembali)
+                                        "jumlah": str(jumlah_kembali)
                                         }
                                     applyChange(dataKembaliGadget, "gadget_return_history")
                                 return getUserID
