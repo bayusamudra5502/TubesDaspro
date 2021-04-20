@@ -43,14 +43,13 @@ def delete(username):
                     if(validation == "Y") or (validation == "y"):
                         dataConsumable["data"][i] = {}
                         print("Item telah berhasil dihapus dari database")
+                        applyChange(dataConsumable, "consumable")
                     else:   #(validation == "N") or (validation == "n")
                         break
                 else:   #(dataConsumable["data"][i]["id"] != id)
                     print("Tidak ada item dengan ID tersebut")
         else:   #(id_array[0] != "G") and (id_array[0] != "C")
             print("Tidak ada item dengan ID tersebut")
-        applyChange(dataGadget, "gadget")
-        applyChange(dataConsumable, "consumable")
     else:
         print("Silakan lakukan login sebagai admin untuk menjalankan perintah ini")
     return isAdminRole

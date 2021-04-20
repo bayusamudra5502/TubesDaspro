@@ -36,12 +36,15 @@ def peminjamanGadget(username):
                         else:   # dataPinjamGadget["data"][i]["id"] != id_item
                             break
                     if(jumlah_gadget_kembali == jumlah_gadget_pinjam):
+                        notFound = True
                         for i in range(dataGadget["row_number"]):
                             if(dataGadget["data"][i]["id"] == id_item):
+                                notFound = False
                                 if(int(dataGadget["data"][i]["jumlah"]) > 0) and (int(dataGadget["data"][i]["jumlah"]) >= jumlah_pinjam):
                                     newGadget = int(dataGadget["data"][i]["jumlah"]) - (jumlah_pinjam)
                                     dataGadget["data"][i]["jumlah"] = str(newGadget)
-                                    print("Item " + str(dataGadget["data"][dataGadget][i]["nama"]) + " (" + str(dataGadget["data"][i]["jumlah"]) + ") " "berhasil dipinjam")
+                                    print()
+                                    print("Item " + str(dataGadget["data"][i]["nama"]) + " (x" + str(jumlah_pinjam) + ") " "berhasil dipinjam!")
                                     applyChange(dataGadget, "gadget")
                                     if getUserID(username):
                                         nextIndex = dataPinjamGadget["row_number"]
@@ -61,17 +64,23 @@ def peminjamanGadget(username):
                                         applyChange(dataPinjamGadget, "gadget_borrow_history")
                                     return getUserID
                                 else:   #(dataGadget["data"][i]["jumlah"]) <= 0) or (dataGadget["data"][i]["jumlah"] < jumlah_pinjam)
+                                    print()
                                     print("Jumlah yang ingin dipinjam melebihi stok item. Stok sekarang: " + str(dataGadget["data"][i]["jumlah"]))
-                            else:   # dataGadget["data"][i]["id"] != id_item
-                                print("Tidak ada item dengan ID tersebut!")
+                        if notFound:   # dataGadget["data"][i]["id"] != id_item
+                            print()  
+                            print("Tidak ada item dengan ID tersebut!, silakan masukan ID yang valid")
                     else:  # jumlah_gadget_kembali != jumlah_gadget_pinjam 
+                        print()
                         print("Kembalikan item dari peminjaman sebelumnya untuk dapat meminjam kembali")
                 else:
+                    print()
                     print("Masukan tanggal tidak valid, silakan masukan format tanggal yang valid")
                 return isValidTanggal
             else:   # jumlah_pinjam <= 0
+                print()
                 print("Jumlah peminjaman harus lebih besar dari nol")
         else:
+            print()
             print("Silakan lakukan login sebagai user untuk menjalankan perintah ini")
         return isUserRole
     return getUserID
