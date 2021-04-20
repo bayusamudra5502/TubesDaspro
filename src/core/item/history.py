@@ -84,7 +84,7 @@ def histKembaliGadget(username):
                                 if (itemList['data'][m]['id'])== (dataBorrowHist['data'][k]['id_gadget']): #mencocokkan nama gadget
                                     print(f"Nama {phrase3}         : {itemList['data'][m]['nama']}")
                             print(f"Tanggal {phrase1}: {dataReturnHist['data'][j]['tanggal_pengembalian']}")
-                            print(f"Jumlah              : {dataReturnHist['data'][j]['jumlah']}")
+                            print(f"Jumlah              : {dataReturnHist['data'][j]['jumlah_kembali']}")
             print()
             if (i%5==4):
                 lanjut=input("Ingin menampilkan entry selanjutnya? (Y/N): ")
