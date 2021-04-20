@@ -9,8 +9,10 @@ def delete(username):
     if isAdminRole(username):
         dataGadget = getTable("gadget")
         dataConsumable = getTable("consumable")
+        # Meminta input
         id = input("Masukan ID item: ")
         id_array = list(id)
+        # Validasi dan modifikasi data
         if (id_array[0]=="G"):
             for i in range(dataGadget["row_number"]):
                 if(dataGadget["data"][i]["id"] == id):
