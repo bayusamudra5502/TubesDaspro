@@ -79,8 +79,7 @@ def doSave(username):
 
 def main(saveDir):
     isExit = False
-    # username = ""
-    username = "admin"
+    username = ""
     errorCnt = 0
 
     system("cls || clear")
@@ -136,6 +135,12 @@ def main(saveDir):
                     
                 else:
                     print("Anda belum melakukan login. Silahkan login terlebih dahulu.")
+            elif(command == "logout"):
+                if(username != ""):
+                    username = ""
+                    print("Anda berhasil logout.")
+                else:
+                    print("Anda belum melakukan login. Silahkan gunakan perintah LOGIN.")
             elif command == "exit":
                 isExit = exit(username)
                 errorCnt = 0
