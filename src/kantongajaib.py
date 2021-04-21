@@ -31,11 +31,11 @@ else:
         print("Memuat database...")
         if(loadDatabase(argv[1])):
             sleep(1)
-            print("Pemuatan database berhasil.")
+            print("\033[92mPemuatan database berhasil.\033[0m")
             sleep(.5)
             main(argv[1])
         else:
-            print("Pemuatan database gagal.")
+            print("\033[91mERR: Pemuatan database gagal.\033[0m")
     else:
-        print("Gunakan: python kantongajaib.py -h untuk menampilkan bantuan")
+        print("Gunakan: \033[33mpython kantongajaib.py -h\033[0m untuk menampilkan bantuan")
         print()
