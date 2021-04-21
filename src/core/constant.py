@@ -43,22 +43,22 @@ DB_FILES_NAME = (["consumable_history.csv",
 ENGINE_CHART = {
         "STONE" : {
             "energi" : 10,
-            "maxFaktor" : 50,
+            "maxFaktor" : 2,
             "waktu" : 30
         },
         "IRON" : {
             "energi" : 50,
-            "maxFaktor" : 100,
+            "maxFaktor" : 6,
             "waktu" : 20
         },
         "GOLD" : {
             "energi" : 100,
-            "maxFaktor" : 110,
+            "maxFaktor" : 7,
             "waktu" : 5
         },
         "DIAMOND" : {
             "energi" : 110,
-            "maxFaktor" : 150,
+            "maxFaktor" : 10,
             "waktu" : 10
         },
     }
@@ -70,4 +70,4 @@ RARITY_CHART = {
         "S" : 100
 }
 
-LAB_LOWER_DIV = 37.5
+LAB_LOWER_DIV = 2
