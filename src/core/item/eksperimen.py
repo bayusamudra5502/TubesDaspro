@@ -4,7 +4,7 @@
 
 from core.constant import LAB_LOWER_DIV, MAX_ARRAY_NUM
 from core.database import getTable
-from core.auth import isValidUser, getUserID, user
+from core.auth import isUserRole, getUserID
 from core.database import applyChange
 from core.util import random
 from core.util import toLower
@@ -548,7 +548,7 @@ def eksperimen(uname):
     dataConsumable = getTable("consumable")
     dataConsumableHist = getTable("consumable_history")
 
-    if isValidUser(uname):
+    if isUserRole(uname):
         username = uname
         option = ""
         isExit = False

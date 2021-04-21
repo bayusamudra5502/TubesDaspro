@@ -23,7 +23,7 @@ def help(username):
     print("riwayatpinjam = untuk melihat riwayat peminjaman gadget(admin)")
     print("riwayatkembali= untuk melihat riwayat pengembalian gadget(admin)")
     print("riwayatambil  = untuk melihat riwayat permintaan consumable(admin)")
-    print("eksperimen   = untuk menggabungkan consumable menjadi consumable yang baru(user)")
+    print("eksperimen   = untuk menggabungkan consumable menjadi consumable yang baru (user)")
     print("save          = untuk melakukan penyimpanan data yang telah diubah")
     print("help          = untuk meminta petunjuk penggunaan sistem")
     print("exit          = untuk keluar dari dalam sistem catt: Y = ya, n = no, c = cancel/batal")

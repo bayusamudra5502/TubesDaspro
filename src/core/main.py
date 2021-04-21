@@ -48,8 +48,10 @@ def doSave(username):
         isOKLocation = False
         saveDir = ""
         while not isOKLocation:
+            print("Penyimpanan data ke database")
+            print("---------------------------------\n")
             print("Silahkan masukkan lokasi penyimpanan database.")
-            print("Jika anda ingin menyimpan database pada lokasi sebelumnya, masukkan .*.")
+            print("Jika anda ingin menyimpan database pada lokasi sebelumnya, masukkan \033[34m.*.\033[0m")
             print()
 
             saveDir = input("Lokasi Penyimpanan : ")
