@@ -14,6 +14,8 @@ from core.item.permintaan import mintaConsumable
 from core.util import toLower
 from core.help import help
 
+currentDBLocation = ""
+
 def exit(username) -> bool:
     if(isChanged() and (username) != ""):
         resp = ""
@@ -47,9 +49,13 @@ def doSave(username):
         saveDir = ""
         while not isOKLocation:
             print("Silahkan masukkan lokasi penyimpanan database.")
+            print("Jika anda ingin menyimpan database pada lokasi sebelumnya, masukkan .*.")
             print()
 
             saveDir = input("Lokasi Penyimpanan : ")
+            if(saveDir == ".*."):
+                saveDir = currentDBLocation
+            
             print()
 
             print("Lokasi penyimpanan yang dipilih: ")
@@ -78,6 +84,10 @@ def doSave(username):
         return False
 
 def main(saveDir):
+    global currentDBLocation
+
+    currentDBLocation = saveDir
+
     isExit = False
     username = ""
     errorCnt = 0
@@ -85,7 +95,8 @@ def main(saveDir):
     system("cls || clear")
 
     # Diambil dari : https://patorjk.com/software/taag/#p=display&f=Big&t=Kantong%20Ajaib
-    print("""
+    print("""\033[32m
+
   _  __           _                               _       _ _     
  | |/ /          | |                        /\   (_)     (_) |    
  | ' / __ _ _ __ | |_ ___  _ __   __ _     /  \   _  __ _ _| |__  
@@ -93,12 +104,12 @@ def main(saveDir):
  | . \ (_| | | | | || (_) | | | | (_| |  / ____ \| | (_| | | |_) |
  |_|\_\__,_|_| |_|\__\___/|_| |_|\__, | /_/    \_\ |\__,_|_|_.__/ 
                                   __/ |         _/ |              
-                                 |___/         |__/   v1.0
+                                 |___/         |__/   \033[36m v1.0 \033[0m
 """)
     print("Selamat datang di kantong ajaib")
     print()
-    print("Silahkan lakukan login dengan menggunakan perintah 'login'")
-    print("Untuk melihat perintah yang tersedia, gunakan perintah 'help'")
+    print("Silahkan lakukan login dengan menggunakan perintah \033[34mLOGIN\033[0m")
+    print("Untuk melihat perintah yang tersedia, gunakan perintah \033[34mHELP\033[0m\n")
 
     commandDriver = {
         "carirarity" : searchByRarity,
@@ -114,53 +125,60 @@ def main(saveDir):
         "riwayatkembali" : histKembaliGadget,
         "riwayatambil" : histAmbilConsumable,
         "help" : help,
-        "eksperimen": eksperimen
+        "eksperimen": eksperimen,
+        "save": doSave
     }
 
-    commandList = list(commandDriver.keys())
+    commandList = list(commandDriver.keys()) + \
+                    ["whois","login","help","exit","logout","", "save"]
     command = ""
 
     while not isExit:
         try:
             command = toLower(input(">>> "))
-            
-            if command == "exit":
-                isExit = exit(username)
-                errorCnt = 0
-                command = ""
+
+            # Cek perintah valid atau tidak
+            isValidComm = False
+            for i in range(len(commandList)):
+                if commandList[i] == command:
+                    isValidComm = True
+                    
+            if(not isValidComm):
+                print("\033[91mPerintah tidak valid, silahkan coba lagi.\033[0m")
+                if errorCnt >= 3:
+                    print("Tips : Gunakan help untuk melihat perintah yang tersedia.")
+                
+                errorCnt += 1
             elif command == "login":
                 username = login()
                 errorCnt = 0
-            elif command == "save":
-                if username == "":
-                    print("Anda belum melakukan login. Silahkan login terlebih dahulu dengan menggunakan perintah 'login'")
-                elif isValidUser(username):
-                    doSave(username)
-                
-                errorCnt = 0
-            elif command == "":
-                pass
             elif command == "help":
                 commandDriver["help"](username)
-            else:
-                if username == "":
-                    print("Anda belum melakukan login. Silahkan login terlebih dahulu dengan menggunakan perintah 'login'")
+            elif command == "exit":
+                isExit = exit(username)
+                errorCnt = 0
+                command = ""
+            elif isValidUser(username) and command != "":
+                if command == "whois":
+                        print("Saat ini anda login sebagai")
+                        print(f"Username : {username}")
+                        if(isUserRole(username)):
+                            print(f"Role : User")
+                        elif(isAdminRole(username)):
+                            print("Role : Administrator")
+                elif(command == "logout"):
+                    username = ""
+                    print("Anda berhasil logout.")
+                elif command == "save":
+                    doSave(username)
                 else:
-                    isValidComm = False
-                    for i in range(len(commandList)):
-                        if commandList[i] == command:
-                            isValidComm = True
-                    
-                    if(isValidComm):
-                        commandDriver[command](username)
-                        errorCnt = 0
-                    else:
-                        print("Perintah tidak valid, Silahkan coba lagi.")
+                    commandDriver[command](username)
 
-                        if errorCnt >= 3:
-                            print("Tips : Gunakan help untuk melihat perintah yang tersedia.")
-                        
-                        errorCnt += 1
+            elif command == "":
+                pass
+            else:
+                print("\033[33mPERINGATAN:\033[0m Anda belum melakukan login. \nSilahkan login terlebih dahulu dengan menggunakan perintah \033[34mLOGIN\033[0m.")
+                errorCnt = 0
 
         except KeyboardInterrupt:
             command = "exit"

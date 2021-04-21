@@ -41,7 +41,6 @@ def isValidUser(username):
     objUser = getObjectUser(username)
 
     if(objUser == {}):
-        print(f"User {username} tidak ditemukan.")
         return False
     else:
         return True

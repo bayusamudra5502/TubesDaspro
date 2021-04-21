@@ -10,4 +10,4 @@ from .permintaan import *
 from .peminjaman import *
 from .pengembalian import *
 from .search import *
-from .eksperimen import *
+from .eksperimen import eksperimen

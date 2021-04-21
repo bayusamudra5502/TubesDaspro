@@ -5,6 +5,8 @@
 ### Projcet
 docs/*.docx
 tmp/
+db*
+!db/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
