@@ -21,7 +21,7 @@ def peminjamanGadget(username):
             jumlah_pinjam = int(input("Jumlah peminjaman: "))
             jumlah_gadget_kembali = 0
             jumlah_gadget_pinjam = 0
-            is_returned = False
+            is_returned = "FALSE"
             # Validasi dan modifikasi data
             if jumlah_pinjam > 0:
                 if isValidTanggal(tanggal_pinjam):
@@ -59,7 +59,7 @@ def peminjamanGadget(username):
                                             "id_gadget": id_item,
                                             "tanggal_peminjaman": tanggal_pinjam,
                                             "jumlah": str(jumlah_pinjam),
-                                            "is_returned": str(is_returned),
+                                            "is_returned": is_returned,
                                             }
                                         applyChange(dataPinjamGadget, "gadget_borrow_history")
                                     return getUserID
