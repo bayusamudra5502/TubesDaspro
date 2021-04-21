@@ -6,6 +6,7 @@ from core import main
 from core.database import isValidDir
 from sys import argv
 from core.database.load import loadDatabase
+from time import  sleep
 
 # KAMUS
 
@@ -29,7 +30,9 @@ else:
     if(isValidDir(argv[1])):
         print("Memuat database...")
         if(loadDatabase(argv[1])):
+            sleep(1)
             print("Pemuatan database berhasil.")
+            sleep(.5)
             main(argv[1])
         else:
             print("Pemuatan database gagal.")

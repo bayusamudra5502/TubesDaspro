@@ -79,7 +79,8 @@ def doSave(username):
 
 def main(saveDir):
     isExit = False
-    username = ""
+    # username = ""
+    username = "admin"
     errorCnt = 0
 
     system("cls || clear")
@@ -98,7 +99,7 @@ def main(saveDir):
     print("Selamat datang di kantong ajaib")
     print()
     print("Silahkan lakukan login dengan menggunakan perintah 'login'")
-    print("Untuk melihat perintah yang tersedia, gunakan perintah 'help'")
+    print("Untuk melihat perintah yang tersedia, gunakan perintah 'help'\n")
 
     commandDriver = {
         "carirarity" : searchByRarity,
@@ -123,8 +124,19 @@ def main(saveDir):
     while not isExit:
         try:
             command = toLower(input(">>> "))
-            
-            if command == "exit":
+
+            if command == "whois":
+                if username != "":
+                    print("Anda login sebagai")
+                    print(f"Username : {username}")
+                    if(isUserRole(username)):
+                        print(f"Role : User")
+                    elif(isAdminRole(username)):
+                        print("Role : Administrator")
+                    
+                else:
+                    print("Anda belum melakukan login. Silahkan login terlebih dahulu.")
+            elif command == "exit":
                 isExit = exit(username)
                 errorCnt = 0
                 command = ""
