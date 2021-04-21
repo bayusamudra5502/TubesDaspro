@@ -60,10 +60,10 @@ def pengembalianGadget(username):
                                     if generateNextID(lastID):
                                         dataKembaliGadget["data"][nextIndex] = \
                                         {
-                                        "id": id1,
-                                        "id_peminjaman": nomor_pinjam,
-                                        "tanggal_pengembalian": tanggal_kembali,
-                                        "jumlah": str(jumlah_kembali)
+                                            "id": id1,
+                                            "id_peminjaman": nomor_pinjam,
+                                            "tanggal_pengembalian": tanggal_kembali,
+                                            "jumlah": str(jumlah_kembali)
                                         }
                                     applyChange(dataKembaliGadget, "gadget_return_history")
                                 return getUserID

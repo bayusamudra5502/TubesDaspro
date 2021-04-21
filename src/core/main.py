@@ -14,6 +14,8 @@ from core.item.permintaan import mintaConsumable
 from core.util import toLower
 from core.help import help
 
+currentDBLocation = ""
+
 def exit(username) -> bool:
     if(isChanged() and (username) != ""):
         resp = ""
@@ -47,9 +49,13 @@ def doSave(username):
         saveDir = ""
         while not isOKLocation:
             print("Silahkan masukkan lokasi penyimpanan database.")
+            print("Jika anda ingin menyimpan database pada lokasi sebelumnya, masukkan .*.")
             print()
 
             saveDir = input("Lokasi Penyimpanan : ")
+            if(saveDir == ".*."):
+                saveDir = currentDBLocation
+            
             print()
 
             print("Lokasi penyimpanan yang dipilih: ")
@@ -78,6 +84,10 @@ def doSave(username):
         return False
 
 def main(saveDir):
+    global currentDBLocation
+
+    currentDBLocation = saveDir
+
     isExit = False
     username = ""
     errorCnt = 0
@@ -115,11 +125,12 @@ def main(saveDir):
         "riwayatkembali" : histKembaliGadget,
         "riwayatambil" : histAmbilConsumable,
         "help" : help,
-        "eksperimen": eksperimen
+        "eksperimen": eksperimen,
+        "save": doSave
     }
 
     commandList = list(commandDriver.keys()) + \
-                    ["whois","login","help","exit","logout",""]
+                    ["whois","login","help","exit","logout","", "save"]
     command = ""
 
     while not isExit:
