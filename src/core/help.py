@@ -63,10 +63,10 @@ def help(username):
         akses    : admin, user
         fungsi   : * menampilkan petunjuk dan fitur-fitur yang ada pada sistem
                    * dapat diakses tanpa harus melakukan login terlebih dahulu
-    15. Perintah "save"
+    16. Perintah "save"
         akses    : admin, user
         fungsi   : untuk melakukan penyimpanan data
-    15. Perintah "exit"
+    17. Perintah "exit"
         akses    : admin, user
         fungsi   : untuk keluar dari sistem, pilihan:
                     Y/y = ya, menyimpan perubahan yang telah dilakukan pada sistem
