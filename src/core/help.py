@@ -6,7 +6,7 @@ from core.auth import isAdminRole, isValidUser
 
 def help(username):
     print("""\033[32m
-                                  __    __   _______  __      .______   
+                                   __    __   _______  __       ______   
                                   |  |  |  | |   ____||  |     |   _  \  
                                   |  |__|  | |  |__   |  |     |  |_)  | 
                                   |   __   | |   __|  |  |     |   ___/  
