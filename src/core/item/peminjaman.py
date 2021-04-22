@@ -14,28 +14,23 @@ def peminjamanGadget(username):
         if isUserRole(username):
             dataGadget = getTable("gadget")
             dataPinjamGadget = getTable("gadget_borrow_history")
-            dataKembaliGadget = getTable("gadget_return_history")
             # Meminta input
-            id_item = input("Masukan ID item: ")
-            tanggal_pinjam = input("Tanggal peminjaman: ")
-            jumlah_pinjam = int(input("Jumlah peminjaman: "))
+            id_item = input("Masukan ID item    : ")
+            tanggal_pinjam = input("Tanggal peminjaman : ")
+            jumlah_pinjam = int(input("Jumlah peminjaman  : "))
             jumlah_gadget_kembali = 0
             jumlah_gadget_pinjam = 0
             is_returned = "FALSE"
+            cant_borrow = True
             # Validasi dan modifikasi data
             if jumlah_pinjam > 0:
                 if isValidTanggal(tanggal_pinjam):
-                    for i in range(dataKembaliGadget["row_number"]):
-                        if(dataKembaliGadget["data"][i]["id"] == id_item):
-                            jumlah_gadget_kembali = jumlah_gadget_kembali + int(dataKembaliGadget["data"][i]["jumlah"])
-                        else:   # dataKembaliGadget["data"][i]["id"] != id_item
-                            break
                     for i in range(dataPinjamGadget["row_number"]):
-                        if(dataPinjamGadget["data"][i]["id"] == id_item):
-                            jumlah_gadget_pinjam = jumlah_gadget_pinjam + int(dataPinjamGadget["data"][i]["jumlah"])
-                        else:   # dataPinjamGadget["data"][i]["id"] != id_item
-                            break
-                    if(jumlah_gadget_kembali == jumlah_gadget_pinjam):
+                        if(dataPinjamGadget["data"][i]["is_returned"] == "TRUE") and (dataPinjamGadget["data"][i]["id"] == id_item) and (dataPinjamGadget["data"][i]["id_peminjam"] == str(getUserID(username))):
+                            cant_borrow = False
+                        else:
+                            pass                           
+                    if(cant_borrow == False):
                         notFound = True
                         for i in range(dataGadget["row_number"]):
                             if(dataGadget["data"][i]["id"] == id_item):
