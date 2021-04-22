@@ -32,6 +32,7 @@ def edit(username):
                         if(int(dataGadget["data"][i]["jumlah"]) + (jumlah_edit) >= 0):
                             newGadget = int(dataGadget["data"][i]["jumlah"]) + (jumlah_edit)
                             dataGadget["data"][i]["jumlah"] = str(newGadget)
+                            jumlah_edit = abs(jumlah_edit)
                             print()
                             print(str(jumlah_edit) + " " + str(dataGadget["data"][i]["nama"]) + " berhasil dibuang. Stok sekarang: " + str(newGadget))
                         else:

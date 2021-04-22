@@ -3,32 +3,95 @@
 # yang berkaitan dengan fitur help (F16)
 
 from core.auth import isAdminRole, isValidUser
+from os import system
 
 def help(username):
-    print("========================== HELP ===========================")
-    print("===========================================================")
-    print("====================== Kantong Ajaib ======================")
+    system("clear || cls")
+    print("""\033[32m
+                                   __    __   _______  __       ______   
+                                  |  |  |  | |   ____||  |     |   _  \  
+                                  |  |__|  | |  |__   |  |     |  |_)  | 
+                                  |   __   | |   __|  |  |     |   ___/  
+                                  |  |  |  | |  |____ |  `----.|  |      
+                                  |__|  |__| |_______||_______|| _|    \033[36m v1.0 \033[0m                                              
+""")
+    print("=========================================== Kantong Ajaib ==============================================")
     print()
-    print()
-    print("register      = untuk melakukan pendaftaran user baru hanya bisa dilakukan oleh admin")
-    print("login         = untuk melakukan login ke sistem (admin/user)")
-    print("carirarity    = untuk melakukan pencarian gadget berdasarkan raritynya(admin,user)")
-    print("caritahun     = untuk melakukan pencarian gadget berdasarkan tahun ditemukan(admin,user)")
-    print("tambahitem    = untuk melakukan penambahan item(admin)")
-    print("hapusitem     = untuk melakukan penghapusan item(admin)")
-    print("ubahjumlah    = untuk mengubah jumlah gadget dan consumable yang terdapat di dalam sistem(admin)")
-    print("pinjam        = untuk melakukan peminjaman gadget yang akan menambahkan entry pada file history bila di save(user)")
-    print("kembalikan    = untuk melakukan pengembalian gadget secara seutuhnya(user)")
-    print("minta         = untuk meminya consumable yang tersedia(user)")
-    print("riwayatpinjam = untuk melihat riwayat peminjaman gadget(admin)")
-    print("riwayatkembali= untuk melihat riwayat pengembalian gadget(admin)")
-    print("riwayatambil  = untuk melihat riwayat permintaan consumable(admin)")
-    print("eksperimen   = untuk menggabungkan consumable menjadi consumable yang baru(user)")
-    print("save          = untuk melakukan penyimpanan data yang telah diubah")
-    print("help          = untuk meminta petunjuk penggunaan sistem")
-    print("exit          = untuk keluar dari dalam sistem catt: Y = ya, n = no, c = cancel/batal")
-    print()
-    print("silahkan pilih salah satu menu di atas")
-    print("lakukan login terlebih dahulu")
-    print("jika belum menjadi user maka mintalah admin untuk melakukannya")
+    print("==============Berikut merupakan petunjuk penggunaan fitur-fitur di Laboratorium Doramonangis============")
+    print("""
+    1. Perintah "register"
+       akses    : admin
+       fungsi   : untuk melakukan pendaftaran user baru
+
+    2. Perintah "login"
+       akses    : admin, user
+       fungsi   : untuk melakukan login ke sistem
+
+    3. Perintah "carirarity"
+       akses    : admin, user
+       fungsi   : untuk melakukan pencarian gadget berdasarkan raritynya
+
+    4. Perintah "caritahun"
+       akses    : admin, user
+       fungsi   : untuk melakukan pencarian gadget berdasarkan tahun ditemukan
+
+    5. Perintah "tambahitem"
+       akses    : admin
+       fungsi   : untuk melakukan penambahan item 
+
+    6. Perintah "hapusitem"
+       akses    : admin
+       fungsi   : untuk melakukan penghapusan item
+
+    7. Perintah "ubahjumlah"
+       akses    : admin
+       fungsi   : untuk mengubah jumlah gadget dan consumable yang terdapat di dalam sistem
+
+    8. Perintah "pinjam"
+       akses    : user
+       fungsi   : untuk melakukan peminjaman gadget pada sistem
+
+    9. Perintah "kembalikan"
+       akses    : user
+       fungsi   : untuk melakukan pengembalian pada gadget yang telah dipinjam kepada sistem
+
+    10. Perintah "minta"
+        akses    : user
+        fungsi   : untuk melakukan permintaan consumable
+
+    11. Perintah "riwayatambil"
+        akses    : admin
+        fungsi   : untuk melihat riwayat 5 permintaan consumable terbaru yang descending tanggal
+
+    12. Perintah "riwayatpinjam"
+        akses    : admin
+        fungsi   : untuk melihat riwayat 5 peminjaman gadget terbaru yang descending tanggal
+
+    13. Perintah "riwayatkembali"
+        akses    : admin
+        fungsi   : untuk melihat riwayat 5 pengembalian gadget terbaru yang descending tanggal
+
+    14. Perintah "eksperimen"
+        akses    : user
+        fungsi   : untuk menggabungkan consumable menjadi consumable yang baru dengan rarity yang baru
+
+    15. Perintah "help"
+        akses    : admin, user
+        fungsi   : * menampilkan petunjuk dan fitur-fitur yang ada pada sistem
+                   * dapat diakses tanpa harus melakukan login terlebih dahulu
+
+    16. Perintah "save"
+        akses    : admin, user
+        fungsi   : untuk melakukan penyimpanan data
+        
+    17. Perintah "exit"
+        akses    : admin, user
+        fungsi   : untuk keluar dari sistem, pilihan:
+                    Y/y = ya, menyimpan perubahan yang telah dilakukan pada sistem
+                    N/n = tidak, tidak menyimpan perubahan yang dilakukan pada sistem
+                    C/c = cancel, batalkan perintah exit
+
+================================== silahkan pilih salah satu menu di atas ========================================
+======================================= lakukan login terlebih dahulu ============================================
+======================== jika belum menjadi user maka mintalah admin untuk melakukannya ==========================""")
     

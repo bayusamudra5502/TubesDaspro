@@ -71,10 +71,10 @@ def pengembalianGadget(username):
                                             "id": id1,
                                             "id_peminjaman": nomor_pinjam,
                                             "tanggal_pengembalian": tanggal_kembali,
-                                            "jumlah_pengembalian": str(jumlah_kembali)
+                                            "jumlah": str(jumlah_kembali)
                                             }
                                         applyChange(dataKembaliGadget, "gadget_return_history")
-                                    return getUserID
+                                    # return getUserID
                             if notFound1:   # dataGadget["data"][i]["id"] != id_item
                                 print("Item tersebut sudah tidak ada dalam database gadget")
                         else:   # validation_jumlah = False
@@ -87,10 +87,8 @@ def pengembalianGadget(username):
                 else:   # jumlah_kembali <= 0
                     print("Jumlah pengembalian harus lebih besar dari nol")
             else:   # no_returned == True
-                print()
                 print("Tidak ada item yang perlu anda kembalikan")
         else:
-            print()
             print("Silakan lakukan login sebagai user untuk menjalankan perintah ini")
         return isUserRole
     return isValidUser

@@ -14,7 +14,6 @@ def peminjamanGadget(username):
         if isUserRole(username):
             dataGadget = getTable("gadget")
             dataPinjamGadget = getTable("gadget_borrow_history")
-            dataKembaliGadget = getTable("gadget_return_history")
             # Meminta input
             id_item = input("Masukan ID item    : ")
             tanggal_pinjam = input("Tanggal peminjaman : ")
@@ -26,8 +25,8 @@ def peminjamanGadget(username):
             # Validasi dan modifikasi data
             if jumlah_pinjam > 0:
                 if isValidTanggal(tanggal_pinjam):
-                    for i in range(dataKembaliGadget["row_number"]):
-                        if(dataKembaliGadget["data"][i]["is_returned"] == "TRUE") and (dataKembaliGadget["data"][i]["id"] == id_item):
+                    for i in range(dataPinjamGadget["row_number"]):
+                        if(dataPinjamGadget["data"][i]["is_returned"] == "TRUE") and (dataPinjamGadget["data"][i]["id"] == id_item) and (dataPinjamGadget["data"][i]["id_peminjam"] == str(getUserID(username))):
                             cant_borrow = False
                         else:
                             pass                           

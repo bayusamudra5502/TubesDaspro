@@ -13,19 +13,19 @@ def save(saveDir):
     fungsi mengembalikan True"""
     
     if not exists(saveDir):
-        print(f"WARN: Lokasi '{saveDir}' tidak ditemukan. Akan dibuat folder baru.")
+        print(f"\033[33mPERINGATAN:\033[0m Lokasi '{saveDir}' tidak ditemukan. Akan dibuat folder baru.")
         try:
             mkdir(saveDir)
         except Exception:
-            print(f"Tidak bisa membuat folder {saveDir}. Pastikan anda memiliki akses.")
+            print(f"\033[91mERROR:\033[0m Tidak bisa membuat folder {saveDir}. Pastikan anda memiliki akses.")
             return False
     
     if not isdir(saveDir):
-        print(f"ERROR: Lokasi '{saveDir}' bukan merupakan folder.")
+        print(f"\033[91mERROR:\033[0m Lokasi '{saveDir}' bukan merupakan folder.")
         return False
 
     if not access(saveDir, W_OK):
-        print(f"ERROR: Lokasi '{saveDir}' tidak bisa ditulis. Pastikan anda memiliki akses.")
+        print(f"\033[91mERROR:\033[0m Lokasi '{saveDir}' tidak bisa ditulis. Pastikan anda memiliki akses.")
         return False
 
     database = readDatabase()
@@ -59,13 +59,13 @@ def save(saveDir):
             file.close()
         else:
             isChangeApply = False
-            print(f"ERROR: File '{filePath}' tidak bisa ditulis. Pastikan anda memiliki akses.")
+            print(f"\033[91mERROR:\033[0m File '{filePath}' tidak bisa ditulis. Pastikan anda memiliki akses.")
 
     if isChangeApply:
         resetChanged()
     elif isChangePartial:
-        print("Sebagian file telah berhasil tersimpan.\n")
+        print("\033[33mSebagian file telah berhasil tersimpan.\033[0m\n")
     else:
-        print("Gagal menyimpan seluruh file.\n")
+        print("\033[91mGagal menyimpan seluruh file.\033[0m\n")
 
     return isChangeApply

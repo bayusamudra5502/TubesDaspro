@@ -4,7 +4,7 @@
 
 from core.constant import LAB_LOWER_DIV, MAX_ARRAY_NUM
 from core.database import getTable
-from core.auth import isValidUser, getUserID, user
+from core.auth import isUserRole, getUserID
 from core.database import applyChange
 from core.util import random
 from core.util import toLower
@@ -168,6 +168,8 @@ def addItemLabolatory():
                         consumables[nItem] = selectedObject
                         dataConsumable["data"][index]["jumlah"] = str(int(dataConsumable["data"][index]["jumlah"]) - count)
                         nItem += 1
+                    else:
+                        print()
                 else:
                     print("Consumable telah habis. Silahkan pilih yang lain.")
         else:
@@ -442,8 +444,9 @@ def mix():
         isValidAns = False
 
         while not isValidAns:
-            print("PERINGATAN !")
-            cmd = toLower(input("Apakah anda yakin untuk langsung melakukan proses pencampuran tanpa menggunakan mesin? [Y/n] :"))
+            print("\033[33mPERINGATAN !\033[0m")
+            print("Apakah anda yakin untuk langsung melakukan proses pencampuran tanpa menggunakan mesin?")
+            cmd = toLower(input("Jawaban [Y/n] : "))
 
             if(cmd == "y"):
                 isValidAns = True
@@ -463,11 +466,12 @@ def mix():
     
     print("Tahap persiapan selsai.")
     print("Memulai memasukkan semua bahan.")
+    print()
 
     sumPoint = 0
     for i in range(nItem):
         print(f"1. Memasukkan {consumables[i]['nama']} sebanyak {consumables[i]['jumlah']} buah")
-        sumPoint += RARITY_CHART[consumables[i]["rarity"]] * (random() ** 1.25)
+        sumPoint += RARITY_CHART[consumables[i]["rarity"]] * (random()) * (consumables[i]['jumlah'] * (random() + .5))
 
         # Melakukan pencatatan pengambilan
         nextIndex = dataConsumableHist["row_number"]
@@ -484,22 +488,39 @@ def mix():
 
         sleep(1)
 
+    print()
     print("Memulai proses pencampuran semua bahan.")
-
+    sleep(1)
     finalScore = sumPoint
 
+    system("clear || cls")
     if (engine != {}):
-        print("Mesin yang digunakan :", engine["nama"])
-        print(f"Proses memakan waktu : {engine['waktu']} detik")
-        sleep(engine['waktu'])
+        for i in range(engine['waktu'] + 1):
+            print("\033[0;0H")
+            print("Proses Pencampuran")
+            print("----------------------")
+            print()
+            print("Mesin yang digunakan :", engine["nama"])
+            print(f"Proses memakan waktu : {engine['waktu']} detik")
+            print()
+            print(f"Proses yang telah berjalan : {i/engine['waktu']*100:.2f}%")
+            sleep(1)
 
         finalScore *= engine["faktorPengali"]
     else:
-        print("Proses memakan waktu : 1 menit")
         finalScore *= random()
-        sleep(60)
+        for i in range(60+1):
+            print("\033[0;0H")
+            print("Proses Pencampuran")
+            print("----------------------")
+            print()
+            print(f"Proses memakan waktu : 60 detik")
+            print()
+            print(f"Proses yang telah berjalan : {i/60 * 100:.2f}%")
+            sleep(1)
 
-    print("Proses pencampuran selesai.")
+    print()
+    print("Proses pencampuran selesai.\n")
 
     rarityCode = ""
     if(finalScore < RARITY_CHART["B"]):
@@ -548,7 +569,7 @@ def eksperimen(uname):
     dataConsumable = getTable("consumable")
     dataConsumableHist = getTable("consumable_history")
 
-    if isValidUser(uname):
+    if isUserRole(uname):
         username = uname
         option = ""
         isExit = False
@@ -612,13 +633,13 @@ def eksperimen(uname):
                         deleteItem()
                     else:
                         print("Consumable dalam keranjang belum ada. Silahkan masukkan terlebih dahulu.")
-                        sleep(.5)
+                        sleep(1)
                 elif option == "edit" or option == "4":
                     if nItem > 0:
                         editItem()
                     else:
                         print("Consumable dalam keranjang belum ada. Silahkan masukkan terlebih dahulu.")
-                        sleep(.5)
+                        sleep(1)
                 elif option == "engine" or option =="5":
                     setEngine()
                 elif option == "mix" or option =="6":
@@ -630,7 +651,7 @@ def eksperimen(uname):
                     else:
                         print("Masukkan terlebih dahulu barang yang akan dicampurkan.")
                         option = ""
-                        sleep(.5)
+                        sleep(1)
                 elif option == "exit" or option =="7":
                     print()
                     isOK = False
@@ -654,3 +675,5 @@ def eksperimen(uname):
                     print("Perintah tidak dikenal. Silahkan coba lagi.")
                     print()
                     isValid = False
+    else:
+        print("Anda harus login sebagai user untuk mengakses fitur ini.")

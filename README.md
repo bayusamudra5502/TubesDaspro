@@ -26,4 +26,13 @@ contoh:
 * USERNAME : yols
 * PASSWORD : yols
 
+* USERNAME : bayu
+* PASSWORD : bayu
+
+* USERNAME : dhyto
+* PASSWORD : dhyto
+
+* USERNAME : fadhil
+* PASSWORD : fadhil
+
 
