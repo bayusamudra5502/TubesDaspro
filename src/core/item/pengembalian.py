@@ -30,9 +30,9 @@ def pengembalianGadget(username):
                             pass
             # Meminta input
             if no_returned == False:
-                nomor_pinjam = input("Masukan nomor peminjaman: ")
-                jumlah_kembali = int(input("Masukan jumlah item yang dikembalikan: "))
-                tanggal_kembali = input("Tanggal pengembalian: ")
+                nomor_pinjam = input("Masukan nomor peminjaman              : ")
+                jumlah_kembali = int(input("Masukan jumlah item yang dikembalikan : "))
+                tanggal_kembali = input("Tanggal pengembalian                  : ")
                 validation_jumlah = False
                 is_returned = "TRUE"
                 # Validasi dan modifikasi data

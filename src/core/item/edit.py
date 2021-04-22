@@ -11,8 +11,8 @@ def edit(username):
         dataGadget = getTable("gadget")
         dataConsumable = getTable("consumable")
         # Meminta input
-        id = input("Masukan ID item: ")
-        jumlah_edit = int(input("Masukan jumlah: "))
+        id = input("Masukan ID item : ")
+        jumlah_edit = int(input("Masukan jumlah  : "))
         id_array = list(id)
         # Validasi dan modifikasi data
         if (id_array[0]=="G"):
