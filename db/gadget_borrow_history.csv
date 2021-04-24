@@ -1,9 +1,1 @@
-id;id_peminjam;id_gadget;tanggal_peminjaman;jumlah;is_returned
-1;P3;G1;12/02/2020;3;TRUE
-2;P2;G2;12/10/1999;10;TRUE
-3;P3;G1;11/10/2020;1;TRUE
-4;P4;G1;12/12/2020;1;FALSE
-5;P4;G1;12/04/2000;2;FALSE
-6;P4;G1;12/12/2000;3;FALSE
-7;P3;G1;21/04/2021;20;FALSE
-8;P2;G1;01/01/2021;3;FALSE
+id;id_peminjam;id_gadget;tanggal_peminjaman;jumlah;jumlah_kembali;is_returned
