@@ -1,1 +1,2 @@
 id;id_peminjam;id_gadget;tanggal_peminjaman;jumlah;jumlah_kembali;is_returned
+PJM-1;P3;G3;10/02/2020;3;2;FALSE

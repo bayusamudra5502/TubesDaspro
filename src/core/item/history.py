@@ -20,7 +20,7 @@ def histPinjamGadget(username):
         sortedtanggal=[[0 for i in range (2)] for j in range (int(dataBorrowHist['row_number']))]
         for i in range (int(dataBorrowHist['row_number'])):
             sortedtanggal[i][0]=int(dataBorrowHist['data'][i]['tanggal_peminjaman'][6]+dataBorrowHist['data'][i]['tanggal_peminjaman'][7]+dataBorrowHist['data'][i]['tanggal_peminjaman'][8]+dataBorrowHist['data'][i]['tanggal_peminjaman'][9]+dataBorrowHist['data'][i]['tanggal_peminjaman'][3]+dataBorrowHist['data'][i]['tanggal_peminjaman'][4]+dataBorrowHist['data'][i]['tanggal_peminjaman'][0]+dataBorrowHist['data'][i]['tanggal_peminjaman'][1])
-            sortedtanggal[i][1]=int(dataBorrowHist['data'][i]['id']) #menyimpan id peminjaman
+            sortedtanggal[i][1]=str(dataBorrowHist['data'][i]['id']) #menyimpan id peminjaman
         sortedtanggal.sort(reverse=True) #list telah disort descending berdasarkan tanggal
         banyakdata=len(sortedtanggal)
         print(f"Menampilkan 5 riwayat {phrase1} terbaru\n")
@@ -35,7 +35,7 @@ def histPinjamGadget(username):
                     for l in range (int(itemList['row_number'])):
                         if (itemList['data'][l]['id'])== (dataBorrowHist['data'][j]['id_gadget']): #mencocokkan nama gadget
                             print(f"Nama {phrase3}         : {itemList['data'][l]['nama']}")
-                    print(f"Tanggal {phrase1}   : {dataBorrowHist['data'][j]['tanggal_peminjaman']}")
+                    print(f"Tanggal {phrase1}  : {dataBorrowHist['data'][j]['tanggal_peminjaman']}")
                     print(f"Jumlah              : {dataBorrowHist['data'][j]['jumlah']}")
                     print(f"Jumlah Dikembalikan : {dataBorrowHist['data'][j]['jumlah_kembali']}")
                     print(f"Sudah Kembali Semua : {dataBorrowHist['data'][j]['is_returned']}")
@@ -68,7 +68,7 @@ def histKembaliGadget(username):
         sortedtanggal=[[0 for i in range (2)] for j in range (int(dataReturnHist['row_number']))]
         for i in range (int(dataReturnHist['row_number'])):
             sortedtanggal[i][0]=int(dataReturnHist['data'][i]['tanggal_pengembalian'][6]+dataReturnHist['data'][i]['tanggal_pengembalian'][7]+dataReturnHist['data'][i]['tanggal_pengembalian'][8]+dataReturnHist['data'][i]['tanggal_pengembalian'][9]+dataReturnHist['data'][i]['tanggal_pengembalian'][3]+dataReturnHist['data'][i]['tanggal_pengembalian'][4]+dataReturnHist['data'][i]['tanggal_pengembalian'][0]+dataReturnHist['data'][i]['tanggal_pengembalian'][1])
-            sortedtanggal[i][1]=int(dataReturnHist['data'][i]['id']) #menyimpan id peminjaman
+            sortedtanggal[i][1]=str(dataReturnHist['data'][i]['id']) #menyimpan id peminjaman
         sortedtanggal.sort(reverse=True) #list telah disort descending berdasarkan tanggal
         banyakdata=len(sortedtanggal)
         print(f"Menampilkan 5 riwayat {phrase1} terbaru\n")
@@ -115,7 +115,7 @@ def histAmbilConsumable(username):
         sortedtanggal=[[0 for i in range (2)] for j in range (int(dataConsumableHist['row_number']))]
         for i in range (int(dataConsumableHist['row_number'])):
             sortedtanggal[i][0]=int(dataConsumableHist['data'][i]['tanggal_pengambilan'][6]+dataConsumableHist['data'][i]['tanggal_pengambilan'][7]+dataConsumableHist['data'][i]['tanggal_pengambilan'][8]+dataConsumableHist['data'][i]['tanggal_pengambilan'][9]+dataConsumableHist['data'][i]['tanggal_pengambilan'][3]+dataConsumableHist['data'][i]['tanggal_pengambilan'][4]+dataConsumableHist['data'][i]['tanggal_pengambilan'][0]+dataConsumableHist['data'][i]['tanggal_pengambilan'][1])
-            sortedtanggal[i][1]=int(dataConsumableHist['data'][i]['id']) #menyimpan id peminjaman
+            sortedtanggal[i][1]=str(dataConsumableHist['data'][i]['id']) #menyimpan id peminjaman
         sortedtanggal.sort(reverse=True) #list telah disort descending berdasarkan tanggal
         banyakdata=len(sortedtanggal)
         print(f"Menampilkan 5 riwayat {phrase1} terbaru\n")

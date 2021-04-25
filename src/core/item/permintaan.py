@@ -32,7 +32,7 @@ def mintaConsumable(username):
                             print("Item " + str(dataConsumable['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
                             
                             if getUserID(username):
-                                lastID = "pmt-0"
+                                lastID = "PMT-0"
                                 nextIndex = dataConsumableHist["row_number"]
 
                                 if(dataConsumableHist["row_number"] > 0):
