@@ -383,9 +383,13 @@ def setEngine():
 
                         # Melakukan pencatatan pengambilan
                         nextIndex = dataConsumableHist["row_number"]
+                        id = "0"
+                        if(nextIndex > 0):
+                            id = dataConsumableHist["data"][nextIndex - 1]["id"]
+
                         dataConsumableHist['data'][nextIndex] = \
                         {
-                            'id': generateNextID(dataConsumableHist["data"][nextIndex - 1]["id"]),
+                            'id': generateNextID(id),
                             'id_pengambil': str(getUserID(username)),
                             'id_consumable': dataConsumable["data"][index]["id"],
                             'tanggal_pengambilan': datetime.now().strftime("%d/%m/%Y"),
@@ -475,9 +479,15 @@ def mix():
 
         # Melakukan pencatatan pengambilan
         nextIndex = dataConsumableHist["row_number"]
+        id = "0"
+
+        if(dataConsumableHist["row_number"] > 0):
+            lastIdx = nextIndex - 1
+            id = dataConsumableHist["data"][lastIdx]["id"]
+
         dataConsumableHist['data'][nextIndex] = \
         {
-            'id': generateNextID(dataConsumableHist["data"][nextIndex - 1]["id"]),
+            'id': generateNextID(id),
             'id_pengambil': str(getUserID(username)),
             'id_consumable': dataConsumable["data"][consumables[i]['dbIndex']]["id"],
             'tanggal_pengambilan': datetime.now().strftime("%d/%m/%Y"),
@@ -545,9 +555,15 @@ def mix():
     nama = input("Nama Consumable : ")
 
     consumableNextID = dataConsumable["row_number"]
+    id = "C0"
+
+    if(dataConsumable["row_number"] > 0):
+        lastIdx = consumableNextID - 1
+        id = dataConsumable["data"][lastIdx]["id"]
+
     dataConsumable['data'][consumableNextID] = \
     {
-        'id': generateNextID(dataConsumable["data"][consumableNextID-1]["id"]),
+        'id': generateNextID(id),
         'nama': nama,
         'deskripsi': "Barang hasil pencampuran di Laboratorium Doraemonangis.",
         'jumlah': str(jumlahConsumable),
