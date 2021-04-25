@@ -70,6 +70,7 @@ def checkIDAvailability(ID: str) -> bool:
 
     return True
 
+
 def addItem(username):
     dataGadget = getTable("gadget")
     dataConsumable = getTable("consumable")
@@ -89,14 +90,21 @@ def addItem(username):
                     break
 
                 else:
-                    print('Masukan jumlah harus lebih dari nol.')
+                    print('Jumlah tidak valid.')
             rarity = input('Masukan rarity: ').upper()
 
             # Validasi Rarity Item
             if checkRarity(rarity):
                 # Tambah Gadget
                 if (id[0] == 'G'):
-                    tahun_ditemukan = input('Masukan tahun ditemukan: ')
+                    while True:
+                        tahun_ditemukan = input('Masukan tahun ditemukan: ')
+
+                        if int(jumlah) > 0:
+                            break
+
+                        else:
+                            print('Tahun tidak valid.')
                     nextIndex = dataGadget['row_number']
                     dataGadget['data'][nextIndex] = \
                         {
@@ -124,5 +132,5 @@ def addItem(username):
                     print('Item telah berhasil ditambahkan ke database.')
                     applyChange(dataConsumable, 'consumable')
     else:
-        print('Hanya admin yang dapat melakukan fitur tambah item ini')
+        print('Hanya admin yang dapat melakukan fitur tambah item ini.')
     return isAdminRole
