@@ -29,6 +29,7 @@ def delete(username):
                         dataGadget["data"][i] ={}
                         print()
                         print("Item telah berhasil dihapus dari database")
+                        applyChange(dataGadget, "gadget")
                     else:   #(validation == "N") or (validation == "n")
                         break
             if notFound1:    #(dataGadget["data"][i]["id"] != id)

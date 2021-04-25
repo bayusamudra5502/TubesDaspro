@@ -21,7 +21,7 @@ from .password import isValidPassword
 # ALGORITMA
 def login() -> str:
     dataUser = getTable("user")
-    errcode = 0
+    errcode = 1
 
     username = input('Masukan username: ')
     password = input('Masukan password: ')
@@ -30,6 +30,7 @@ def login() -> str:
         # Login Benar
         if (username == dataUser['data'][i]['username']) and isValidPassword(password, dataUser['data'][i]['password']):
             print('Halo', username + '!', 'Selamat datang di Kantong Ajaib.')
+            errcode = 0
             return username
 
         # Password Salah
