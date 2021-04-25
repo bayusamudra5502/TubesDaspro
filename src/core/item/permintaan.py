@@ -32,11 +32,15 @@ def mintaConsumable(username):
                             print("Item " + str(dataConsumable['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
                             
                             if getUserID(username):
-                                nextIndex = dataConsumableHist['row_number']
-                                lastIndext = dataConsumableHist['row_number']-1
-                                lastId = dataConsumableHist['data'][lastIndext]['id']
-                                id1 = (generateNextID(lastId))
-                                if generateNextID(lastId):
+                                lastID = "pmt-0"
+                                nextIndex = dataConsumableHist["row_number"]
+
+                                if(dataConsumableHist["row_number"] > 0):
+                                    lastIndext = dataConsumableHist["row_number"]-1
+                                    lastID = dataConsumableHist["data"][lastIndext]["id"]
+
+                                id1 = (generateNextID(lastID))
+                                if generateNextID(lastID):
                                     dataConsumableHist['data'][nextIndex] = \
                                     {
                                         'id': id1,
@@ -47,6 +51,8 @@ def mintaConsumable(username):
                                     }
 
                                 applyChange(dataConsumableHist, 'consumable_history')
+
+                            return getUserID
 
                         elif (int(dataConsumable['data'][i]['jumlah'])) == jumlah_permintaan:
                             newConsumable1 =  (int(dataConsumable['data'][i]['jumlah']))
