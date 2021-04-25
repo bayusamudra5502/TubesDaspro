@@ -2,10 +2,10 @@
 # Modul ini adalah modul yang berisi fungsi
 # yang berkaitan dengan fitur help (F16)
 
-from core.auth import isAdminRole, isValidUser
+
 from os import system
 
-def help(username):
+def help(username): #Fungsi utama help untuk menampilkan semua petunjuk dalam sistem
     system("clear || cls")
     print("""\033[32m
           __    __   _______  __       ______   
@@ -84,8 +84,13 @@ def help(username):
 16.Perintah "save"
    akses    : admin, user
    fungsi   : untuk melakukan penyimpanan data
+
+
+17.Perintah "logout"
+   akses    : admin, user
+   fungsi   : untuk melakukan logout dari sistem dan beralih ke akun lain
         
-17.Perintah "exit"
+18.Perintah "exit"
    akses    : admin, user
    fungsi   : untuk keluar dari sistem, pilihan:
                Y/y = ya, menyimpan perubahan yang telah dilakukan pada sistem
