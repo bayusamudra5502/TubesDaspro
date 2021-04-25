@@ -71,17 +71,25 @@ def checkIDAvailability(ID: str) -> bool:
     return True
 
 def addItem(username):
+    dataGadget = getTable("gadget")
+    dataConsumable = getTable("consumable")
+
     # Validasi User
     if isAdminRole(username):
-        dataGadget = getTable("gadget")
-        dataConsumable = getTable("consumable")
         id = input('Masukan id: ').upper()
 
         # Validasi ID Item
         if checkIDAvailability(id):
             nama = input('Masukan nama: ')
             deskripsi = input('Masukan deskripsi: ')
-            jumlah = input('Masukan jumlah: ')
+            while True:
+                jumlah = input('Masukan jumlah: ')
+
+                if int(jumlah) > 0:
+                    break
+
+                else:
+                    print('Masukan jumlah harus lebih dari nol.')
             rarity = input('Masukan rarity: ').upper()
 
             # Validasi Rarity Item
@@ -115,9 +123,6 @@ def addItem(username):
                         }
                     print('Item telah berhasil ditambahkan ke database.')
                     applyChange(dataConsumable, 'consumable')
-            return checkRarity
-        return checkIDAvailability
     else:
-        print("Hanya admin yang dapat melakukan fitur tambah item ini")
+        print('Hanya admin yang dapat melakukan fitur tambah item ini')
     return isAdminRole
-    

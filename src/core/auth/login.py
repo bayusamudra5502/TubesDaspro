@@ -38,7 +38,7 @@ def login() -> str:
         not isValidPassword(password, dataUser['data'][i]['password'])):
             errcode = 0
             print('Halo', username + '!', 'Password yang kamu input salah.')
-            return ""
+            continue
 
         # Username tidak ditemukan
         else:
@@ -47,5 +47,3 @@ def login() -> str:
 
     if (errcode == 1):
         print('Username tidak ditemukan.')
-
-    pass
