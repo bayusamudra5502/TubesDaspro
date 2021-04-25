@@ -23,25 +23,26 @@ def histPinjamGadget(username):  #Fungsi utama untuk Peminjaman
             sortedtanggal[i][1]=str(dataBorrowHist['data'][i]['id']) #menyimpan id peminjaman
         sortedtanggal.sort(reverse=True) #list telah disort descending berdasarkan tanggal
         banyakdata=len(sortedtanggal)
-        print(f"Menampilkan 5 riwayat {phrase1} terbaru\n")
+        print(f"\033[91mMenampilkan 5 riwayat\033[0m \033[91m{phrase1}\033[0m \033[\033[91mterbaru\033[0m")
+        print()
         # Menampilkan 5 riwayat peminjaman terbaru"
         for i in range (banyakdata):  # Perulangan berdasarkan variabel banyak data
             for j in range (int(dataBorrowHist['row_number'])):
                 if (dataBorrowHist['data'][j]['id'])==str(sortedtanggal[i][1]): #mencocokkan id peminjaman
-                    print(f"ID {phrase1}       : {dataBorrowHist['data'][j]['id']}")
+                    print(f"\033[92mID {phrase1}       \033[0m: {dataBorrowHist['data'][j]['id']}")
                     for k in range (int(listuser['row_number'])): #mencocokkan nama peminjam
                         if (listuser['data'][k]['id'])==(dataBorrowHist['data'][j]['id_peminjam']):#Mencocokkan id user dengan id peminjam
-                            print(f"Nama {phrase2}       : {listuser['data'][k]['nama']}") #Mencetak hasilnya
+                            print(f"\033[92mNama {phrase2}       \033[0m: {listuser['data'][k]['nama']}") #Mencetak hasilnya
                     for l in range (int(itemList['row_number'])): 
                         if (itemList['data'][l]['id'])== (dataBorrowHist['data'][j]['id_gadget']): #mencocokkan nama gadget
-                            print(f"Nama {phrase3}         : {itemList['data'][l]['nama']}")#Menampilkan nama peminjam
-                    print(f"Tanggal {phrase1}  : {dataBorrowHist['data'][j]['tanggal_peminjaman']}")#menampilkan tanggal peminjaman
-                    print(f"Jumlah              : {dataBorrowHist['data'][j]['jumlah']}")#menampilkan jumlah yg dipinjam
-                    print(f"Jumlah Dikembalikan : {dataBorrowHist['data'][j]['jumlah_kembali']}")#menampilkan jumlah yang dikembalikan
-                    print(f"Sudah Kembali Semua : {dataBorrowHist['data'][j]['is_returned']}")#menampilkan pesan apakah semua sudah dikembalikan
+                            print(f"\033[92mNama {phrase3}         \033[0m: {itemList['data'][l]['nama']}")#Menampilkan nama peminjam
+                    print(f"\033[92mTanggal {phrase1}  \033[0m: {dataBorrowHist['data'][j]['tanggal_peminjaman']}")#menampilkan tanggal peminjaman
+                    print(f"\033[92mJumlah              \033[0m: {dataBorrowHist['data'][j]['jumlah']}")#menampilkan jumlah yg dipinjam
+                    print(f"\033[92mJumlah Dikembalikan \033[0m: {dataBorrowHist['data'][j]['jumlah_kembali']}")#menampilkan jumlah yang dikembalikan
+                    print(f"\033[92mSudah Kembali Semua \033[0m: {dataBorrowHist['data'][j]['is_returned']}")#menampilkan pesan apakah semua sudah dikembalikan
             print()
             if (i%5==4): # fungsi jika database lebih dari 5 akan ditampilkan entry selanjutnya
-                lanjut=input("Ingin menampilkan entry selanjutnya? (Y/N): ")
+                lanjut=input("\033[93mIngin menampilkan entry selanjutnya? (Y/N): \033[0m")
                 if lanjut.lower()=="y":
                     print()
                     continue
@@ -49,7 +50,7 @@ def histPinjamGadget(username):  #Fungsi utama untuk Peminjaman
                     break
         applyChange(dataBorrowHist, "gadget_borrow_history") #menyimpan data
     else: #jika yang mengakses adalah user
-        print("Hanya admin yang dapat melakukan fitur riwayat ini")
+        print("\033[92mHanya admin yang dapat melakukan fitur riwayat ini\033[0m")
     return isAdminRole
 
 
@@ -71,25 +72,26 @@ def histKembaliGadget(username): #Fungsi utama riwayat pengembalian
             sortedtanggal[i][1]=str(dataReturnHist['data'][i]['id']) #menyimpan id peminjaman
         sortedtanggal.sort(reverse=True) #list telah disort descending berdasarkan tanggal
         banyakdata=len(sortedtanggal)
-        print(f"Menampilkan 5 riwayat {phrase1} terbaru\n")
+        print(f"\033[91mMenampilkan 5 riwayat\033[0m \033[91m{phrase1}\033[0m \033[91mterbaru\033[0m")
+        print()
         #Menampilkan 5 riwayat pengembalian terbaru
         for i in range (banyakdata):
             for j in range (int(dataReturnHist['row_number'])):
                 if (dataReturnHist['data'][j]['id'])==str(sortedtanggal[i][1]): #mencocokkan id peminjaman
-                    print(f"ID {phrase1}     : {dataReturnHist['data'][j]['id']}") #menmpilkan id pengembalian
+                    print(f"\033[92mID {phrase1}     \033[0m: {dataReturnHist['data'][j]['id']}") #menmpilkan id pengembalian
                     for k in range(int(dataBorrowHist['row_number'])):
                         if (dataBorrowHist['data'][k]['id']) == (dataReturnHist['data'][j]['id_peminjaman']): #mencocokkan id peminjaman
                             for l in range (int(listuser['row_number'])): #mencocokkan nama peminjam
                                 if (listuser['data'][l]['id'])==(dataBorrowHist['data'][k]['id_peminjam']): # mencocokkan nama peminjam
-                                    print(f"Nama {phrase2}     : {listuser['data'][l]['nama']}")# Menampilkan nama pengembali
+                                    print(f"\033[92mNama {phrase2}     \033[0m: {listuser['data'][l]['nama']}")# Menampilkan nama pengembali
                             for m in range (int(itemList['row_number'])):
                                 if (itemList['data'][m]['id'])== (dataBorrowHist['data'][k]['id_gadget']): #mencocokkan nama gadget
-                                    print(f"Nama {phrase3}         : {itemList['data'][m]['nama']}") #menampilkan nama gadget
-                            print(f"Tanggal {phrase1}: {dataReturnHist['data'][j]['tanggal_pengembalian']}") #menampilkan tanggal pengembalian
-                            print(f"Jumlah              : {dataReturnHist['data'][j]['jumlah']}")#menampilkan jumlah yang dikembalikan
+                                    print(f"\033[92mNama {phrase3}         \033[0m: {itemList['data'][m]['nama']}") #menampilkan nama gadget
+                            print(f"\033[92mTanggal {phrase1}\033[0m: {dataReturnHist['data'][j]['tanggal_pengembalian']}") #menampilkan tanggal pengembalian
+                            print(f"\033[92mJumlah              \033[0m: {dataReturnHist['data'][j]['jumlah']}")#menampilkan jumlah yang dikembalikan
             print()
             if (i%5==4): #fungsi untuk menampilkan 5 riwayat berikutnya
-                lanjut=input("Ingin menampilkan entry selanjutnya? (Y/N): ")
+                lanjut=input("\033[93mIngin menampilkan entry selanjutnya? (Y/N):\033[0m ")
                 if lanjut.lower()=="y":
                     print()
                     continue
@@ -97,7 +99,7 @@ def histKembaliGadget(username): #Fungsi utama riwayat pengembalian
                     break
         applyChange(dataReturnHist, "gadget_return_history") #menyimpan data
     else: #jika yang mengakses adalah user
-        print("Hanya admin yang dapat melakukan fitur riwayat ini")
+        print("\033[92mHanya admin yang dapat melakukan fitur riwayat ini\033[0m")
     return isAdminRole
 
 
@@ -118,23 +120,24 @@ def histAmbilConsumable(username): #Fungsi utama Riwayat Pengambilan
             sortedtanggal[i][1]=str(dataConsumableHist['data'][i]['id']) #menyimpan id peminjaman
         sortedtanggal.sort(reverse=True) #list telah disort descending berdasarkan tanggal
         banyakdata=len(sortedtanggal)
-        print(f"Menampilkan 5 riwayat {phrase1} terbaru\n")
+        print(f"\033[92mMenampilkan 5 riwayat\033[0m \033[92m{phrase1}\033[0m \033[92mterbaru\033[0m")
+        print()
         #menampilkan 5 riwayat pengambilan terbaru
         for i in range (banyakdata):
             for j in range (int(dataConsumableHist['row_number'])):
                 if (dataConsumableHist['data'][j]['id'])==str(sortedtanggal[i][1]): #mencocokkan id peminjaman
-                    print(f"ID {phrase1}     : {dataConsumableHist['data'][j]['id']}")#Menampilkan id riwayatconsumable
+                    print(f"\033[92mID {phrase1}     \033[0m: {dataConsumableHist['data'][j]['id']}")#Menampilkan id riwayatconsumable
                     for k in range (int(listuser['row_number'])): #mencocokkan nama peminjam
                         if (listuser['data'][k]['id'])==(dataConsumableHist['data'][j]['id_pengambil']):#mencocokkan id pengambilan
-                            print(f"Nama {phrase2}     : {listuser['data'][k]['nama']}")#menampiljan nama pengambil
+                            print(f"\033[92mNama {phrase2}     \033[0m: {listuser['data'][k]['nama']}")#menampiljan nama pengambil
                     for l in range (int(itemList['row_number'])):
                         if (itemList['data'][l]['id'])== (dataConsumableHist['data'][j]['id_consumable']): #mencocokkan nama gadget
-                            print(f"Nama {phrase3}    : {itemList['data'][l]['nama']}")#menampilkan nama consumable
-                    print(f"Tanggal {phrase1}: {dataConsumableHist['data'][j]['tanggal_pengambilan']}")#menampilkan tanggal pengambilan
-                    print(f"Jumlah             : {dataConsumableHist['data'][j]['jumlah']}")#menampilkan jumlah pengambilan
+                            print(f"\033[92mNama {phrase3}    \033[0m: {itemList['data'][l]['nama']}")#menampilkan nama consumable
+                    print(f"\033[92mTanggal {phrase1}\033[0m: {dataConsumableHist['data'][j]['tanggal_pengambilan']}")#menampilkan tanggal pengambilan
+                    print(f"\033[92mJumlah             \033[0m: {dataConsumableHist['data'][j]['jumlah']}")#menampilkan jumlah pengambilan
             print()
             if (i%5==4):#menampilkan 5 entry selanjutnya
-                lanjut=input("Ingin menampilkan entry selanjutnya? (Y/N): ")
+                lanjut=input("\033[93mIngin menampilkan entry selanjutnya? (Y/N): \033[0m")
                 if lanjut.lower()=="y":
                     print()
                     continue
@@ -142,6 +145,6 @@ def histAmbilConsumable(username): #Fungsi utama Riwayat Pengambilan
                     break
         applyChange(dataConsumableHist, "consumable_history")#menyimpan data
     else:#jika yang mengakses adalah user
-        print("Hanya admin yang dapat melakukan fitur riwayat ini")
+        print("\033[92mHanya admin yang dapat melakukan fitur riwayat ini\033[0m")
     return isAdminRole
 
