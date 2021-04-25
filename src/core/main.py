@@ -48,8 +48,9 @@ def doSave(username):
         isOKLocation = False
         saveDir = ""
         while not isOKLocation:
-            print("Penyimpanan data ke database")
-            print("---------------------------------\n")
+            print()
+            print("\033[36mPenyimpanan data ke database")
+            print("---------------------------------\033[0m\n")
             print("Silahkan masukkan lokasi penyimpanan database.")
             print("Jika anda ingin menyimpan database pada lokasi sebelumnya, masukkan \033[34m.*.\033[0m")
             print()
@@ -168,7 +169,10 @@ def main(saveDir):
                 command = ""
             elif isValidUser(username) and command != "":
                 if command == "whois":
-                        print("\033[32mINFO :\033[0mSaat ini anda login sebagai")
+                        print()
+                        print("\033[36mStatus Login")
+                        print("----------------\033[0m")
+                        print("Saat ini anda login sebagai")
                         print(f"Username : {username}")
                         if(isUserRole(username)):
                             print(f"Role : User")
