@@ -21,7 +21,7 @@ from .password import isValidPassword
 # ALGORITMA
 def login() -> str:
     dataUser = getTable("user")
-    errcode = 1
+    loggedIn = False
 
     username = input('Masukan username: ')
     password = input('Masukan password: ')
@@ -30,20 +30,12 @@ def login() -> str:
         # Login Benar
         if (username == dataUser['data'][i]['username']) and isValidPassword(password, dataUser['data'][i]['password']):
             print('Halo', username + '!', 'Selamat datang di Kantong Ajaib.')
-            errcode = 0
+            loggedIn = True
             return username
 
-        # Password Salah
-        elif (username == dataUser['data'][i]['username']) and (
-        not isValidPassword(password, dataUser['data'][i]['password'])):
-            errcode = 0
-            print('Halo', username + '!', 'Password yang kamu input salah.')
-            continue
-
-        # Username tidak ditemukan
+        # Kombinasi Salah
         else:
-            errcode = 1
             continue
 
-    if (errcode == 1):
-        print('Username tidak ditemukan.')
+    if not loggedIn:
+        print('Kombinasi username dan password salah.')
