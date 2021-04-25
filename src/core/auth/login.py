@@ -33,9 +33,5 @@ def login() -> str:
             loggedIn = True
             return username
 
-        # Kombinasi Salah
-        else:
-            continue
-
     if not loggedIn:
         print('Kombinasi username dan password salah.')

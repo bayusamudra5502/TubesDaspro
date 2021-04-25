@@ -37,7 +37,7 @@ from core.util import generateNextID
 
 
 # ALGORITMA
-def checkRarity(rarity: str) -> bool:
+def isRarityValid(rarity: str) -> bool:
     if rarity in ['C', 'B', 'A', 'S']:
         return True
 
@@ -46,7 +46,7 @@ def checkRarity(rarity: str) -> bool:
         return False
 
 
-def checkIDAvailability(ID: str) -> bool:
+def isIDValid(ID: str) -> bool:
     dataGadget = getTable("gadget")
     dataConsumable = getTable("consumable")
 
@@ -80,7 +80,7 @@ def addItem(username):
         id = input('Masukan id: ').upper()
 
         # Validasi ID Item
-        if checkIDAvailability(id):
+        if isIDValid(id):
             nama = input('Masukan nama: ')
             deskripsi = input('Masukan deskripsi: ')
             while True:
@@ -94,7 +94,7 @@ def addItem(username):
             rarity = input('Masukan rarity: ').upper()
 
             # Validasi Rarity Item
-            if checkRarity(rarity):
+            if isRarityValid(rarity):
                 # Tambah Gadget
                 if (id[0] == 'G'):
                     while True:
@@ -131,6 +131,8 @@ def addItem(username):
                         }
                     print('Item telah berhasil ditambahkan ke database.')
                     applyChange(dataConsumable, 'consumable')
+
     else:
         print('Hanya admin yang dapat melakukan fitur tambah item ini.')
+
     return isAdminRole
