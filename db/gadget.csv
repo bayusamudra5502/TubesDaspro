@@ -1,9 +1,6 @@
 id;nama;deskripsi;jumlah;rarity;tahun_ditemukan
 G1;Time Machine;Mesin waktu doremonangis;7;A;2099
 G2;Bamboo Propeller;Baling-baling bambu (buat terbang);22;A;2080
-<<<<<<< HEAD
 G3;laptopnya mikasha;MIKASHA PUNYAAA;1001;A;2041
-=======
-G3;laptopnya mikasha;MIKASHA PUNYAAA;999;A;2041
->>>>>>> acfed677c5496db3a9afc7844c011c53eae11d67
 G4;MESIN CUCI SAKTI NOBITA;DOREMONANGIS TAMBAH NANGIS ALATNYA DICURI;199;S;3012
+G5;magnet cinta;ku padamu sedalam samudra;123;A;2009
