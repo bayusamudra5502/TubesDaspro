@@ -2,19 +2,19 @@
 # Modul ini adalah modul yang berisi fungsi
 # yang berkaitan dengan fitur help (F16)
 
-
 from os import system
 
 def help(username): #Fungsi utama help untuk menampilkan semua petunjuk dalam sistem
     system("clear || cls")
     print("""\033[32m
-          __    __   _______  __       ______   
-         |  |  |  | |   ____||  |     |   _  \  
-         |  |__|  | |  |__   |  |     |  |_)  | 
-         |   __   | |   __|  |  |     |   ___/  
-         |  |  |  | |  |____ |  `----.|  |      
-         |__|  |__| |_______||_______|| _|    \033[36m v1.0 \033[0m                                              
-""")
+           __    __   _______  __       ______   
+          |  |  |  | |   ____||  |     |   _  \  
+          |  |__|  | |  |__   |  |     |  |_)  | 
+          |   __   | |   __|  |  |     |   ___/  
+          |  |  |  | |  |____ |  `----.|  |      
+          |__|  |__| |_______||_______|| _|    \033[36m v1.0 \033[0m
+    """)
+    print()
     print("===================== \033[34mKantong Ajaib\033[0m ======================")
     print()
     print("== \033[34mBerikut merupakan petunjuk penggunaan fitur-fitur di\033[0m ==")
