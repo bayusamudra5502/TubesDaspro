@@ -120,7 +120,7 @@ def histAmbilConsumable(username): #Fungsi utama Riwayat Pengambilan
             sortedtanggal[i][1]=str(dataConsumableHist['data'][i]['id']) #menyimpan id peminjaman
         sortedtanggal.sort(reverse=True) #list telah disort descending berdasarkan tanggal
         banyakdata=len(sortedtanggal)
-        print(f"\033[91mMenampilkan 5 riwayat\033[0m \033[92m{phrase1}\033[0m \033[92mterbaru\033[0m")
+        print(f"\033[91mMenampilkan 5 riwayat\033[0m \033[91m{phrase1}\033[0m \033[91mterbaru\033[0m")
         print()
         #menampilkan 5 riwayat pengambilan terbaru
         for i in range (banyakdata):
