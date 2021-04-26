@@ -155,6 +155,8 @@ def main(saveDir):
             elif command == "login":
                 if username == "":
                     username = login()
+                    if username == None:
+                        username = ""
                 else:
                     print(f"\033[32mINFO : \033[0mAnda sudah melakukan login sebagai {username}.")
                     print("Silahkan logout terlebih dahulu untuk mengganti user.")
