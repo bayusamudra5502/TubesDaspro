@@ -52,6 +52,7 @@ def register(username):
         else:
             print('Username tidak tersedia.')
         applyChange(dataUser, 'user')
+
     # Diakses user biasa
     else:
         print('Program ini hanya dapat diakses oleh admin.')

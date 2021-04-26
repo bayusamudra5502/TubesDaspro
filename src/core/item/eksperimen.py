@@ -383,9 +383,13 @@ def setEngine():
 
                         # Melakukan pencatatan pengambilan
                         nextIndex = dataConsumableHist["row_number"]
+                        id = "0"
+                        if(nextIndex > 0):
+                            id = dataConsumableHist["data"][nextIndex - 1]["id"]
+
                         dataConsumableHist['data'][nextIndex] = \
                         {
-                            'id': generateNextID(dataConsumableHist["data"][nextIndex - 1]["id"]),
+                            'id': generateNextID(id),
                             'id_pengambil': str(getUserID(username)),
                             'id_consumable': dataConsumable["data"][index]["id"],
                             'tanggal_pengambilan': datetime.now().strftime("%d/%m/%Y"),
@@ -475,9 +479,15 @@ def mix():
 
         # Melakukan pencatatan pengambilan
         nextIndex = dataConsumableHist["row_number"]
+        id = "0"
+
+        if(dataConsumableHist["row_number"] > 0):
+            lastIdx = nextIndex - 1
+            id = dataConsumableHist["data"][lastIdx]["id"]
+
         dataConsumableHist['data'][nextIndex] = \
         {
-            'id': generateNextID(dataConsumableHist["data"][nextIndex - 1]["id"]),
+            'id': generateNextID(id),
             'id_pengambil': str(getUserID(username)),
             'id_consumable': dataConsumable["data"][consumables[i]['dbIndex']]["id"],
             'tanggal_pengambilan': datetime.now().strftime("%d/%m/%Y"),
@@ -545,9 +555,15 @@ def mix():
     nama = input("Nama Consumable : ")
 
     consumableNextID = dataConsumable["row_number"]
+    id = "C0"
+
+    if(dataConsumable["row_number"] > 0):
+        lastIdx = consumableNextID - 1
+        id = dataConsumable["data"][lastIdx]["id"]
+
     dataConsumable['data'][consumableNextID] = \
     {
-        'id': generateNextID(dataConsumable["data"][consumableNextID-1]["id"]),
+        'id': generateNextID(id),
         'nama': nama,
         'deskripsi': "Barang hasil pencampuran di Laboratorium Doraemonangis.",
         'jumlah': str(jumlahConsumable),
@@ -569,14 +585,14 @@ def eksperimen(uname):
     dataConsumable = getTable("consumable")
     dataConsumableHist = getTable("consumable_history")
 
-    if isUserRole(uname):
-        username = uname
-        option = ""
-        isExit = False
-        while (not isExit):
-            system("cls || clear")
-            print("""\033[32m
-
+    if(dataConsumable["row_number"] > 0):
+        if isUserRole(uname):
+            username = uname
+            option = ""
+            isExit = False
+            while (not isExit):
+                system("cls || clear")
+                print("""\033[32m
 ██╗░░░░░░█████╗░██████╗░░█████╗░██████╗░░█████╗░████████╗░█████╗░██████╗░██╗░░░██╗
 ██║░░░░░██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗╚██╗░██╔╝
 ██║░░░░░███████║██████╦╝██║░░██║██████╔╝███████║░░░██║░░░██║░░██║██████╔╝░╚████╔╝░
@@ -584,96 +600,98 @@ def eksperimen(uname):
 ███████╗██║░░██║██████╦╝╚█████╔╝██║░░██║██║░░██║░░░██║░░░╚█████╔╝██║░░██║░░░██║░░░
 ╚══════╝╚═╝░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝░░░╚═╝░░░
 \033[0m""")
-            print("Halo, selamat datang di laboratorium doraemonangis.")
-            print()
+                print("Halo, selamat datang di laboratorium doraemonangis.")
+                print()
 
-            print("--------------------------------------")
-            print("\033[1mDaftar Objek yang akan diproses\033[0m")
-            print("--------------------------------------")
+                print("--------------------------------------")
+                print("\033[1mDaftar Objek yang akan diproses\033[0m")
+                print("--------------------------------------")
 
-            if(engine != {}):
-                print(f"MESIN PENCAMPUR : {engine['nama']}")
-            else:
-                print("MESIN PENCAMPUR : \033[31mTIDAK ADA\033[0m")
-
-            print()
-            print("\033[1;36mKERANJANG CONSUMABLE: \033[0m")
-            if(nItem > 0):
-                for i in range(nItem):
-                    print(f"{i+1}. {consumables[i]['nama']}", end="")
-                    print(f" - Rarity {consumables[i]['rarity']}", end="")
-                    print(f" (x {consumables[i]['jumlah']})")
-            else:
-                print("BELUM ADA CONSUMABLE YANG DIPILIH")
-            
-            print()
-
-            print("Perintah yang tersedia: ")
-            print("1. SHOW - Tampilkan Consumable")
-            print("2. ADD - Tambah Consumable")
-            print("3. DELETE - Hapus Data Consumable yang dipilih")
-            print("4. EDIT - Edit jumlah consumable yang dipilih")
-            print("5. ENGINE - Pilih mesin yang digunakan untuk mencampurkan")
-            print("6. MIX - Lakukan pencampuran")
-            print("7. EXIT - Keluar dari laboratorium dan batalkan segala aksi")
-
-            print()
-
-            isValid = False
-            while not isValid:
-                option = toLower(input("Perintah yang dipilih : "))
-
-                isValid = True
-                if option == "show" or option == "1":
-                    showData(dataConsumable, "DAFTAR CONSUMABLE")
-                elif option == "add" or option == "2":
-                    addItemLabolatory()
-                elif option == "delete" or option == "3":
-                    if nItem > 0:
-                        deleteItem()
-                    else:
-                        print("Consumable dalam keranjang belum ada. Silahkan masukkan terlebih dahulu.")
-                        sleep(1)
-                elif option == "edit" or option == "4":
-                    if nItem > 0:
-                        editItem()
-                    else:
-                        print("Consumable dalam keranjang belum ada. Silahkan masukkan terlebih dahulu.")
-                        sleep(1)
-                elif option == "engine" or option =="5":
-                    setEngine()
-                elif option == "mix" or option =="6":
-                    if nItem > 0:
-                        if mix():
-                            isExit = True
-                        else:
-                            isExit = False
-                    else:
-                        print("Masukkan terlebih dahulu barang yang akan dicampurkan.")
-                        option = ""
-                        sleep(1)
-                elif option == "exit" or option =="7":
-                    print()
-                    isOK = False
-                    print("Apakah anda yakin akna keluar dari laboratorium.")
-                    print("Semua perubahan yang telah dilakukan tidak akan bisa dikembalikan.")
-
-                    while(not isOK):
-                        cmd = toLower(input("Jawaban [Y/n] : "))
-
-                        if(cmd == "y"):
-                            isOK = True
-                            isExit = True
-                        elif(cmd == "n"):
-                            isOK = True
-                            isValid = False
-                            print()
-                        else:
-                            print("Jawaban tidak dikenal. ULangi. \n")
-
+                if(engine != {}):
+                    print(f"MESIN PENCAMPUR : {engine['nama']}")
                 else:
-                    print("Perintah tidak dikenal. Silahkan coba lagi.")
-                    print()
-                    isValid = False
+                    print("MESIN PENCAMPUR : \033[31mTIDAK ADA\033[0m")
+
+                print()
+                print("\033[1;36mKERANJANG CONSUMABLE: \033[0m")
+                if(nItem > 0):
+                    for i in range(nItem):
+                        print(f"{i+1}. {consumables[i]['nama']}", end="")
+                        print(f" - Rarity {consumables[i]['rarity']}", end="")
+                        print(f" (x {consumables[i]['jumlah']})")
+                else:
+                    print("BELUM ADA CONSUMABLE YANG DIPILIH")
+                
+                print()
+
+                print("Perintah yang tersedia: ")
+                print("1. SHOW - Tampilkan Consumable")
+                print("2. ADD - Tambah Consumable")
+                print("3. DELETE - Hapus Data Consumable yang dipilih")
+                print("4. EDIT - Edit jumlah consumable yang dipilih")
+                print("5. ENGINE - Pilih mesin yang digunakan untuk mencampurkan")
+                print("6. MIX - Lakukan pencampuran")
+                print("7. EXIT - Keluar dari laboratorium dan batalkan segala aksi")
+
+                print()
+
+                isValid = False
+                while not isValid:
+                    option = toLower(input("Perintah yang dipilih : "))
+
+                    isValid = True
+                    if option == "show" or option == "1":
+                        showData(dataConsumable, "DAFTAR CONSUMABLE")
+                    elif option == "add" or option == "2":
+                        addItemLabolatory()
+                    elif option == "delete" or option == "3":
+                        if nItem > 0:
+                            deleteItem()
+                        else:
+                            print("Consumable dalam keranjang belum ada. Silahkan masukkan terlebih dahulu.")
+                            sleep(1)
+                    elif option == "edit" or option == "4":
+                        if nItem > 0:
+                            editItem()
+                        else:
+                            print("Consumable dalam keranjang belum ada. Silahkan masukkan terlebih dahulu.")
+                            sleep(1)
+                    elif option == "engine" or option =="5":
+                        setEngine()
+                    elif option == "mix" or option =="6":
+                        if nItem > 0:
+                            if mix():
+                                isExit = True
+                            else:
+                                isExit = False
+                        else:
+                            print("Masukkan terlebih dahulu barang yang akan dicampurkan.")
+                            option = ""
+                            sleep(1)
+                    elif option == "exit" or option =="7":
+                        print()
+                        isOK = False
+                        print("Apakah anda yakin akna keluar dari laboratorium.")
+                        print("Semua perubahan yang telah dilakukan tidak akan bisa dikembalikan.")
+
+                        while(not isOK):
+                            cmd = toLower(input("Jawaban [Y/n] : "))
+
+                            if(cmd == "y"):
+                                isOK = True
+                                isExit = True
+                            elif(cmd == "n"):
+                                isOK = True
+                                isValid = False
+                                print()
+                            else:
+                                print("Jawaban tidak dikenal. ULangi. \n")
+
+                    else:
+                        print("Perintah tidak dikenal. Silahkan coba lagi.")
+                        print()
+                        isValid = False
+        else:
+            print("Anda harus login sebagai user untuk mengakses fitur ini.")
     else:
-        print("Anda harus login sebagai user untuk mengakses fitur ini.")
+        print("Data consumable kosong. Silahkan tambah data terlebih dahulu.")

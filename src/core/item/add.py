@@ -37,7 +37,7 @@ from core.util import generateNextID
 
 
 # ALGORITMA
-def checkRarity(rarity: str) -> bool:
+def isRarityValid(rarity: str) -> bool:
     if rarity in ['C', 'B', 'A', 'S']:
         return True
 
@@ -46,7 +46,7 @@ def checkRarity(rarity: str) -> bool:
         return False
 
 
-def checkIDAvailability(ID: str) -> bool:
+def isIDValid(ID: str) -> bool:
     dataGadget = getTable("gadget")
     dataConsumable = getTable("consumable")
 
@@ -70,25 +70,41 @@ def checkIDAvailability(ID: str) -> bool:
 
     return True
 
+
 def addItem(username):
+    dataGadget = getTable("gadget")
+    dataConsumable = getTable("consumable")
+
     # Validasi User
     if isAdminRole(username):
-        dataGadget = getTable("gadget")
-        dataConsumable = getTable("consumable")
         id = input('Masukan id: ').upper()
 
         # Validasi ID Item
-        if checkIDAvailability(id):
+        if isIDValid(id):
             nama = input('Masukan nama: ')
             deskripsi = input('Masukan deskripsi: ')
-            jumlah = input('Masukan jumlah: ')
+            while True:
+                jumlah = input('Masukan jumlah: ')
+
+                if int(jumlah) > 0:
+                    break
+
+                else:
+                    print('Jumlah tidak valid.')
             rarity = input('Masukan rarity: ').upper()
 
             # Validasi Rarity Item
-            if checkRarity(rarity):
+            if isRarityValid(rarity):
                 # Tambah Gadget
                 if (id[0] == 'G'):
-                    tahun_ditemukan = input('Masukan tahun ditemukan: ')
+                    while True:
+                        tahun_ditemukan = input('Masukan tahun ditemukan: ')
+
+                        if int(jumlah) > 0:
+                            break
+
+                        else:
+                            print('Tahun tidak valid.')
                     nextIndex = dataGadget['row_number']
                     dataGadget['data'][nextIndex] = \
                         {
@@ -115,9 +131,8 @@ def addItem(username):
                         }
                     print('Item telah berhasil ditambahkan ke database.')
                     applyChange(dataConsumable, 'consumable')
-            return checkRarity
-        return checkIDAvailability
+
     else:
-        print("Hanya admin yang dapat melakukan fitur tambah item ini")
+        print('Hanya admin yang dapat melakukan fitur tambah item ini.')
+
     return isAdminRole
-    

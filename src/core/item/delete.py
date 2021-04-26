@@ -25,7 +25,7 @@ def delete(username):
                         print()
                         print("Apakah anda yakin ingin menghapus " + str(dataGadget["data"][i]["nama"]) + " (Y/N)?", end="")
                         validation = input()
-                    # Mengubah
+                    # Menghapus data
                     if (validation == 'Y') or (validation == 'y'):
                         dataGadget["data"][i] ={}
                         print()
@@ -50,7 +50,7 @@ def delete(username):
                         print()
                         print("Apakah anda yakin ingin menghapus " + str(dataGadget["data"][i]["nama"]) + " (Y/N)?", end="")
                         validation = input()
-                    if(validation == "Y") or (validation == "y"):
+                    if(validation == "Y") or (validation == "y"):   # Menghapus data
                         dataConsumable["data"][i] = {}
                         print()
                         print("Item telah berhasil dihapus dari database")

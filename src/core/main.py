@@ -48,8 +48,9 @@ def doSave(username):
         isOKLocation = False
         saveDir = ""
         while not isOKLocation:
-            print("Penyimpanan data ke database")
-            print("---------------------------------\n")
+            print()
+            print("\033[36mPenyimpanan data ke database")
+            print("---------------------------------\033[0m\n")
             print("Silahkan masukkan lokasi penyimpanan database.")
             print("Jika anda ingin menyimpan database pada lokasi sebelumnya, masukkan \033[34m.*.\033[0m")
             print()
@@ -152,7 +153,15 @@ def main(saveDir):
                 
                 errorCnt += 1
             elif command == "login":
-                username = login()
+                if username == "":
+                    username = login()
+                    if username == None:
+                        username = ""
+                else:
+                    print(f"\033[32mINFO : \033[0mAnda sudah melakukan login sebagai {username}.")
+                    print("Silahkan logout terlebih dahulu untuk mengganti user.")
+                    print("Gunakan perintah \033[34mLOGOUT\033[0m untuk logout.")
+                
                 errorCnt = 0
             elif command == "help":
                 commandDriver["help"](username)
@@ -162,6 +171,9 @@ def main(saveDir):
                 command = ""
             elif isValidUser(username) and command != "":
                 if command == "whois":
+                        print()
+                        print("\033[36mStatus Login")
+                        print("----------------\033[0m")
                         print("Saat ini anda login sebagai")
                         print(f"Username : {username}")
                         if(isUserRole(username)):

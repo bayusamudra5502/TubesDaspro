@@ -35,8 +35,6 @@ def searchByRarity(username):
     else:
         print('Silahkan login terlebih dahulu sebelum menjalankan program lain.')
     return isValidUser
-    pass
-
 
 def searchByYear(username):
     # Fitur F04

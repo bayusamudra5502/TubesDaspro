@@ -39,83 +39,86 @@ def pengembalianGadget(username):
             else:
                 # Meminta input
                 if no_returned == False:
-                    print("Silahkan input data objek yang ingin dikembalikan:")
+                    print("Silahkan input data objek yang ingin dikembalikan")
                     nomor_pinjam = input("ID peminjaman : ")
                     validation_jumlah = False
 
-                    # Validasi dan modifikasi data
+                    # Validasi data
+                    notFound = True
+                    validation_jumlah = False
                     for i in range(dataPinjamGadget["row_number"]):
                         if(dataPinjamGadget["data"][i]["id"] == str(nomor_pinjam)):
                             notFound=False
                             if notFound == False:
                                 jumlah_kembali = int(input("Masukan jumlah item yang dikembalikan : "))
                                 if jumlah_kembali > 0:
-                                    tanggal_kembali = input("Tanggal pengembalian : ")
-                                    if isValidTanggal(tanggal_kembali):
-                                        if(int(dataPinjamGadget["data"][i]["jumlah"]) - int(dataPinjamGadget["data"][i]["jumlah_kembali"]) > jumlah_kembali):
-                                            validation_jumlah = True
+                                    if(int(dataPinjamGadget["data"][i]["jumlah"]) - int(dataPinjamGadget["data"][i]["jumlah_kembali"]) > jumlah_kembali):
+                                        validation_jumlah = True
 
-                                            id_item = dataPinjamGadget["data"][i]["id_gadget"]
-                                            dataPinjamGadget["data"][i]["jumlah_kembali"] = \
-                                                str(int(dataPinjamGadget["data"][i]["jumlah_kembali"]) + jumlah_kembali)
+                                        id_item = dataPinjamGadget["data"][i]["id_gadget"]
+                                        dataPinjamGadget["data"][i]["jumlah_kembali"] = \
+                                            str(int(dataPinjamGadget["data"][i]["jumlah_kembali"]) + jumlah_kembali)
 
-                                        elif(int(dataPinjamGadget["data"][i]["jumlah"]) - int(dataPinjamGadget["data"][i]["jumlah_kembali"]) == jumlah_kembali):
-                                            validation_jumlah = True
+                                    elif(int(dataPinjamGadget["data"][i]["jumlah"]) - int(dataPinjamGadget["data"][i]["jumlah_kembali"]) == jumlah_kembali):
+                                        validation_jumlah = True
 
-                                            id_item = dataPinjamGadget["data"][i]["id_gadget"]
-                                            dataPinjamGadget["data"][i]["is_returned"] = "TRUE"
-                                            dataPinjamGadget["data"][i]["jumlah_kembali"] = \
-                                                str(int(dataPinjamGadget["data"][i]["jumlah_kembali"]) + jumlah_kembali)
-                                    else:
-                                        print()
-                                        print("Masukan tanggal tidak valid, silakan masukan format tanggal yang valid")
+                                        id_item = dataPinjamGadget["data"][i]["id_gadget"]
+                                        dataPinjamGadget["data"][i]["is_returned"] = "TRUE"
+                                        dataPinjamGadget["data"][i]["jumlah_kembali"] = \
+                                            str(int(dataPinjamGadget["data"][i]["jumlah_kembali"]) + jumlah_kembali)
                                 else:   #jumlah_kembali <= 0
                                     print()
                                     print("Jumlah pengembalian harus lebih besar dari nol")
                                         
-                    
-                    if notFound:   #dataPinjamGadget["data"][i]["id"] != str(nomor_pinjam)
+                    # Modifikasi data
+                    if notFound == True:   #dataPinjamGadget["data"][i]["id"] != str(nomor_pinjam)
+                        print()
                         print("Tidak ada item dengan nomor peminjaman tersebut")
                     else:
                         if validation_jumlah:
-                            notFound1 = True
+                            tanggal_kembali = input("Tanggal pengembalian : ")
+                            if isValidTanggal(tanggal_kembali):
+                                notFound1 = True
 
-                            for i in range(dataGadget["row_number"]):
-                                if(dataGadget["data"][i]["id"] == id_item):
-                                    # Update data gadget di db
-                                    notFound1 = False
-                                    newGadget = int(dataGadget["data"][i]["jumlah"]) + jumlah_kembali
-                                    dataGadget["data"][i]["jumlah"] = str(newGadget)
+                                for i in range(dataGadget["row_number"]):
+                                    if(dataGadget["data"][i]["id"] == id_item):
+                                        # Update data gadget di db
+                                        notFound1 = False
+                                        newGadget = int(dataGadget["data"][i]["jumlah"]) + jumlah_kembali
+                                        dataGadget["data"][i]["jumlah"] = str(newGadget)
 
-                                    print()
-                                    print("Item "+ dataGadget['data'][i]['nama'] + " (x"+str(jumlah_kembali) + ") " + " telah dikembalikan!")
+                                        print()
+                                        print("Item "+ dataGadget['data'][i]['nama'] + " (x"+str(jumlah_kembali) + ") " + " telah dikembalikan!")
 
-                                    if getUserID(username):
-                                        lastID = "KMB-0"
-                                        nextIndex = dataKembaliGadget["row_number"]
+                                        if getUserID(username):
+                                            lastID = "KMB-0"
+                                            nextIndex = dataKembaliGadget["row_number"]
 
-                                        if(dataKembaliGadget["row_number"] > 0):
-                                            lastIndext = dataKembaliGadget["row_number"]-1
-                                            lastID = dataKembaliGadget["data"][lastIndext]["id"]
+                                            if(dataKembaliGadget["row_number"] > 0):
+                                                lastIndext = dataKembaliGadget["row_number"]-1
+                                                lastID = dataKembaliGadget["data"][lastIndext]["id"]
 
-                                        id1 = (generateNextID(lastID))
+                                            id1 = (generateNextID(lastID))
 
-                                        dataKembaliGadget["data"][nextIndex] = \
-                                            {
-                                                "id": id1,
-                                                 "id_peminjaman": nomor_pinjam,
-                                                "tanggal_pengembalian": tanggal_kembali,
-                                                "jumlah": str(jumlah_kembali)
-                                            }
+                                            dataKembaliGadget["data"][nextIndex] = \
+                                                {
+                                                    "id": id1,
+                                                    "id_peminjaman": nomor_pinjam,
+                                                    "tanggal_pengembalian": tanggal_kembali,
+                                                    "jumlah": str(jumlah_kembali)
+                                                }
                                                 
-                                        # Terapkan perubahan di db
-                                        applyChange(dataGadget, "gadget")
-                                        applyChange(dataPinjamGadget, "gadget_borrow_history")
-                                        applyChange(dataKembaliGadget, "gadget_return_history")
+                                            # Terapkan perubahan di db
+                                            applyChange(dataGadget, "gadget")
+                                            applyChange(dataPinjamGadget, "gadget_borrow_history")
+                                            applyChange(dataKembaliGadget, "gadget_return_history")
 
-                            if notFound1: 
-                                print()  
-                                print("Item tersebut sudah tidak ada dalam database gadget")
+                                if notFound1: 
+                                    print()  
+                                    print("Item tersebut sudah tidak ada dalam database gadget")
+                            else:
+                                print()
+                                print("Masukan tanggal tidak valid, silakan masukan format tanggal yang valid")
                         else:   # validation_jumlah = False
                             print()
                             print("Jumlah yang ingin dikembalikan melebihi jumlah peminjaman")
