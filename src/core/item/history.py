@@ -16,7 +16,7 @@ def histPinjamGadget(username):  #Fungsi utama untuk Peminjaman
         phrase2="Peminjam"
         phrase3="Gadget"
 
-        #sort tanggal
+        #sort tanggal  #asumsi format tanggal adalah dd/bb/yyyy
         sortedtanggal=[[0 for i in range (2)] for j in range (int(dataBorrowHist['row_number']))]
         for i in range (int(dataBorrowHist['row_number'])):
             sortedtanggal[i][0]=int(dataBorrowHist['data'][i]['tanggal_peminjaman'][6]+dataBorrowHist['data'][i]['tanggal_peminjaman'][7]+dataBorrowHist['data'][i]['tanggal_peminjaman'][8]+dataBorrowHist['data'][i]['tanggal_peminjaman'][9]+dataBorrowHist['data'][i]['tanggal_peminjaman'][3]+dataBorrowHist['data'][i]['tanggal_peminjaman'][4]+dataBorrowHist['data'][i]['tanggal_peminjaman'][0]+dataBorrowHist['data'][i]['tanggal_peminjaman'][1])
@@ -65,7 +65,7 @@ def histKembaliGadget(username): #Fungsi utama riwayat pengembalian
         phrase2="Pengembali"
         phrase3="Gadget"
 
-        #sort tanggal
+        #sort tanggal  #asumsi format tanggal adalah dd/bb/yyyy
         sortedtanggal=[[0 for i in range (2)] for j in range (int(dataReturnHist['row_number']))]
         for i in range (int(dataReturnHist['row_number'])):
             sortedtanggal[i][0]=int(dataReturnHist['data'][i]['tanggal_pengembalian'][6]+dataReturnHist['data'][i]['tanggal_pengembalian'][7]+dataReturnHist['data'][i]['tanggal_pengembalian'][8]+dataReturnHist['data'][i]['tanggal_pengembalian'][9]+dataReturnHist['data'][i]['tanggal_pengembalian'][3]+dataReturnHist['data'][i]['tanggal_pengembalian'][4]+dataReturnHist['data'][i]['tanggal_pengembalian'][0]+dataReturnHist['data'][i]['tanggal_pengembalian'][1])
@@ -113,7 +113,7 @@ def histAmbilConsumable(username): #Fungsi utama Riwayat Pengambilan
         phrase2="Pengambil"
         phrase3="Consumable"
 
-        #sort tanggal
+        #sort tanggal #asumsi format tanggal adalah dd/bb/yyyy
         sortedtanggal=[[0 for i in range (2)] for j in range (int(dataConsumableHist['row_number']))]
         for i in range (int(dataConsumableHist['row_number'])):
             sortedtanggal[i][0]=int(dataConsumableHist['data'][i]['tanggal_pengambilan'][6]+dataConsumableHist['data'][i]['tanggal_pengambilan'][7]+dataConsumableHist['data'][i]['tanggal_pengambilan'][8]+dataConsumableHist['data'][i]['tanggal_pengambilan'][9]+dataConsumableHist['data'][i]['tanggal_pengambilan'][3]+dataConsumableHist['data'][i]['tanggal_pengambilan'][4]+dataConsumableHist['data'][i]['tanggal_pengambilan'][0]+dataConsumableHist['data'][i]['tanggal_pengambilan'][1])

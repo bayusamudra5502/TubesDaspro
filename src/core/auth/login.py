@@ -34,4 +34,5 @@ def login() -> str:
             return username
 
     if not loggedIn:
-        print('Kombinasi username dan password salah.')
+        print("""Kombinasi username dan password salah
+Silakan Ulangi perintah login""")

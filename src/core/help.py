@@ -79,7 +79,7 @@ def help(username): #Fungsi utama help untuk menampilkan semua petunjuk dalam si
 15.\033[31mPerintah "help"\033[0m
    \033[36makses\033[0m     : admin, user
    \033[36mfungsi\033[0m    : * menampilkan petunjuk dan fitur-fitur yang ada pada sistem
-              * dapat diakses tanpa harus melakukan login terlebih dahulu
+               * dapat diakses tanpa harus melakukan login terlebih dahulu
 
 16.\033[31mPerintah "save"\033[0m
    \033[36makses\033[0m     : admin, user
