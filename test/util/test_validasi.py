@@ -24,3 +24,8 @@ def test_outRange():
     assert not isValidTanggal("32/01/2000")
     assert not isValidTanggal("2020/10/13")
     assert not isValidTanggal("31/04/2000")
+
+def test_lenTahun():
+    assert not isValidTanggal("30/12/12000")
+    assert not isValidTanggal("30/12/12")
+    assert isValidTanggal("30/12/1200")
