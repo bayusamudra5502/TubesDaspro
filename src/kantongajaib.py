@@ -1,5 +1,5 @@
 # Program kantongAjaib
-# Deskripsi Program
+# Program sistem inventori kantong ajaib doraemonangis.
 
 # LIBRARY
 from core import main
@@ -9,6 +9,7 @@ from core.database.load import loadDatabase
 from time import  sleep
 
 # KAMUS
+# argv: Array of string
 
 # ALGORITMA
 if len(argv) < 2:
