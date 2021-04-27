@@ -57,6 +57,11 @@ def getObjectUser(username):
     dan jika tidak ditemukan akan mengeluarkan objek 
     kosong ({}).
     """
+    # KAMUS LOKAL
+    # dataUser: userTable
+    # objUser: user
+
+    # ALGORITMA
     dataUser = getTable("user")
     for i in range(dataUser["row_number"]):
         objUser = dataUser["data"][i]
@@ -71,6 +76,10 @@ def getUserID(username):
     dan mengeluarkan id-nya bila username ada. Bila
     tidak ada, maka akan mengaluarkan string kosong.
     """
+    # KAMUS LOKAL
+    # objUser: userTable
+
+    # ALGORITMA
     objUser = getObjectUser(username)
     if objUser != {}:
         return objUser["id"]
@@ -82,6 +91,10 @@ def isAdminRole(username):
     menghasilkan nilai True bila username memiliki 
     role admin.
     """
+    # KAMUS LOKAL
+    # objUser: userTable
+
+    # ALGORITMA
     if isValidUser(username):
         objUser = getObjectUser(username)
         return objUser["role"] == "admin"
@@ -93,6 +106,10 @@ def isUserRole(username):
     menghasilkan nilai True bila username memiliki 
     role user.
     """
+    # KAMUS LOKAL
+    # objUser: userTable
+
+    # ALGORITMA
     if isValidUser(username):
         objUser = getObjectUser(username)
         return objUser["role"] == "user"
@@ -103,6 +120,10 @@ def isValidUser(username):
     """Fungsi ini akan menerima sebuah string dan
     menghasilkan nilai True bila username ada.
     """
+    # KAMUS LOKAL
+    # objUser: userTable
+
+    # ALGORITMA
     objUser = getObjectUser(username)
 
     if(objUser == {}):
@@ -114,5 +135,8 @@ def isUnameAvailable(username):
     """Fungsi ini akan menerima sebuah string dan
     menghasilkan nilai True bila username tidak ada.
     """
+    # KAMUS LOKAL
+
+    # ALGORITMA
     return (getObjectUser(username) == {})
 

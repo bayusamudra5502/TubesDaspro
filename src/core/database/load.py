@@ -2,6 +2,7 @@
 # Modul ini berisi fungsi yang berkaitan
 # dengan pemuatan data dari file csv
 
+# PUSTAKA
 from os import R_OK,  walk
 from os import access
 from os.path import abspath, isabs, isdir, isfile, join, exists
@@ -9,6 +10,9 @@ from os.path import abspath, isabs, isdir, isfile, join, exists
 from core.util import split
 from core.constant import DB_FILES_NAME, MAX_ARRAY_NUM
 from .database import *
+
+# KAMUS
+# 
 
 def readFile(path:str) -> str:
     """Fungsi ini mengeluarkan isi dari file pada path"""
