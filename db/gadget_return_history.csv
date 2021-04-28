@@ -1,7 +1,4 @@
 id;id_peminjaman;tanggal_pengembalian;jumlah
 KMB-1;PJM-1;12/10/2020;2
 KMB-2;PJM-2;16/04/2012;4
-<<<<<<< HEAD
-=======
 KMB-3;PJM-1;12/12/2020;1
->>>>>>> 91a6b08781c8bc6d66da07c8685b2ab7f9f9c126

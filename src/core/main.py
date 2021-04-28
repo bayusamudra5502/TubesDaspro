@@ -58,7 +58,9 @@ def exit(username) -> bool:
         while(not (toLower(resp) == "y" or 
                 toLower(resp) == "n" or
                 toLower(resp) == "c")):
-            resp = input("Apakah anda ingin meyimpan perubahan? [Y/n/c] : ")
+            print()
+            print("\033[33mPERHATIAN\033[0m")
+            resp = input("Apakah anda ingin meyimpan perubahan yang telah dilakukan? [Y/n/c] : ")
 
             if(toLower(resp) == "y"):
                 if(doSave(username)):
@@ -240,17 +242,22 @@ def main(saveDir):
             elif isValidUser(username) and command != "":
                 if command == "whois":
                         print()
-                        print("\033[36mStatus Login")
-                        print("----------------\033[0m")
+                        print("\033[36mSTATUS LOGIN\033[0m")
+                        print()
                         print("Saat ini anda login sebagai")
                         print(f"Username : {username}")
                         if(isUserRole(username)):
                             print(f"Role : User")
                         elif(isAdminRole(username)):
                             print("Role : Administrator")
+                elif command == "eksperimen":
+                    if commandDriver["eksperimen"](username):
+                        header()
                 elif(command == "logout"):
                     username = ""
-                    print("Anda berhasil logout.")
+                    print()
+                    print("\033[36mINFORMASI\033[0m")
+                    print("Anda telah berhasil logout.")
                 elif command == "save":
                     doSave(username)
                 else:
@@ -259,11 +266,9 @@ def main(saveDir):
             elif command == "":
                 pass
             else:
-                print("\033[33mPERINGATAN:\033[0m Anda belum melakukan login. \nSilahkan login terlebih dahulu dengan menggunakan perintah \033[34mLOGIN\033[0m.")
+                print()
+                print("\033[33mPERINGATAN\n\033[0mAnda belum melakukan login saat ini. \nSilahkan login terlebih dahulu dengan menggunakan perintah \033[34mLOGIN\033[0m.")
                 errorCnt = 0
-
-            if command == "eksperimen":
-                header()
 
         except KeyboardInterrupt:
             command = "exit"

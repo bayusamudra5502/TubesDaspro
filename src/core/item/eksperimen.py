@@ -933,6 +933,7 @@ def eksperimen(uname):
                             if(cmd == "y"):
                                 isOK = True
                                 isExit = True
+                                return True
                             elif(cmd == "n"):
                                 isOK = True
                                 isValid = False
@@ -946,5 +947,7 @@ def eksperimen(uname):
                         isValid = False
         else:
             print("Anda harus login sebagai user untuk mengakses fitur ini.")
+            return False
     else:
         print("Data consumable kosong. Silahkan tambah data terlebih dahulu.")
+        return False
