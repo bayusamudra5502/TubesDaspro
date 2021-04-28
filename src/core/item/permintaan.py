@@ -25,7 +25,7 @@ def mintaConsumable(username): #Fungsi utama permintaan
                     tanggal_permintaan = input("\33[92mTanggal permintaan: \033[0m")#memasukkan tanggal permintaan
 
                     if isValidTanggal(tanggal_permintaan): #melakukan validasi tanggal
-                        if (int(dataConsumable['data'][i]['jumlah'])) > jumlah_permintaan: #jika jumlah yg diminta kecil dari database            
+                        if (int(dataConsumable['data'][i]['jumlah'])) >= jumlah_permintaan: #jika jumlah yg diminta kecil dari database            
                             newConsumable =  (int(dataConsumable['data'][i]['jumlah']))-(jumlah_permintaan)#jumlah pada database berkurang
                             dataConsumable['data'][i]['jumlah'] = str(newConsumable)#data baru setelah jumlah berkurang
                             print() #mencetak hasil keluaran
@@ -54,35 +54,6 @@ def mintaConsumable(username): #Fungsi utama permintaan
 
                             return getUserID
 
-                        elif (int(dataConsumable['data'][i]['jumlah'])) == jumlah_permintaan: #jika jumlahnya sama
-                            newConsumable1 =  (int(dataConsumable['data'][i]['jumlah']))#jumlah pada database tidak dihapus
-                            dataConsumable['data'][i]['jumlah'] = str(newConsumable1)#data baru
-                            #mencetak keluaran
-                            print()
-                            print("Item " + str(dataConsumable['data'][i]['nama'])+ " (x" + str(jumlah_permintaan) +") telah berhasil diambil!")
-                        
-                            if getUserID(username): #fungsi untuk mendapatkan id riwayat consumable
-                                lastID = "PMT-0" #asumsi awal id ketika data kosong
-                                nextIndex = dataConsumableHist["row_number"] #indeks selanjutnya dari data
-
-                                if(dataConsumableHist["row_number"] > 0): #jika jumlah baris > 0
-                                    lastIndext = dataConsumableHist["row_number"]-1 #indeks sebelumnya
-                                    lastID = dataConsumableHist["data"][lastIndext]["id"] #id dari indeks sebelumnya
-
-                                id1 = (generateNextID(lastID)) #mendapatkan id selanjutnya
-                                if generateNextID(lastID): #fungsi mengisi data consumable History
-                                    dataConsumableHist['data'][nextIndex] = \
-                                    {
-                                        'id': id1,
-                                        'id_pengambil': str(getUserID(username)),
-                                        'id_consumable': id_item,
-                                        'tanggal_pengambilan': tanggal_permintaan,
-                                        'jumlah': str(jumlah_permintaan),
-                                    }
-
-                                applyChange(dataConsumableHist, 'consumable_history') #menyimpan data
-
-                            return getUserID
                         else:#jumlah pengambilan melebihi sistem
                             print()
                             print("\033[36mJumlah pengambilan melebihi jumlah item yang ada, silakan kurangi jumlah\033[0m")
