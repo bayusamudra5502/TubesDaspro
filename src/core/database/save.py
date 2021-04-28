@@ -4,7 +4,7 @@
 
 # PUSTAKA
 from .database import readDatabase, resetChanged
-from os.path import join, abspath, isdir, exists
+from os.path import join, abspath, isdir, exists, dirname, basename
 from os import W_OK, access, mkdir
 
 # KAMUS
@@ -59,9 +59,19 @@ def save(saveDir):
     if not exists(saveDir):
         print(f"\033[33mPERINGATAN:\033[0m Lokasi '{saveDir}' tidak ditemukan. Akan dibuat folder baru.")
         try:
-            mkdir(saveDir)
+            noDirs = [basename(saveDir)]
+            dirpath = dirname(abspath(saveDir))
+
+            while not exists(dirpath):
+                noDirs.append(basename(dirpath))
+                dirpath = abspath(join(dirpath, ".."))
+            
+            for i in range(len(noDirs)-1 , -1,-1):
+                dirpath = abspath(join(dirpath, noDirs[i]))
+                mkdir(dirpath)
         except Exception:
             print(f"\033[91mERROR:\033[0m Tidak bisa membuat folder {saveDir}. Pastikan anda memiliki akses.")
+
             return False
     
     if not isdir(saveDir):
