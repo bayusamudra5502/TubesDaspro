@@ -90,13 +90,8 @@ def peminjamanGadget(username):
                         print("\033[91mMasukan tanggal tidak valid, silakan masukan format tanggal yang valid\033[0m")
                 else:   # notFound == True
                     print()
-<<<<<<< HEAD
                     print("\033[91mTidak ada item dengan ID tersebut!, silakan masukan ID yang valid\033[0m")
             elif wrong_id == True:  # (id_array[0] != "C") and (id_array[0] != "G")
-=======
-                    print("Tidak ada item dengan ID tersebut!, silakan masukan ID yang valid")
-            elif wrong_id == True:
->>>>>>> 91a6b08781c8bc6d66da07c8685b2ab7f9f9c126
                 print()
                 print("\033[91mFormat ID tidak valid, silakan masukan ID yang valid\033[0m")           
             else:   # can_borrow == False
@@ -104,8 +99,4 @@ def peminjamanGadget(username):
                 print("\033[91mKembalikan item dari peminjaman sebelumnya untuk dapat meminjam kembali\033[0m")
         else:   # Akun yang digunakan tidak memiliki role user
             print()
-<<<<<<< HEAD
             print("\033[92mSilakan lakukan login sebagai user untuk menjalankan perintah ini\033[0m")
-=======
-            print("Silakan lakukan login sebagai user untuk menjalankan perintah ini")
->>>>>>> 91a6b08781c8bc6d66da07c8685b2ab7f9f9c126

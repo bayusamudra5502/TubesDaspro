@@ -228,8 +228,9 @@ def showData(data, title):
 
     # ALGORITMA
     system("cls || clear")
+    print(f"\033[36m{title}")
+    print("---------------------------\033[0m")
 
-    print(title)
     print()
 
     showStartNum = 0
@@ -276,10 +277,13 @@ def addItemLabolatory():
     # ALGORITMA
     global consumables, nItem, dataConsumable
 
-    print()
     isOK = False
     while not isOK:
-        print("Ketikan c untuk membatalkan aksi ini.")
+        system("cls || clear")
+        print()
+        print("\033[36mTambah item ke keranjang")
+        print("------------------------------\033[0m")
+        print("Masukkan c untuk membatalkan aksi ini.")
         print("Silahkan masukkan nomor urut consumable yang ingin digunakan:")
         index = selectIndex(dataConsumable["row_number"])
 
@@ -307,9 +311,9 @@ def addItemLabolatory():
 
                     print()
                     print("Berikut consumable yang dipilih : ")
-                    print(f"Nama\t: {selectedObject['nama']}")
-                    print(f"Jumlah yang dipilih\t: {selectedObject['jumlah']}")
-                    print(f"Rarity\t: {selectedObject['rarity']}")
+                    print(f"Nama : {selectedObject['nama']}")
+                    print(f"Jumlah yang dipilih : {selectedObject['jumlah']}")
+                    print(f"Rarity : {selectedObject['rarity']}")
                     print()
 
                     isOK = (toLower(input("Apakah data diatas sudah benar? [Y/n] : ")) == "y")
@@ -345,7 +349,9 @@ def deleteItem():
     isLocked = True
 
     while isLocked:
-        print()
+        system("cls || clear")
+        print("\033[36mHapus item pada keranjang")
+        print("------------------------------\033[0m")
         print("Silahkan isi nomor urut consumable pada keranjang yang akan dihapus.")
         print("Note : Inputlah C untuk membatalkan aksi ini.")
 
@@ -408,18 +414,22 @@ def editItem():
     global consumables, nItem, dataConsumable
     isLocked = True
 
+
     while isLocked:
+        system("cls || clear")
+        print("\033[36mEdit item")
+        print("----------------------\033[0m")
         print("Silahkan pilih nomor consumable yang akan diubah:")
         index = selectIndex(nItem)
 
-        print("Silahkan masukkan jumlah baru yang diinginkan")
+        print("\nSilahkan masukkan jumlah baru yang diinginkan")
         dbIndex = consumables[index]["dbIndex"]
         total = int(dataConsumable["data"][dbIndex]["jumlah"]) + int(consumables[index]["jumlah"])
 
         newCnt = getCount(total)
 
         print()
-        print("Berikut ini adalah keranjanng yang akan diubah : ")
+        print("Berikut ini adalah keranjang yang akan diubah : ")
         print(f"Nama : {consumables[index]['nama']}")
         print(f"Jumlah : {consumables[index]['jumlah']} -> {newCnt}")
         print()
@@ -469,12 +479,16 @@ def setEngine():
     isValidInput = False
     isLocked = True
 
+
     while isLocked:
+        system("cls || clear")
+        print("\033[36mPemilihan Mesin")
+        print("----------------------\033[0m")
         print("Silahkan pilih mesin pencampur yang akan digunakan: ")
-        print("1. STONE - Stone Engine")
-        print("2. IRON - Iron Engine")
-        print("3. GOLD - Gold Engine ")
-        print("4. DIAMOND - Diamond Engine\n")
+        print("1. \033[37mSTONE\033[0m - Stone Engine")
+        print("2. \033[97mIRON\033[0m - Iron Engine")
+        print("3. \033[33mGOLD\033[0m - Gold Engine ")
+        print("4. \033[96mDIAMOND\033[0m - Diamond Engine\n")
             
         print("Ketik C untuk membatalkan aksi ini.")
         print("Ketik DOCS untuk membaca dokumentasi dari mesin\n")
@@ -488,7 +502,7 @@ def setEngine():
 
         if(toLower(userInput) == "docs"):
             system("cls || clear")
-            print("DOKUMENTASI\n")
+            print("\033[36mDOKUMENTASI\033[0m\n")
             print("Spesifikasi Mesin")
             print("----------------------------")
             print("1. Mesin STONE")
@@ -549,17 +563,18 @@ def setEngine():
 
             while (not isCanceled and totalEnergy < ENGINE_CHART[userInput]["energi"]):
                 system("cls || clear")
-                print("PENGISIAN ENERGI")
+                print("\033[36mPENGISIAN ENERGI")
+                print("------------------------\033[0m")
                 print("")
-                print(f"Total Energi Terkumpul : {totalEnergy} Dorapower.")
+                print(f"Total Energi Terkumpul : \033[32m{totalEnergy} Dorapower.\033[0m")
                 print(f"Kebutuhan Energi : {ENGINE_CHART[userInput]['energi']} Dorapower")
-                print(f"Kekurangan Energi : {ENGINE_CHART[userInput]['energi'] - totalEnergy} Dorapower")
+                print(f"Kekurangan Energi : \033[91m{ENGINE_CHART[userInput]['energi'] - totalEnergy} Dorapower\033[0m")
                 print()
 
                 print("Perintah yang tersedia:")
-                print("1. LIHAT - Melihat daftar consumable yang tersedia.")
-                print("2. TAMBAH - Menambah Energi")
-                print("3. BATAL - Membatalkan proses dan membuang semua energi yang sudah terkumpul.")
+                print("1. \033[34mLIHAT\033[0m - Melihat daftar consumable yang tersedia.")
+                print("2. \033[34mTAMBAH\033[0m - Menambah Energi")
+                print("3. \033[34mBATAL\033[0m - Membatalkan proses dan membuang semua energi yang sudah terkumpul.")
                 print("")
                 print("Bagian ini akan tertutup setelah energi yang diisikan sudah melebihi batas minimum.")
                 
@@ -599,6 +614,7 @@ def setEngine():
 
                 elif(toLower(cmd) == "batal" or cmd == "3"):
                     isCanceled = True
+                    isLocked = False
                 else:
                     print("ERROR! Perintah tidak dikenal, silahkan coba lagi.")
                     sleep(.5)
@@ -723,8 +739,8 @@ def mix():
     if (engine != {}):
         for i in range(engine['waktu'] + 1):
             print("\033[0;0H")
-            print("Proses Pencampuran")
-            print("----------------------")
+            print("\033[36mProses Pencampuran")
+            print("----------------------\033[0m")
             print()
             print("Mesin yang digunakan :", engine["nama"])
             print(f"Proses memakan waktu : {engine['waktu']} detik")
@@ -855,13 +871,13 @@ def eksperimen(uname):
                 print()
 
                 print("Perintah yang tersedia: ")
-                print("1. SHOW - Tampilkan Consumable")
-                print("2. ADD - Tambah Consumable")
-                print("3. DELETE - Hapus Data Consumable yang dipilih")
-                print("4. EDIT - Edit jumlah consumable yang dipilih")
-                print("5. ENGINE - Pilih mesin yang digunakan untuk mencampurkan")
-                print("6. MIX - Lakukan pencampuran")
-                print("7. EXIT - Keluar dari laboratorium dan batalkan segala aksi")
+                print("1. \033[34mSHOW\033[0m - Tampilkan Consumable")
+                print("2. \033[34mADD\033[0m - Tambah Consumable")
+                print("3. \033[34mDELETE\033[0m - Hapus Data Consumable yang dipilih")
+                print("4. \033[34mEDIT\033[0m - Edit jumlah consumable yang dipilih")
+                print("5. \033[34mENGINE\033[0m - Pilih mesin yang digunakan untuk mencampurkan")
+                print("6. \033[34mMIX\033[0m - Lakukan pencampuran")
+                print("7. \033[34mEXIT\033[0m - Keluar dari laboratorium dan batalkan segala aksi")
 
                 print()
 
@@ -878,14 +894,18 @@ def eksperimen(uname):
                         if nItem > 0:
                             deleteItem()
                         else:
+                            print()
+                            print("\033[33mPERINGATAN\033[0m")
                             print("Consumable dalam keranjang belum ada. Silahkan masukkan terlebih dahulu.")
-                            sleep(1)
+                            sleep(2)
                     elif option == "edit" or option == "4":
                         if nItem > 0:
                             editItem()
                         else:
+                            print()
+                            print("\033[33mPERINGATAN\033[0m")
                             print("Consumable dalam keranjang belum ada. Silahkan masukkan terlebih dahulu.")
-                            sleep(1)
+                            sleep(2)
                     elif option == "engine" or option =="5":
                         setEngine()
                     elif option == "mix" or option =="6":
@@ -895,13 +915,16 @@ def eksperimen(uname):
                             else:
                                 isExit = False
                         else:
+                            print()
+                            print("\033[33mPERINGATAN\033[0m")
                             print("Masukkan terlebih dahulu barang yang akan dicampurkan.")
                             option = ""
-                            sleep(1)
+                            sleep(2)
                     elif option == "exit" or option =="7":
                         print()
                         isOK = False
-                        print("Apakah anda yakin akna keluar dari laboratorium.")
+                        print("\033[33mPERINGATAN\033[0m")
+                        print("Apakah anda yakin akan keluar dari laboratorium.")
                         print("Semua perubahan yang telah dilakukan tidak akan bisa dikembalikan.")
 
                         while(not isOK):
@@ -915,7 +938,7 @@ def eksperimen(uname):
                                 isValid = False
                                 print()
                             else:
-                                print("Jawaban tidak dikenal. ULangi. \n")
+                                print("Jawaban tidak dikenal. Ulangi. \n")
 
                     else:
                         print("Perintah tidak dikenal. Silahkan coba lagi.")

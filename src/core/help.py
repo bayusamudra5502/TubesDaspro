@@ -96,6 +96,14 @@ def help(username): #Fungsi utama help untuk menampilkan semua petunjuk dalam si
                N/n = tidak, tidak menyimpan perubahan yang dilakukan pada sistem
                C/c = cancel, batalkan perintah exit
 
+19.\033[31mPerintah "whois"\033[0m
+   \033[36makses\033[0m     : admin, user
+   \033[36mfungsi\033[0m    : untuk melihat pengguna yang login saat ini
+
+20.\033[31mPerintah "clear"\033[0m
+   \033[36makses\033[0m     : admin, user
+   \033[36mfungsi\033[0m    : untuk menghapus layar
+
 ================= \033[34msilahkan pilih salah satu menu di atas\033[0m ==================
 ==================== \033[34mlakukan login terlebih dahulu\033[0m ========================
 ===== \033[34mjika belum menjadi user maka mintalah admin untuk melakukannya\033[0m ======""")

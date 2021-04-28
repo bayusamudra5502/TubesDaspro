@@ -36,6 +36,9 @@ currentDBLocation = ""
 # Prosedur ini akan menjadi menu utama dalam program. Prosedur
 # ini akan menjadi perantara pada program
 
+# procedure header()
+# Prosedur ini akan mencetak header program pada layar
+
 def exit(username) -> bool:
     """Fungsi ini akan menangani proses exit program. Fungsi
     ini akan memeriksa apakah user telah melakukan perubahan
@@ -130,6 +133,27 @@ def doSave(username):
         print("Anda tidak memiliki akses untuk menyimpan data.")
         return False
 
+def header():
+    """Mencetak Header Program"""
+    system("cls || clear")
+
+    # Diambil dari : https://patorjk.com/software/taag/#p=display&f=Big&t=Kantong%20Ajaib
+    print("""\033[32m
+
+  _  __           _                               _       _ _     
+ | |/ /          | |                        /\   (_)     (_) |    
+ | ' / __ _ _ __ | |_ ___  _ __   __ _     /  \   _  __ _ _| |__  
+ |  < / _` | '_ \| __/ _ \| '_ \ / _` |   / /\ \ | |/ _` | | '_ \ 
+ | . \ (_| | | | | || (_) | | | | (_| |  / ____ \| | (_| | | |_) |
+ |_|\_\__,_|_| |_|\__\___/|_| |_|\__, | /_/    \_\ |\__,_|_|_.__/ 
+                                  __/ |         _/ |              
+                                 |___/         |__/   \033[36m v1.0 \033[0m
+""")
+    print("Selamat datang di kantong ajaib")
+    print()
+    print("Silahkan lakukan login dengan menggunakan perintah \033[34mLOGIN\033[0m")
+    print("Untuk melihat perintah yang tersedia, gunakan perintah \033[34mHELP\033[0m")
+
 def main(saveDir):
     """
     Prosedur ini akan menjadi menu utama dalam program. Prosedur ini akan
@@ -153,24 +177,8 @@ def main(saveDir):
     username = ""
     errorCnt = 0
 
-    system("cls || clear")
-
-    # Diambil dari : https://patorjk.com/software/taag/#p=display&f=Big&t=Kantong%20Ajaib
-    print("""\033[32m
-
-  _  __           _                               _       _ _     
- | |/ /          | |                        /\   (_)     (_) |    
- | ' / __ _ _ __ | |_ ___  _ __   __ _     /  \   _  __ _ _| |__  
- |  < / _` | '_ \| __/ _ \| '_ \ / _` |   / /\ \ | |/ _` | | '_ \ 
- | . \ (_| | | | | || (_) | | | | (_| |  / ____ \| | (_| | | |_) |
- |_|\_\__,_|_| |_|\__\___/|_| |_|\__, | /_/    \_\ |\__,_|_|_.__/ 
-                                  __/ |         _/ |              
-                                 |___/         |__/   \033[36m v1.0 \033[0m
-""")
-    print("Selamat datang di kantong ajaib")
+    header()
     print()
-    print("Silahkan lakukan login dengan menggunakan perintah \033[34mLOGIN\033[0m")
-    print("Untuk melihat perintah yang tersedia, gunakan perintah \033[34mHELP\033[0m\n")
 
     commandDriver = {
         "carirarity" : searchByRarity,
@@ -191,7 +199,7 @@ def main(saveDir):
     }
 
     commandList = list(commandDriver.keys()) + \
-                    ["whois","login","help","exit","logout","", "save"]
+                    ["whois","login","help","exit","logout","", "save", "clear"]
     command = ""
 
     while not isExit:
@@ -227,6 +235,8 @@ def main(saveDir):
                 isExit = exit(username)
                 errorCnt = 0
                 command = ""
+            elif command == "clear":
+                header()
             elif isValidUser(username) and command != "":
                 if command == "whois":
                         print()
@@ -251,6 +261,9 @@ def main(saveDir):
             else:
                 print("\033[33mPERINGATAN:\033[0m Anda belum melakukan login. \nSilahkan login terlebih dahulu dengan menggunakan perintah \033[34mLOGIN\033[0m.")
                 errorCnt = 0
+
+            if command == "eksperimen":
+                header()
 
         except KeyboardInterrupt:
             command = "exit"

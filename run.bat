@@ -1,1 +1,1 @@
-python "src/kantongajaib.py" "db/"
+python "src/kantongajaib.py" "db/" || "src/kantongajaib.py" "db/" 
