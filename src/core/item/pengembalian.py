@@ -28,14 +28,14 @@ def pengembalianGadget(username):
                             jumlah_tersisa = int(dataPinjamGadget['data'][i]['jumlah']) - int(dataPinjamGadget['data'][i]['jumlah_kembali'])
                             
                             print(str(cntNum) + ". " + dataGadget["data"][j]["nama"])
-                            print(f"    ID Peminjaman : {dataPinjamGadget['data'][i]['id']}")
-                            print(f"    Tanggal peminjaman : {dataPinjamGadget['data'][i]['tanggal_peminjaman']}")
-                            print(f"    Jumlah yg belum dikembalikan : {jumlah_tersisa} item \n")
+                            print(f"\033[36m    ID Peminjaman : {dataPinjamGadget['data'][i]['id']}\033[0m")
+                            print(f"\033[36m    Tanggal peminjaman : {dataPinjamGadget['data'][i]['tanggal_peminjaman']}\033[0m")
+                            print(f"\033[36m    Jumlah yg belum dikembalikan : {jumlah_tersisa} item \n\033[0m")
                             
                             no_returned = False
             
             if cntNum == 0:
-                print("Anda tidak memiliki gadget yang dipinjam saat ini.")
+                print("\033[92mAnda tidak memiliki gadget yang dipinjam saat ini.\033[0m")
             else:
                 # Meminta input
                 if no_returned == False:
@@ -68,12 +68,12 @@ def pengembalianGadget(username):
                                             str(int(dataPinjamGadget["data"][i]["jumlah_kembali"]) + jumlah_kembali)
                                 else:   #jumlah_kembali <= 0
                                     print()
-                                    print("Jumlah pengembalian harus lebih besar dari nol")
+                                    print("\033[91mJumlah pengembalian harus lebih besar dari nol\033[0m")
                                         
                     # Modifikasi data
                     if notFound == True:   #dataPinjamGadget["data"][i]["id"] != str(nomor_pinjam)
                         print()
-                        print("Tidak ada item dengan nomor peminjaman tersebut")
+                        print("\033[91mTidak ada item dengan nomor peminjaman tersebut\033[0m")
                     else:
                         if validation_jumlah:
                             tanggal_kembali = input("Tanggal pengembalian : ")
@@ -115,16 +115,20 @@ def pengembalianGadget(username):
 
                                 if notFound1: 
                                     print()  
-                                    print("Item tersebut sudah tidak ada dalam database gadget")
+                                    print("\033[91mItem tersebut sudah tidak ada dalam database gadget\033[0m")
                             else:
                                 print()
-                                print("Masukan tanggal tidak valid, silakan masukan format tanggal yang valid")
+                                print("\033[91mMasukan tanggal tidak valid, silakan masukan format tanggal yang valid\033[0m")
                         else:   # validation_jumlah = False
                             print()
-                            print("Jumlah yang ingin dikembalikan melebihi jumlah peminjaman")
+                            print("\033[91mJumlah yang ingin dikembalikan melebihi jumlah peminjaman\033[0m")
                 else:   # no_returned == True
                     print()
-                    print("Tidak ada item yang perlu anda kembalikan")
+                    print("\033[92mTidak ada item yang perlu anda kembalikan\033[0m")
         else:
             print()
+<<<<<<< HEAD
+            print("\033[92mSilakan lakukan login sebagai user untuk menjalankan perintah ini\033[0m")
+=======
             print("Silakan lakukan login sebagai user untuk menjalankan perintah ini")
+>>>>>>> 91a6b08781c8bc6d66da07c8685b2ab7f9f9c126
