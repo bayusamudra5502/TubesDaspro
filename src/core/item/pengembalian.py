@@ -127,4 +127,8 @@ def pengembalianGadget(username):
                     print("\033[92mTidak ada item yang perlu anda kembalikan\033[0m")
         else:
             print()
+<<<<<<< HEAD
             print("\033[92mSilakan lakukan login sebagai user untuk menjalankan perintah ini\033[0m")
+=======
+            print("Silakan lakukan login sebagai user untuk menjalankan perintah ini")
+>>>>>>> 91a6b08781c8bc6d66da07c8685b2ab7f9f9c126

@@ -4,9 +4,9 @@
 # bagian ini, user akan memasukan perintahnya
 # untuk mengakses kantong ajaib.
 
+# PUSTAKA
 from os import system
 from os.path import abspath
-import sys
 from core.auth import *
 from core.item import *
 from core.database import isChanged, save
@@ -14,9 +14,42 @@ from core.item.permintaan import mintaConsumable
 from core.util import toLower
 from core.help import help
 
+# KAMUS
+# currentDBLocation : string = ""
 currentDBLocation = ""
 
+# function exit(username:string) -> boolean
+# Fungsi ini akan menangani proses exit program. Fungsi
+# ini akan memeriksa apakah user telah melakukan perubahan
+# pada database atau belum. Jika sudah, akan diberi opsi
+# untuk menyimpan perubahan atau tidak.
+# Fungsi ini akan menghasilkan True bila program dihendaki
+# untuk ditutup, dan False bila batal ditutup.
+
+# procedure doSave(input username: string)
+# Prosedur ini akan menjadi view dari proses penyimpanan data.
+# User yang memiliki hak menyimpan akan diminta lokasi
+# penyimpanan data.
+
+# procedure main(input savedir: string, 
+#               input/output currentDBLocation: string)
+# Prosedur ini akan menjadi menu utama dalam program. Prosedur
+# ini akan menjadi perantara pada program
+
 def exit(username) -> bool:
+    """Fungsi ini akan menangani proses exit program. Fungsi
+    ini akan memeriksa apakah user telah melakukan perubahan
+    pada database atau belum. Jika sudah, akan diberi opsi
+    untuk menyimpan perubahan atau tidak.
+    
+    Fungsi ini akan menghasilkan True bila program dihendaki
+    untuk ditutup, dan False bila batal ditutup.
+    """
+    # KAMUS LOKAL
+    # resp : char
+    # errResp : char
+
+    # ALGORTIMA
     if(isChanged() and (username) != ""):
         resp = ""
         while(not (toLower(resp) == "y" or 
@@ -44,6 +77,17 @@ def exit(username) -> bool:
         return True
 
 def doSave(username):
+    """Prosedur ini akan menjadi view dari proses penyimpanan data.
+    User yang memiliki hak menyimpan akan diminta lokasi
+    penyimpanan data.
+    """
+    # KAMUS LOKAL
+    # isOKLocation : boolean
+    # isValidResp : boolean
+    # saveDir : string
+    # resp : string
+
+    # ALGORITMA
     if(isValidUser(username)):
         isOKLocation = False
         saveDir = ""
@@ -87,8 +131,22 @@ def doSave(username):
         return False
 
 def main(saveDir):
+    """
+    Prosedur ini akan menjadi menu utama dalam program. Prosedur ini akan
+    menjadi perantara dari berbagai fitur pada program.
+    """
     global currentDBLocation
 
+    # KAMUS LOKAL
+    # isExit: boolean 
+    # username: string
+    # errorCnt: integer
+    # commandList: Array[0..21] of string
+    # command: string
+    # isValidComm: boolean
+    # i : integer
+
+    # ALGORITMA
     currentDBLocation = saveDir
 
     isExit = False

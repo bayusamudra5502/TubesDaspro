@@ -2,16 +2,60 @@
 # Modul ini merupakan implementasi dari fitur
 # Penyimpanan pada program ini.
 
-from typing import cast
+# PUSTAKA
 from .database import readDatabase, resetChanged
 from os.path import join, abspath, isdir, exists
 from os import W_OK, access, mkdir
 
+# KAMUS
+# type table = < data: Array of ..., {Menyesuaikan dengan jenis tabelnya}
+#                   row_number: integer,
+#                   col_number: integer,
+#                   columnName: Array of string>
+
+# type row = <...> { Menyesuaikan dengan kolom pada database. Nama field
+#                    adalah nama kolom dan valuenya adalah nilai pada 
+#                    database }
+
+# type dbDataType = <
+#   consumable_history: table,
+#   consumable: table,
+#   gadget_return_history: table,
+#   gadget_borrow_history: table,
+#   gadget: table,
+#   user: table
+# >
+
+# type db = <
+#       data: dbDataType,
+#       tableName: Array[0..6] of string,
+#       numTable: integer
+# >
+
+# procedure save(input saveDir: string)
+# Fungsi ini akan menyimpan semua data pada database di
+# folder saveDir dalam format csv. Jika proses berhasil,
+# fungsi mengembalikan True.
+
+# ALGORITMA
 def save(saveDir):
     """Fungsi ini akan menyimpan semua data pada database di
     folder saveDir dalam format csv. Jika proses berhasil,
-    fungsi mengembalikan True"""
-    
+    fungsi mengembalikan True."""
+    # KAMUS LOKAL
+    # database: db
+    # tableData: table
+
+    # isChangeApply, isChangePartial : boolean
+    # i, j, k: integer
+    # tableName : string
+    # fileName, filePath : string
+
+    # file: SEQFILE of
+    #         (*) data: string
+    #         (1) \0x1A { EOF Character }
+
+    # ALGORITMA
     if not exists(saveDir):
         print(f"\033[33mPERINGATAN:\033[0m Lokasi '{saveDir}' tidak ditemukan. Akan dibuat folder baru.")
         try:

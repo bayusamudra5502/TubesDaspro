@@ -3,7 +3,112 @@
 # getTable yang akan digunakan untuk 
 # mengambil tabel dari data database
 
+# PUSTAKA
 from core.constant import MAX_ARRAY_NUM
+
+# KAMUS
+
+# {KOMPONEN ITEM TABEL}
+#  type consumableHistory = <
+#       id: string
+#       id_pengambil: string
+#       id_consumable: string
+#       tanggal_pengambilan:string
+#       jumlah: string
+# >
+
+# type consumable = <
+#       id: string,
+#       nama: string
+#       deskripsi: string
+#       jumlah: string
+#       rarity: character
+# >
+
+# type gadgetBorrowHistory = <
+#       id: string,
+#       id_peminjam: string,
+#       id_gadget: string,
+#       tanggak_peminjaman: string,
+#       jumlah: string,
+#       jumlah_kembali: string,
+#       is_returned: string
+# >
+
+# type gadgetReturnHistory = <
+#       id: string,
+#       id_peminjamanL string,
+#       tanggal_pengambilan: string
+#       jumlah: string
+# >
+
+# type gadget = <
+#       id: string
+#       nama: string
+#       deskripsi: string
+#       jumlah: string
+#       rarity: character
+#       tahun_ditemukan: string
+# >
+
+# type user = < 
+#       id: string,
+#       username: string,
+#       nama: string,
+#       alamat: string,
+#       password: string,
+#       role: string>
+
+# {TIPE DATA TABEL}
+# type table = < data: Array of ..., {Menyesuaikan dengan jenis tabelnya}
+#                   row_number: integer,
+#                   col_number: integer,
+#                   columnName: Array of string>
+
+# { DATABASE }
+# type dbDataType = <
+#   consumable_history: table,
+#   consumable: table,
+#   gadget_return_history: table,
+#   gadget_borrow_history: table,
+#   gadget: table,
+#   user: table
+# >
+
+# type database = <
+#       data: dbDataType,
+#       tableName: Array[0..6] of string,
+#       numTable: integer
+# >
+
+# { KAMUS VARIABEL PROGRAM }
+# db: database
+# ischange: boolean
+
+# function getTable(name: string) -> table
+# getTable menerima sebuah name yang merupakan nama dari tabel
+# pada database. Nama tabel adalah nama file tanpa ekstensi. 
+# Fungsi ini akan mengembalikan sebuah dict yang merupakan 
+# struktur data tabel.
+
+# procedure ApplyChange(input changedTable: table, input tableName: string)
+# applyChange akan menyimpan perubahan pada database. Parameter 
+# changeTable merupakan struktur data `table` yang diambil dengan 
+# menggunakan fungsi `getTable()` yang telah diubah. tableName 
+# merupakan nama tabel  yang dimaksud. Nama tabel harus sama 
+# dengan nama file tanpa ekstensi seperti pada `getTable()`.
+
+# function isChanged() -> boolean
+# Fungsi ini akan memeriksa apakah sudah ada perubahan yang
+# dilakukan pada database. Jika sudah, akan mengembalikan
+# True.
+
+# function readDatabase() -> database
+# Fungsi ini akan mengeluarkan objek database saat fungsi ini
+# dijalankan.
+
+# procedure resetChanged()
+# Prosedur ini akan mengubah status perubahan menjadi False.
 
 db = {
     "data" : {},
@@ -13,6 +118,7 @@ db = {
 
 isChange = False
 
+# ALGORITMA
 def getTable(name:str) -> dict:
     """
     getTable menerima sebuah name yang merupakan nama dari tabel
@@ -21,6 +127,11 @@ def getTable(name:str) -> dict:
     Fungsi ini akan mengembalikan sebuah dict yang merupakan 
     struktur data tabel. LIhat dokumentasi.
     """
+    # KAMUS LOKAL
+    # isExist : boolean
+    # i : integer
+
+    # ALGORTIMA
     global db
 
     if db == {}:
@@ -48,9 +159,17 @@ def applyChange(changedTable : dict, tableName:str):
     merupakan nama tabel  yang dimaksud. Nama tabel harus sama 
     dengan nama file tanpa ekstensi seperti pada `getTable()`.
 
-    FUugsi ini harus dijalankan setelah melakukan perubahan pada 
+    Prosedur ini harus dijalankan setelah melakukan perubahan pada 
     table agar tersimpan pada struktur data database.
     """
+    # KAMUS LOKAL
+    # formattedTable : table
+    # numRows : integer
+    # i : integer
+    # isEditing : boolean
+
+
+    # ALGORITMA
     global db, isChange
 
     # Pengaturan jumlah Row
@@ -89,6 +208,9 @@ def isChanged() -> bool:
     dilakukan pada database. Jika sudah, akan mengembalikan
     True.
     """
+    # KAMUS LOKAL
+
+    # ALGORITMA
     return isChange
 
 def readDatabase():
@@ -96,11 +218,17 @@ def readDatabase():
     Fungsi ini akan mengeluarkan objek database saat fungsi ini
     dijalankan.
     """
+    # KAMUS LOKAL
+
+    # ALGORITMA
     return db
 
 def resetChanged():
     """
     Prosedur ini akan mengubah status perubahan menjadi False.
     """
+    # KAMUS LOKAL
+
+    # ALGORITMA
     global isChange
     isChange = False

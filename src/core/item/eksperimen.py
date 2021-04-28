@@ -2,6 +2,7 @@
 # Modul ini merupakan realisasi dari fitur
 # FB03, yaitu meningkatkan rarity Consumable
 
+# PUSTAKA
 from core.constant import LAB_LOWER_DIV, MAX_ARRAY_NUM
 from core.database import getTable
 from core.auth import isUserRole, getUserID
@@ -14,8 +15,102 @@ from time import sleep
 from core.constant import ENGINE_CHART, RARITY_CHART
 from core.util.manipulation import generateNextID
 
+# KAMUS
+# type engineType = <
+#   nama: string,
+#   faktorPengali: real,
+#   waktu: integer
+# >
+
+# type objek = <
+#   nama: string,
+#   jumlah: integer,
+#   rarity: character,
+#   dbIndex: integer
+# >
+
+# type consumableHistory = <
+#       id: string
+#       id_pengambil: string
+#       id_consumable: string
+#       tanggal_pengambilan:string
+#       jumlah: string
+# >
+
+# type consumable = <
+#       id: string,
+#       nama: string
+#       deskripsi: string
+#       jumlah: string
+#       rarity: character
+# >
+
+# type table = < data: Array of ..., {Menyesuaikan dengan jenis tabelnya}
+#                   row_number: integer,
+#                   col_number: integer,
+#                   columnName: Array of string>
+
+# constant MAX_SHOW_NUM: integer = 5
 MAX_SHOW_NUM = 5
 
+# dataConsumableHist: table of consumableHistory
+# dataConsumable: table of consumable
+# consumables: array of objek
+# usageConsumable: array of objek
+# engine: engineType
+# username: string
+# nItem : integer
+
+# procedure setDefault()
+# Prosedur ini akan mengeset semua variabel global
+# menjadi bentuk awal.
+
+# function selectIndex(len: integer) -> integer
+# Fungsi ini akan menerima input nomor urut dari pengguna
+# hingga valid, yaitu bernilai 0 <= input user < len. 
+# Fungsi ini akan mengeluarkan indeks yang dipilih pengguna
+# atau -1 bila proses pengambilan indeks dibatalkan.
+
+# function getCount(num: integer) -> integer
+# Fungsi ini akan menerima input dari user berupa jumlah
+# item hingga valid, yaitu input yang dimasukka lebih dari
+# 0 dan kurang dari sama dengan num. 
+# Fungsi mengeluarkan 0 bila num bernilai 0, -1 bila
+# terjadi eksepsi pada program atau menghasilkan jumlah yang
+# valid dari pengguna.
+
+# procedure showData(input data: table, input title: string)
+# Menampilkan data kepada user dengan judul header title
+
+# procedure addItemLaboratory()
+# Menerima input dari user dan menambahkan item yang akan diproses
+# pada laboratory.
+
+# procedure deleteItem()
+# Prosedur ini akan menerima input dari user dan melakukan penghapusan
+# terhadap item yang ingin dihapus dari keranjang consumable
+# di laboratorium.
+
+# procedure editItem()
+# Prosedur ini akan menerima input dari user dan melakukan
+# perubahan jumlah barang yang dipilih pada keranjang consumable di
+# laboratorium.
+
+# procedure setEngine()
+# Prosedur ini akan menerima input dari user dan membuat objek
+# mesin pada laboratorium.
+
+# procedure mix()
+# prosedur ini akan mencampur semua bahan consumable pada keranjang
+# consumable dan menghasilkan suatu produk dengan rarity random dan
+# jumlah antara 1 s.d. 5
+
+# procedure eksperimen(uname: string)
+# prosedur ini akan menjadi penghubung antara fitur pada laboratorium
+# dan fitur menu utama. User akan memilih perintah yang tepat hingga
+# proses pencampuran telah dilaksanakan atau user keluar dari lab.
+
+# ALGORITMA
 dataConsumableHist = []
 consumables = [{} for i in range(MAX_ARRAY_NUM)]
 usageConsumable = [{} for i in range(MAX_ARRAY_NUM)]
@@ -25,6 +120,13 @@ nItem = 0
 dataConsumable = []
 
 def setDefault():
+    """
+    Prosedur ini akan mengeset semua variabel global
+    menjadi bentuk awal.
+    """
+    # KAMUS LOKAL
+
+    # ALGORITMA
     global dataConsumable, nItem, username, engine
     global consumables, dataConsumableHist, usageConsumable
 
@@ -36,7 +138,21 @@ def setDefault():
     nItem = 0
     dataConsumable = []
 
-def selectIndex(len):
+def selectIndex(len: int):
+    """
+    Fungsi ini akan menerima input nomor urut dari pengguna
+    hingga valid, yaitu bernilai 0 <= input < len. 
+    
+    Fungsi ini akan mengeluarkan indeks yang dipilih pengguna
+    atau -1 bila proses pengambilan indeks dibatalkan.
+    """
+    # KAMUS LOKAL
+    # isOK : bbolean
+    # index: integer
+    # isValidIndex: boolean
+    # inp : string
+
+    # ALGORITMA
     isOK = False
     index = -1
     while not isOK:
@@ -63,6 +179,19 @@ def selectIndex(len):
     return index
 
 def getCount(num):
+    """Fungsi ini akan menerima input dari user berupa jumlah
+    item hingga valid, yaitu input yang dimasukka lebih dari
+    0 dan kurang dari sama dengan num. 
+
+    Fungsi mengeluarkan 0 bila num bernilai 0, -1 bila
+    terjadi eksepsi pada program atau menghasilkan jumlah yang
+    valid dari pengguna.
+    """
+    # KAMUS LOKAL
+    # num, count: integer
+    # isOKCount: boolean
+
+    # ALGORITMA
     if num > 0:
         count = -1
         isOKCount = False
@@ -89,6 +218,15 @@ def getCount(num):
         return 0
 
 def showData(data, title):
+    """Menampilkan data kepada user dengan judul header title."""
+    # KAMUS LOKAL
+    # data: table
+    # showStartNum, showEndNUm : integer
+    # i : integer
+    # title: string
+    # cmd : string
+
+    # ALGORITMA
     system("cls || clear")
 
     print(title)
@@ -124,6 +262,18 @@ def showData(data, title):
             cmd = "n"
 
 def addItemLabolatory():
+    """
+    Menerima input dari user dan menambahkan item yang akan diproses
+    pada laboratory.
+    """
+    # KAMUS LOKAL
+    # selectedObject: objek
+    # index: integer
+    # i, count: integer
+    # isOK: boolean
+    # isinCart: boolean
+
+    # ALGORITMA
     global consumables, nItem, dataConsumable
 
     print()
@@ -177,55 +327,84 @@ def addItemLabolatory():
             isOK = True
 
 def deleteItem():
-        global nItem, dataConsumable
-        isLocked = True
+    """
+    Prosedur ini akan menerima input dari user dan melakukan penghapusan
+    terhadap item yang ingin dihapus dari keranjang consumable
+    di laboratorium.
+    """
+    # KAMUS LOKAL
+    # isLocked: boolean
+    # isValidCMD: boolean
+    # cmd: string
+    # index: integer
+    # jumlah: integer
+    # dbindex, j:integer.
 
-        while isLocked:
+    # ALGORITMA
+    global nItem, dataConsumable
+    isLocked = True
+
+    while isLocked:
+        print()
+        print("Silahkan isi nomor urut consumable pada keranjang yang akan dihapus.")
+        print("Note : Inputlah C untuk membatalkan aksi ini.")
+
+        index = selectIndex(nItem)
+
+        if(index != -1):
             print()
-            print("Silahkan isi nomor urut consumable pada keranjang yang akan dihapus.")
-            print("Note : Inputlah C untuk membatalkan aksi ini.")
+            print("Berikut ini adalah consumable yang akan dihapus dari daftar keranjang:")
+            print()
 
-            index = selectIndex(nItem)
+            print(f"Nama Consumable : {consumables[index]['nama']}")
+            print(f"Jumlah : {consumables[index]['jumlah']}")
+            print(f"Rarity : {consumables[index]['rarity']}")
 
-            if(index != -1):
-                print()
-                print("Berikut ini adalah consumable yang akan dihapus dari daftar keranjang:")
-                print()
+            print()
+            isValidCMD = False
+            while not isValidCMD:
+                cmd = toLower(input("Apakah data diatas sudah benar? [Y/n/c] : ")) 
+                if(cmd == "y"):
+                    jumlah = consumables[index]['jumlah']
+                    dbIndex = consumables[index]["dbIndex"]
+                    dataConsumable["data"][dbIndex]["jumlah"] = str(int(dataConsumable["data"][dbIndex]["jumlah"]) + jumlah)
 
-                print(f"Nama Consumable : {consumables[index]['nama']}")
-                print(f"Jumlah : {consumables[index]['jumlah']}")
-                print(f"Rarity : {consumables[index]['rarity']}")
-
-                print()
-                isValidCMD = False
-                while not isValidCMD:
-                    cmd = toLower(input("Apakah data diatas sudah benar? [Y/n/c] : ")) 
-                    if(cmd == "y"):
-                        jumlah = consumables[index]['jumlah']
-                        dbIndex = consumables[index]["dbIndex"]
-                        dataConsumable["data"][dbIndex]["jumlah"] = str(int(dataConsumable["data"][dbIndex]["jumlah"]) + jumlah)
-
-                        for i in range(index, nItem):
-                            consumables[i] = consumables[i+1]
+                    for i in range(index, nItem):
+                        consumables[i] = consumables[i+1]
                         
-                        consumables[nItem] = {}
-                        nItem -= 1
-                        print("Data Berhasil dihapus.")
-                        isValidCMD = True
-                        isLocked = False
-                    elif(cmd == "c"):
-                        isValidCMD = True
-                        print("Aksi dibatalkan.")
-                        isLocked = False
-                    elif(cmd == "n"):
-                        isValidCMD = True
-                    else:
-                        print("Masukan tidak dikenali, ulangi.")
-            else:
-                print("Aksi dibatalkan.")
-                isLocked = False
+                    consumables[nItem] = {}
+                    nItem -= 1
+                    print("Data Berhasil dihapus.")
+                    isValidCMD = True
+                    isLocked = False
+                elif(cmd == "c"):
+                    isValidCMD = True
+                    print("Aksi dibatalkan.")
+                    isLocked = False
+                elif(cmd == "n"):
+                    isValidCMD = True
+                else:
+                    print("Masukan tidak dikenali, ulangi.")
+        else:
+            print("Aksi dibatalkan.")
+            isLocked = False
 
 def editItem():
+    """
+    Prosedur ini akan menerima input dari user dan melakukan
+    perubahan jumlah barang yang dipilih pada keranjang consumable di
+    laboratorium.
+    """
+    # KAMUS LOKAL
+    # index : integer
+    # dbindex: integer
+    # total: integer
+    # newCnt: integer
+    # isLocked : boolean
+    # isValidCMD: boolean
+    # cmd: string
+
+    # ALGORITMA
     global consumables, nItem, dataConsumable
     isLocked = True
 
@@ -266,6 +445,23 @@ def editItem():
                 print("Masukan tidak dikenali, ulangi.")
 
 def setEngine():
+    """
+    Prosedur ini akan menerima input dari user dan membuat objek
+    mesin pada laboratorium.
+    """
+    # KAMUS LOKAL
+    # userInput: string
+    # isValidInput: boolean
+    # isLocked: boolean
+    # totalEnergy: integer
+    # isCanceled: boolean
+    # cmd: string
+    # index, nextindex: integer
+    # cnt: integer
+    # id: string
+    # factor: real
+
+    # ALGORITMA
     global engine
     print()
     engine = {}
@@ -440,6 +636,26 @@ def setEngine():
             sleep(1)
 
 def mix():
+    """
+    Prosedur ini akan mencampur semua bahan consumable pada keranjang
+    consumable dan menghasilkan suatu produk dengan rarity random dan
+    jumlah antara 1 s.d. 5
+    """
+    # KAMUS LOKAL
+    # isValidAns: boolean
+    # cmd: string
+    # i: integer
+    # sumPoint: integer
+    # nextIndex: integer
+    # id: string
+    # lastIdx: integer
+    # finalScore:  real
+    # rarityCode: character
+    # jumlahConsumable: integer
+    # nama: string
+    # consumableNextID: integer
+
+    # ALGORITMA
     global dataConsumable, dataConsumableHist
     
     print()
@@ -579,6 +795,20 @@ def mix():
     return True
 
 def eksperimen(uname):
+    """
+    Prosedur ini akan menjadi penghubung antara fitur pada laboratorium
+    dan fitur menu utama. User akan memilih perintah yang tepat hingga
+    proses pencampuran telah dilaksanakan atau user keluar dari lab.    
+    """
+    # KAMUS LOKAL
+    # option: string
+    # isExit: boolean
+    # i: integer
+    # isValid: boolean
+    # isOK: boolean
+    # cmd: string
+
+    # ALGORITMA
     global dataConsumable, dataConsumableHist, username
     
     setDefault()

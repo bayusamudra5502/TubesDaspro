@@ -12,13 +12,18 @@ from .manipulation import split
 # DD/MM/YYYY dan tahun harus >= 0
 
 def isValidTanggal(date:str) -> bool:
+    """
+    Fungsi ini akan memeriksa apakah date merupakan
+    tanggal yang valid, yaitu memiliki format
+    DD/MM/YYYY dan tahun harus >= 0
+    """
     date, length = split(date, "/")
     if length == 3:
         hari = int(date[0])
         bulan = int(date[1])
         tahun = int(date[2])
 
-        if(1 <= bulan <= 12 and tahun >= 0):
+        if(1 <= bulan <= 12 and tahun >= 0 and len(date[2]) == 4):
             if(bulan == 2):
                 if((tahun % 4 == 0 and tahun % 100 != 0)
                     or tahun % 400 == 0):

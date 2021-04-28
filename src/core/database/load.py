@@ -2,6 +2,7 @@
 # Modul ini berisi fungsi yang berkaitan
 # dengan pemuatan data dari file csv
 
+# PUSTAKA
 from os import R_OK,  walk
 from os import access
 from os.path import abspath, isabs, isdir, isfile, join, exists
@@ -10,9 +11,45 @@ from core.util import split
 from core.constant import DB_FILES_NAME, MAX_ARRAY_NUM
 from .database import *
 
+# KAMUS
+# type table = < data: Array of ..., {Menyesuaikan dengan jenis tabelnya}
+#                   row_number: integer,
+#                   col_number: integer,
+#                   columnName: Array of string>
+
+# type row = <...> { Menyesuaikan dengan kolom pada database. Nama field
+#                    adalah nama kolom dan valuenya adalah nilai pada 
+#                    database }
+
+# function readFile(path:string) -> string
+# Fungsi ini mengeluarkan isi dari file pada path.
+# Jika path tidak valid, bukan file atau tidak ada,
+# akan mengeluarkan pesan error.
+
+# function loadDatabase(dir:string) -> boolean
+# Fungsi ini akan menerima sebuah direktori dir dari database
+# lalu memparse datanya. Jika parsing berhasil akan mengeluarkan
+# True dan mengubah data db. Jika tidak berhasil, mengeluarkan
+# False.
+
+# function tableParser(tableData:string) -> table
+# Fungsi ini akan memparse data mentah tableData
+# menjadi table yang dapat diproses pada file ini.
+
+# function isValidDir(dir:str) -> boolean
+# Fungsi ini memeriksa apakah folder dir merupakan folder
+# database yang valid. Folder yang valid terdiri dari file yang
+# dibutuhkan dan berada dalam root tertinggi dari dir.
+
+# ALGORITMA
 def readFile(path:str) -> str:
     """Fungsi ini mengeluarkan isi dari file pada path"""
-    
+    # KAMUS LOKAL
+    # fileReader : SEQFILE of 
+    #          (*) hasil: string
+    #          (1) \0x1A { EOF CHARACTER } 
+
+    # ALGORITMA
     if(access(path, R_OK)):
         if(isfile(path)):
             fileReader = open(path, "r")
@@ -32,7 +69,12 @@ def loadDatabase(dir:str) -> bool:
     lalu memparse datanya. Jika parsing berhasil akan mengeluarkan
     True dan mengubah data db. Jika tidak berhasil, mengeluarkan
     False."""
+    # KAMUS LOKAL
+    # i : integer
+    # fileData : string
+    # parsedTable : table
 
+    # ALGORITMA
     if isValidDir(dir):
         for i in range(DB_FILES_NAME[1]):
             # Membaca data dari file
@@ -51,7 +93,15 @@ def loadDatabase(dir:str) -> bool:
 def tableParser(tableData):
     """Fungsi ini akan memparse data mentah tableData
     menjadi table yang dapat diproses pada file ini."""
+    # KAMUS LOKAL
+    # parsedRow: row
+    # parsedTable: table
+    # rawRow: Array of string
+    # tableColumns: Array of string
+    # splittedRow : Array of  string
+    # i,j : integer
 
+    # ALGORITMA
     parsedTable = {
         "data" : [{} for i in range(MAX_ARRAY_NUM)],
         "columnName" : ["" for i in range(MAX_ARRAY_NUM)],
@@ -85,7 +135,22 @@ def isValidDir(dir:str) -> bool:
     """Fungsi ini memeriksa apakah folder dir merupakan folder
     database yang valid. Folder yang valid terdiri dari file yang
     dibutuhkan dan berada dalam root tertinggi dari dir."""
+    # KAMUS LOKAL
+    # type fileCollection = <
+    #      "consumable_history.csv": boolean,
+    #      "consumable.csv": boolean,
+    #      "gadget_borrow_history.csv": boolean,
+    #      "gadget_return_history.csv": boolean,
+    #      "gadget.csv": boolean,
+    #      "user.csv": boolean
+    # >
 
+    # root, dirs, files: string
+    # fileCheck : fileCollection
+    # i : integer
+    # isRequiredExist: boolean
+
+    # ALGORITMA
     if(not isabs(dir)):
         # Membuat path menjadi absolute
         dir = abspath(dir)
