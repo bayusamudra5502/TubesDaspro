@@ -88,7 +88,7 @@ def pengembalianGadget(username):
                                         dataGadget["data"][i]["jumlah"] = str(newGadget)
 
                                         print()
-                                        print("Item "+ dataGadget['data'][i]['nama'] + " (x"+str(jumlah_kembali) + ") " + " telah dikembalikan!")
+                                        print("Item "+ dataGadget['data'][i]['nama'] + " (x"+str(jumlah_kembali) + ") " + "\033[92mtelah dikembalikan!\033[0m")
 
                                         if getUserID(username):
                                             lastID = "KMB-0"
