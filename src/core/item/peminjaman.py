@@ -45,43 +45,44 @@ def peminjamanGadget(username):
                     if isValidTanggal(tanggal_pinjam):  # Validasi input tanggal
                         jumlah_pinjam = int(input("Jumlah peminjaman  : ")) # Meminta input jumlah pinjam
                         if jumlah_pinjam > 0:   # Validasi input jumlah pinjam
-                            if(int(dataGadget["data"][i]["jumlah"]) > 0)\
-                                and (int(dataGadget["data"][i]["jumlah"]) >= jumlah_pinjam):    # Validasi jika gadget yang ingin dipinjam ada dan jumlah yang ingin dipinjam tidak lebih dari jumlah gadget
-                                # Edit Jumlah gadget yang tersedia di database
-                                newGadget = int(dataGadget["data"][i]["jumlah"]) - (jumlah_pinjam)
-                                dataGadget["data"][i]["jumlah"] = str(newGadget)
+                            for i in range(dataGadget["row_number"]):
+                                if(int(dataGadget["data"][i]["jumlah"]) > 0)\
+                                    and (int(dataGadget["data"][i]["jumlah"]) >= jumlah_pinjam):    # Validasi jika gadget yang ingin dipinjam ada dan jumlah yang ingin dipinjam tidak lebih dari jumlah gadget
+                                    # Edit Jumlah gadget yang tersedia di database
+                                    newGadget = int(dataGadget["data"][i]["jumlah"]) - (jumlah_pinjam)
+                                    dataGadget["data"][i]["jumlah"] = str(newGadget)
 
-                                print()
-                                print("Item " + str(dataGadget["data"][i]["nama"]) + " (x" + str(jumlah_pinjam) + ") " "\033[92mberhasil dipinjam!\033[0m")
-                                applyChange(dataGadget, "gadget")
-                                # Menambah data pada database peminjaman
-                                if getUserID(username):
-                                    lastID = "PJM-0"
-                                    nextIndex = dataPinjamGadget["row_number"]
+                                    print()
+                                    print("Item " + str(dataGadget["data"][i]["nama"]) + " (x" + str(jumlah_pinjam) + ") " "\033[92mberhasil dipinjam!\033[0m")
+                                    applyChange(dataGadget, "gadget")
+                                    # Menambah data pada database peminjaman
+                                    if getUserID(username):
+                                        lastID = "PJM-0"
+                                        nextIndex = dataPinjamGadget["row_number"]
 
-                                    if(dataPinjamGadget["row_number"] > 0):
-                                        lastIndext = dataPinjamGadget["row_number"]-1
-                                        lastID = dataPinjamGadget["data"][lastIndext]["id"]
+                                        if(dataPinjamGadget["row_number"] > 0):
+                                            lastIndext = dataPinjamGadget["row_number"]-1
+                                            lastID = dataPinjamGadget["data"][lastIndext]["id"]
 
-                                    id1 = (generateNextID(lastID))
+                                        id1 = (generateNextID(lastID))
 
-                                    if generateNextID(lastID):
-                                        dataPinjamGadget["data"][nextIndex] = \
-                                        {
-                                            "id": id1,
-                                            "id_peminjam": str(getUserID(username)),
-                                            "id_gadget": id_item,
-                                            "tanggal_peminjaman": tanggal_pinjam,
-                                            "jumlah": str(jumlah_pinjam),
-                                            "jumlah_kembali": "0",
-                                            "is_returned": is_returned,
-                                        }
-                                    applyChange(dataPinjamGadget, "gadget_borrow_history")
+                                        if generateNextID(lastID):
+                                            dataPinjamGadget["data"][nextIndex] = \
+                                            {
+                                                "id": id1,
+                                                "id_peminjam": str(getUserID(username)),
+                                                "id_gadget": id_item,
+                                                "tanggal_peminjaman": tanggal_pinjam,
+                                                "jumlah": str(jumlah_pinjam),
+                                                "jumlah_kembali": "0",
+                                                "is_returned": is_returned,
+                                            }
+                                        applyChange(dataPinjamGadget, "gadget_borrow_history")
 
-                                return getUserID
-                            else:   #(dataGadget["data"][i]["jumlah"]) <= 0) or (dataGadget["data"][i]["jumlah"] < jumlah_pinjam) (Gadget yang ingin dipinjam tidak ada atau jumlah peminjaman melebihi jumlah gadget yang tersedia)
-                                print()
-                                print("\033[91mJumlah yang ingin dipinjam melebihi stok item\033[0m. Stok sekarang: " + str(dataGadget["data"][i]["jumlah"]))                      
+                                    return getUserID
+                                else:   #(dataGadget["data"][i]["jumlah"]) <= 0) or (dataGadget["data"][i]["jumlah"] < jumlah_pinjam) (Gadget yang ingin dipinjam tidak ada atau jumlah peminjaman melebihi jumlah gadget yang tersedia)
+                                    print()
+                                    print("\033[91mJumlah yang ingin dipinjam melebihi stok item\033[0m. Stok sekarang: " + str(dataGadget["data"][i]["jumlah"]))                      
                         else:  # jumlah_pinjam < 0
                             print()
                             print("\033[91mJumlah peminjaman harus lebih besar dari nol\033[0m")
