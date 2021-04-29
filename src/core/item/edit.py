@@ -15,7 +15,7 @@ def edit(username):
         id_array = list(id)
         wrong_id = True
         # Validasi format ID
-        while id_array[0] == "G" or id_array[0] == "C":
+        if id_array[0] == "G" or id_array[0] == "C":
             wrong_id = False
         if wrong_id == False:
             # Meminta input jumlah
