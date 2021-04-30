@@ -18,14 +18,14 @@ def edit(username):
         if id_array[0] == "G" or id_array[0] == "C":
             wrong_id = False
         if wrong_id == False:
-            # Meminta input jumlah
-            jumlah_edit = int(input("Masukan jumlah  : "))
             # Modifikasi data gadget
             if (id_array[0]=="G"):
                 notFound = True
                 for i in range(dataGadget["row_number"]):
                     if(dataGadget["data"][i]["id"] == id):  # Validasi apakah id tersebut ada pada databse
                         notFound = False
+                        # Meminta input jumlah
+                        jumlah_edit = int(input("Masukan jumlah  : "))
                         if jumlah_edit > 0: # Menambah jumlah gadget
                             newGadget = int(dataGadget["data"][i]["jumlah"]) + (jumlah_edit)
                             dataGadget["data"][i]["jumlah"] = str(newGadget)
@@ -55,6 +55,8 @@ def edit(username):
                 for i in range(dataConsumable["row_number"]):
                     if(dataConsumable["data"][i]["id"] == id):  # Validasi apakah id tersebut ada pada database
                         notFound = False
+                        # Meminta input jumlah
+                        jumlah_edit = int(input("Masukan jumlah  : "))
                         if jumlah_edit > 0: # Menambah jumlah consumable
                             newConsumable = int(dataConsumable["data"][i]["jumlah"]) + (jumlah_edit)
                             dataConsumable["data"][i]["jumlah"] = str(newConsumable)
