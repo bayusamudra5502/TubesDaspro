@@ -6,7 +6,6 @@
 # PUSTAKA
 from core.database import applyChange, getTable
 from core.auth import isAdminRole
-from core.util import generateNextID
 
 
 # KAMUS
@@ -100,7 +99,7 @@ def addItem(username):
                     while True:
                         tahun_ditemukan = input('Masukan tahun ditemukan: ')
 
-                        if int(jumlah) > 0:
+                        if int(tahun_ditemukan) > 0:
                             break
 
                         else:
