@@ -713,7 +713,7 @@ def mix():
     
     print("Memulai proses persiapan...")
 
-    for i in range(3):
+    for i in range(1,4):
         print(f"Memulai Tahap Persiapan ke-{i}...")
         sleep(1)
         print(f"Tahap ke-{i} selesai dilaksanakan.")
@@ -725,7 +725,7 @@ def mix():
 
     sumPoint = 0
     for i in range(nItem):
-        print(f"1. Memasukkan {consumables[i]['nama']} sebanyak {consumables[i]['jumlah']} buah")
+        print(f"{i+1}. Memasukkan {consumables[i]['nama']} sebanyak {consumables[i]['jumlah']} buah")
         sumPoint += RARITY_CHART[consumables[i]["rarity"]] * (random()) * (consumables[i]['jumlah'] * (random() + .5))
 
         # Melakukan pencatatan pengambilan
