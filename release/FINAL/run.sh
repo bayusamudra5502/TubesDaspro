@@ -1,0 +1,1 @@
+python kantongajaib.py "db/"
