@@ -35,13 +35,15 @@ def pengembalianGadget(username):
                             no_returned = False
             
             if cntNum == 0:
-                print("\033[92mAnda tidak memiliki gadget yang dipinjam saat ini.\033[0m")
+                print("\033[92mAnda tidak memiliki gadget yang dipinjam saat ini. Hubungi admin jika terjadi kesalahan\033[0m")
             else:
+                print()
+                print("\033[92mJika barang yang ingin anda kembalikan tidak tercantum pada daftar, segera hubungi admin\033[0m")
                 # Meminta input
                 if no_returned == False:
+                    print()
                     print("Silahkan input data objek yang ingin dikembalikan")
                     nomor_pinjam = input("ID peminjaman : ")
-                    validation_jumlah = False
 
                     # Validasi data
                     notFound = True
