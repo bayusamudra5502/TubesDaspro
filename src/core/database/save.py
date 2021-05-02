@@ -70,7 +70,7 @@ def save(saveDir):
                 dirpath = abspath(join(dirpath, noDirs[i]))
                 mkdir(dirpath)
         except Exception:
-            print(f"\033[91mERROR:\033[0m Tidak bisa membuat folder {saveDir}. Pastikan anda memiliki akses.")
+            print(f"\033[91mERROR:\033[0m Tidak bisa membuat folder {saveDir}. Pastikan anda memiliki akses dan nama folder valid.")
 
             return False
     

@@ -240,10 +240,12 @@ def showData(data, title):
     if(showEndNum >= MAX_SHOW_NUM):
         showEndNum = MAX_SHOW_NUM
 
+    doPrint = True
     while toLower(cmd) != "n":
-        for i in range(showStartNum, showEndNum):
-            print("%d. %s (Rarity %s) (Jumlah : %s buah)" 
-                % (i+1,data["data"][i]["nama"], data["data"][i]["rarity"], data["data"][i]["jumlah"]))
+        if doPrint:
+            for i in range(showStartNum, showEndNum):
+                print("%d. %s (Rarity %s) (Jumlah : %s buah)" 
+                    % (i+1,data["data"][i]["nama"], data["data"][i]["rarity"], data["data"][i]["jumlah"]))
 
         print()
 
@@ -258,6 +260,13 @@ def showData(data, title):
                     showEndNum += MAX_SHOW_NUM
                 else:
                     showEndNum = data["row_number"]
+                
+                doPrint = True
+            elif(toLower(cmd) == "n"):
+                doPrint = True
+            else:
+                print("Jawaban tidak dikenal. Ulangi")
+                doPrint = False
         else:
             input("Tekan ENTER jika anda ingin keluar.")
             cmd = "n"
@@ -316,14 +325,24 @@ def addItemLabolatory():
                     print(f"Rarity : {selectedObject['rarity']}")
                     print()
 
-                    isOK = (toLower(input("Apakah data diatas sudah benar? [Y/n] : ")) == "y")
-                            
-                    if(isOK):
-                        consumables[nItem] = selectedObject
-                        dataConsumable["data"][index]["jumlah"] = str(int(dataConsumable["data"][index]["jumlah"]) - count)
-                        nItem += 1
-                    else:
-                        print()
+                    isValidAns = False
+                    while not isValidAns:
+                        ans = ""
+                        ans = toLower(input("Apakah data diatas sudah benar? [Y/n] : "))
+                        
+                        if(ans == "y"):
+                            consumables[nItem] = selectedObject
+                            dataConsumable["data"][index]["jumlah"] = str(int(dataConsumable["data"][index]["jumlah"]) - count)
+                            nItem += 1
+                            isValidAns = True
+                            isOK = True
+                        elif(ans == "n"):
+                            print()
+                            isValidAns = True
+                        else:
+                            isValidAns = False
+                            print("Jawaban tidak dikenal. Ulangi.")
+                            print()
                 else:
                     print("Consumable telah habis. Silahkan pilih yang lain.")
         else:
